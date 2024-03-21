@@ -21,7 +21,9 @@ namespace Store_System.UI.ControlPanelUi
         ProductService productService;
         Order order;
         SupplierService supplierService;
-        AdminDashboard adminDashboard;
+        Dashboard adminDashboard;
+
+        private int branchID { get; set; }
 
         public BuyBill()
         {
@@ -31,6 +33,7 @@ namespace Store_System.UI.ControlPanelUi
             order = new Order();
             supplierService = new SupplierService();
 
+            branchIdBox.Text=1.ToString();
         }
 
         private async void BuyBill_Load(object sender, EventArgs e)
@@ -116,7 +119,7 @@ namespace Store_System.UI.ControlPanelUi
                 }
                 TotalPriceBox.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
                 AfterDiscount.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                PaidUp.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
+                PaidUp.Text = sum.ToString(new CultureInfo("ar-EG"));
             }
             catch (Exception ex)
             {
@@ -175,7 +178,7 @@ namespace Store_System.UI.ControlPanelUi
             double Discount = double.Parse(FaturaDiscountBox.Text);
             double FinalPrice = TotalPrice - (TotalPrice * (Discount / 100));
             AfterDiscount.Text = FinalPrice.ToString("C3", new CultureInfo("ar-EG"));
-            PaidUp.Text = FinalPrice.ToString("C3", new CultureInfo("ar-EG"));
+            PaidUp.Text = FinalPrice.ToString(new CultureInfo("ar-EG"));
         }
 
 
@@ -216,6 +219,7 @@ namespace Store_System.UI.ControlPanelUi
                         product.StockAmount += int.Parse(Items.Rows[i].Cells[3].Value.ToString());
                         await productService.UpdateProduct(product);
                         buyBillService.AddOrderItem(orderItems);
+                        buyBillService.UpdateMoneyStock(int.Parse(branchIdBox.Text), double.Parse(PaidUp.Text));
                     }
                     else
                     {

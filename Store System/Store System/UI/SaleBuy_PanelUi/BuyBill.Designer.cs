@@ -92,6 +92,7 @@
             ProductIDBox = new TextBox();
             editBtn = new Button();
             cashierNameBox = new TextBox();
+            branchIdBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -823,11 +824,26 @@
             cashierNameBox.Size = new Size(265, 34);
             cashierNameBox.TabIndex = 144;
             // 
+            // branchIdBox
+            // 
+            branchIdBox.Anchor = AnchorStyles.None;
+            branchIdBox.BackColor = Color.FromArgb(24, 30, 46);
+            branchIdBox.Enabled = false;
+            branchIdBox.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            branchIdBox.ForeColor = Color.White;
+            branchIdBox.Location = new Point(598, 891);
+            branchIdBox.Name = "branchIdBox";
+            branchIdBox.RightToLeft = RightToLeft.Yes;
+            branchIdBox.Size = new Size(110, 30);
+            branchIdBox.TabIndex = 145;
+            branchIdBox.Visible = false;
+            // 
             // BuyBill
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(branchIdBox);
             Controls.Add(editBtn);
             Controls.Add(ProductIDBox);
             Controls.Add(deletebtn);
@@ -957,5 +973,6 @@
         private DataGridViewTextBoxColumn Product_id;
         private Button editBtn;
         public TextBox cashierNameBox;
+        private TextBox branchIdBox;
     }
 }

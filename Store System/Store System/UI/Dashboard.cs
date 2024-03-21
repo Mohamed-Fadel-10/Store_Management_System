@@ -12,8 +12,11 @@ using System.Windows.Forms;
 
 namespace Store_System.UI
 {
-    public partial class AdminDashboard : Form
+    public partial class Dashboard : Form
     {
+        /// <summary>
+        /// AddBranchPage AddBranchPage1;
+        /// </summary>
         public string? UserName { get; set; }
         public string? CashierName { get; set; }
         public string? StockMoneyName { get; set; }
@@ -21,7 +24,7 @@ namespace Store_System.UI
 
         UserServices _userServices;
 
-        public AdminDashboard()
+        public Dashboard()
         {
             InitializeComponent();
             _userServices = new UserServices();
@@ -37,6 +40,10 @@ namespace Store_System.UI
                 returnedItems1 = new ControlPanelUi.ReturnedItems();
                 shiftLock1 = new ControlPanelUi.ShiftLock();
                 addCategoryPage1 = new AddCategoryPage();
+                welcomePage1 = new WelcomePage();
+                //AddBranchPage1 = new AddBranchPage();
+
+                Controls.Add(welcomePage1);
                 Controls.Add(addUserPage1);
                 Controls.Add(addProductPage1);
                 Controls.Add(addSupplierPage1);
@@ -93,10 +100,12 @@ namespace Store_System.UI
             returnedItems1.Visible = false;
             shiftLock1.Visible = false;
 
-            buyBill1.cashierNameBox.Text= CashierName;
+            buyBill1.cashierNameBox.Text = CashierName;
             saleBill1.cashierNameBox.Text = CashierName;
             saleBill1.StockBox.Text = StockMoneyName;
             saleBill1.UserIDBox.Text = UserID.ToString();
+            shiftLock1.userIDBox.Text = UserID.ToString();
+            shiftLock1.branchIdBox.Text=1.ToString();
         }
 
         private void addUserBtn_Click(object sender, EventArgs e)
@@ -170,8 +179,18 @@ namespace Store_System.UI
         {
             shiftLock1.Visible = true;
             shiftLock1.BringToFront();
+            shiftLock1.Refresh();
         }
 
+        private void AdminDashboard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
 
+        private void addBranchBtn_Click(object sender, EventArgs e)
+        {
+            AddBranchPage addBranch= new AddBranchPage();
+            addBranch.Show();
+        }
     }
 }

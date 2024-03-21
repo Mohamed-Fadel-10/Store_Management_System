@@ -1,4 +1,5 @@
-﻿using Store_System.Models;
+﻿using Store_System.Data;
+using Store_System.Models;
 using Store_System.Services;
 using System;
 using System.Collections.Generic;
@@ -14,34 +15,72 @@ namespace Store_System.UI.ControlPanelUi
 {
     public partial class ShiftLock : UserControl
     {
-        //SaleBill saleBill;
-        //ShiftLockService _shiftLockService;
+        SaleBill saleBill;
+        ShiftLockService shiftLockService;
+        UserServices userServices;
         //OrderItems orderItem;
         //Order order;
-
+        double shiftMoney;
+        User user;
 
         public ShiftLock()
         {
             InitializeComponent();
 
-            //saleBill = new SaleBill();
-            //_shiftLockService = new ShiftLockService();
+            saleBill = new SaleBill();
+            shiftLockService = new ShiftLockService();
             //orderItem= new OrderItems();
             //order = new Order();
+            user = new User();
+            userServices = new UserServices();
 
-            //GetUserMoneyStock();
+            ShiftLockService.ShiftMoneyChanged += GetShiftMoney;
+
         }
 
-        //public void GetUserMoneyStock()
-        //{
 
-        //    var query =
-        //        order.OrderItems.Where(o => o.Order_Id == order.ID)
-        //        .Sum(o => o.FaturaPaidPrice);
 
-        //    int userMoneyStock = (int)query;
+        private void ShiftLock_Load(object sender, EventArgs e)
+        {
+            shiftMoney = 0;
+        }
 
-        //    PriceBox.Text=userMoneyStock.ToString();
-        //}
+        private void GetShiftMoney(object? sender, double money)
+        {
+            shiftMoney += money;
+            shiftMoneyBox.Text = shiftMoney.ToString();
+        }
+
+        private void shiftMoneyBox_TextChanged(object sender, EventArgs e)
+        {
+            finalShiftMoneyBox.Text = shiftMoneyBox.Text;
+        }
+
+        private void ExpensesBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ExpensesBox.Text != string.Empty)
+                finalShiftMoneyBox.Text = ((double.Parse(shiftMoneyBox.Text))
+                                    - (double.Parse(ExpensesBox.Text))).ToString();
+            else finalShiftMoneyBox.Text = shiftMoneyBox.Text;
+        }
+
+        private async void Addbtn_Click(object sender, EventArgs e)
+        {
+            int effectedRow = await shiftLockService.UpdateMoney(int.Parse(userIDBox.Text), int.Parse(branchIdBox.Text), double.Parse(finalShiftMoneyBox.Text));
+            if (effectedRow == 2)
+            {
+                MessageBox.Show(".تم تقفيل الشيفت بنجاح", "!System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Clear();
+                shiftMoney = 0;
+            }
+
+        }
+
+        private void Clear()
+        {
+            shiftMoneyBox.Clear();
+            finalShiftMoneyBox.Clear();
+            ExpensesBox.Clear();
+        }
     }
 }

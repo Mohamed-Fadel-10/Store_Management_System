@@ -32,14 +32,16 @@
             panel1 = new Panel();
             label1 = new Label();
             label11 = new Label();
-            DiscountBox = new TextBox();
+            ExpensesBox = new TextBox();
             label10 = new Label();
-            PriceBox = new TextBox();
+            shiftMoneyBox = new TextBox();
             Addbtn = new Button();
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
             label2 = new Label();
-            textBox1 = new TextBox();
+            finalShiftMoneyBox = new TextBox();
+            userIDBox = new TextBox();
+            branchIdBox = new TextBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -79,17 +81,18 @@
             label11.TabIndex = 64;
             label11.Text = "إجمالي خزنة الشيفت";
             // 
-            // DiscountBox
+            // ExpensesBox
             // 
-            DiscountBox.Anchor = AnchorStyles.None;
-            DiscountBox.BackColor = Color.FromArgb(24, 30, 46);
-            DiscountBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            DiscountBox.ForeColor = Color.White;
-            DiscountBox.Location = new Point(587, 223);
-            DiscountBox.Name = "DiscountBox";
-            DiscountBox.RightToLeft = RightToLeft.Yes;
-            DiscountBox.Size = new Size(277, 43);
-            DiscountBox.TabIndex = 65;
+            ExpensesBox.Anchor = AnchorStyles.None;
+            ExpensesBox.BackColor = Color.FromArgb(24, 30, 46);
+            ExpensesBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            ExpensesBox.ForeColor = Color.White;
+            ExpensesBox.Location = new Point(587, 223);
+            ExpensesBox.Name = "ExpensesBox";
+            ExpensesBox.RightToLeft = RightToLeft.Yes;
+            ExpensesBox.Size = new Size(277, 43);
+            ExpensesBox.TabIndex = 65;
+            ExpensesBox.TextChanged += ExpensesBox_TextChanged;
             // 
             // label10
             // 
@@ -103,18 +106,19 @@
             label10.TabIndex = 62;
             label10.Text = "مصروفات";
             // 
-            // PriceBox
+            // shiftMoneyBox
             // 
-            PriceBox.Anchor = AnchorStyles.None;
-            PriceBox.BackColor = Color.FromArgb(24, 30, 46);
-            PriceBox.Enabled = false;
-            PriceBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            PriceBox.ForeColor = Color.White;
-            PriceBox.Location = new Point(910, 223);
-            PriceBox.Name = "PriceBox";
-            PriceBox.RightToLeft = RightToLeft.Yes;
-            PriceBox.Size = new Size(293, 43);
-            PriceBox.TabIndex = 63;
+            shiftMoneyBox.Anchor = AnchorStyles.None;
+            shiftMoneyBox.BackColor = Color.FromArgb(24, 30, 46);
+            shiftMoneyBox.Enabled = false;
+            shiftMoneyBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            shiftMoneyBox.ForeColor = Color.White;
+            shiftMoneyBox.Location = new Point(910, 223);
+            shiftMoneyBox.Name = "shiftMoneyBox";
+            shiftMoneyBox.RightToLeft = RightToLeft.Yes;
+            shiftMoneyBox.Size = new Size(293, 43);
+            shiftMoneyBox.TabIndex = 63;
+            shiftMoneyBox.TextChanged += shiftMoneyBox_TextChanged;
             // 
             // Addbtn
             // 
@@ -129,6 +133,7 @@
             Addbtn.TabIndex = 82;
             Addbtn.Text = "تقفيل الشيفت";
             Addbtn.UseVisualStyleBackColor = false;
+            Addbtn.Click += Addbtn_Click;
             // 
             // panel2
             // 
@@ -162,36 +167,67 @@
             label2.TabIndex = 84;
             label2.Text = "صافي الشيفت";
             // 
-            // textBox1
+            // finalShiftMoneyBox
             // 
-            textBox1.Anchor = AnchorStyles.None;
-            textBox1.BackColor = Color.FromArgb(24, 30, 46);
-            textBox1.Enabled = false;
-            textBox1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.ForeColor = Color.White;
-            textBox1.Location = new Point(264, 223);
-            textBox1.Name = "textBox1";
-            textBox1.RightToLeft = RightToLeft.Yes;
-            textBox1.Size = new Size(277, 43);
-            textBox1.TabIndex = 85;
+            finalShiftMoneyBox.Anchor = AnchorStyles.None;
+            finalShiftMoneyBox.BackColor = Color.FromArgb(24, 30, 46);
+            finalShiftMoneyBox.Enabled = false;
+            finalShiftMoneyBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            finalShiftMoneyBox.ForeColor = Color.White;
+            finalShiftMoneyBox.Location = new Point(264, 223);
+            finalShiftMoneyBox.Name = "finalShiftMoneyBox";
+            finalShiftMoneyBox.RightToLeft = RightToLeft.Yes;
+            finalShiftMoneyBox.Size = new Size(277, 43);
+            finalShiftMoneyBox.TabIndex = 85;
+            // 
+            // userIDBox
+            // 
+            userIDBox.Anchor = AnchorStyles.None;
+            userIDBox.BackColor = Color.FromArgb(24, 30, 46);
+            userIDBox.Enabled = false;
+            userIDBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            userIDBox.ForeColor = Color.White;
+            userIDBox.Location = new Point(951, 74);
+            userIDBox.Name = "userIDBox";
+            userIDBox.RightToLeft = RightToLeft.Yes;
+            userIDBox.Size = new Size(153, 43);
+            userIDBox.TabIndex = 86;
+            userIDBox.Visible = false;
+            // 
+            // branchIdBox
+            // 
+            branchIdBox.Anchor = AnchorStyles.None;
+            branchIdBox.BackColor = Color.FromArgb(24, 30, 46);
+            branchIdBox.Enabled = false;
+            branchIdBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            branchIdBox.ForeColor = Color.White;
+            branchIdBox.Location = new Point(762, 74);
+            branchIdBox.Name = "branchIdBox";
+            branchIdBox.RightToLeft = RightToLeft.Yes;
+            branchIdBox.Size = new Size(153, 43);
+            branchIdBox.TabIndex = 87;
+            branchIdBox.Visible = false;
             // 
             // ShiftLock
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(branchIdBox);
+            Controls.Add(userIDBox);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(finalShiftMoneyBox);
             Controls.Add(label10);
             Controls.Add(panel2);
             Controls.Add(Addbtn);
             Controls.Add(label11);
-            Controls.Add(DiscountBox);
-            Controls.Add(PriceBox);
+            Controls.Add(ExpensesBox);
+            Controls.Add(shiftMoneyBox);
             Controls.Add(panel1);
             MinimumSize = new Size(1496, 949);
             Name = "ShiftLock";
             Size = new Size(1496, 949);
+            Load += ShiftLock_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -205,13 +241,15 @@
         private Panel panel1;
         private Label label1;
         private Label label11;
-        private TextBox DiscountBox;
+        private TextBox ExpensesBox;
         private Label label10;
-        private TextBox PriceBox;
         private Button Addbtn;
         private Panel panel2;
         private PictureBox pictureBox1;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox finalShiftMoneyBox;
+        public TextBox userIDBox;
+        private TextBox shiftMoneyBox;
+        public TextBox branchIdBox;
     }
 }

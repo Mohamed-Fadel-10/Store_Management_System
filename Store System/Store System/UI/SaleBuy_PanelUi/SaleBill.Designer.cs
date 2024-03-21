@@ -236,6 +236,7 @@
             PaidUp.RightToLeft = RightToLeft.Yes;
             PaidUp.Size = new Size(209, 34);
             PaidUp.TabIndex = 114;
+            PaidUp.TextChanged += PaidUp_TextChanged;
             // 
             // label15
             // 

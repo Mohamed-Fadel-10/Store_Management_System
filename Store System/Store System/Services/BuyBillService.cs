@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using Store_System.Data;
 using Store_System.Models;
 using System;
@@ -11,11 +12,11 @@ namespace Store_System.Services
 {
     internal class BuyBillService
     {
-        StoreContext storeContext;
+        StoreContext _context;
 
         public BuyBillService()
         {
-            storeContext = new StoreContext();
+            _context = new StoreContext();
         }
 
 
@@ -23,8 +24,8 @@ namespace Store_System.Services
         {
             if (order != null)
             {
-                await storeContext.Order.AddAsync(order);
-                int row = await storeContext.SaveChangesAsync();
+                await _context.Order.AddAsync(order);
+                int row = await _context.SaveChangesAsync();
                 return row;
             }
             else
@@ -36,8 +37,8 @@ namespace Store_System.Services
         {
             if (orderItems != null)
             {
-                storeContext.OrderItems.Add(orderItems);
-                int row = storeContext.SaveChanges();
+                _context.OrderItems.Add(orderItems);
+                int row = _context.SaveChanges();
                 return row;
             }
             else
@@ -47,13 +48,13 @@ namespace Store_System.Services
 
         public async Task<Order> GetLastOrderID()
         {
-            Order id = await storeContext.Order.OrderByDescending(o => o.ID).FirstOrDefaultAsync();
+            Order id = await _context.Order.OrderByDescending(o => o.ID).FirstOrDefaultAsync();
             return id;
         }
 
         public async Task<Product> GetProductCode(string barcode)
         {
-            var Product = await storeContext.Product.Include(c => c.Category).FirstOrDefaultAsync(p => p.Barcode == barcode);
+            var Product = await _context.Product.Include(c => c.Category).FirstOrDefaultAsync(p => p.Barcode == barcode);
             if (Product != null)
             {
                 return Product;
@@ -62,6 +63,19 @@ namespace Store_System.Services
             {
                 return new Product();
             }
+        }
+
+        public async Task<int> UpdateMoneyStock(int branch_id,double money)
+        {
+            Branch branch = await _context.Branch.FirstOrDefaultAsync(b => b.ID == branch_id);
+
+            if (branch != null)
+            {
+                branch.MainMoneyStock -= money;
+                return await _context.SaveChangesAsync();
+            }
+
+            return 0;
         }
     }
 }

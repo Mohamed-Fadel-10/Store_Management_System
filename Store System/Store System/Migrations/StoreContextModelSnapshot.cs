@@ -202,6 +202,9 @@ namespace Store_System.Migrations
                     b.Property<double>("Discount")
                         .HasColumnType("float");
 
+                    b.Property<int>("FaturaPaidPrice")
+                        .HasColumnType("int");
+
                     b.Property<int?>("OrderID")
                         .HasColumnType("int");
 
@@ -412,9 +415,11 @@ namespace Store_System.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

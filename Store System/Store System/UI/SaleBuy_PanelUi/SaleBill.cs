@@ -23,6 +23,7 @@ namespace Store_System.UI.ControlPanelUi
         SaleBillService _saleBillService;
         ProductService _productService;
         Order _order;
+        ShiftLock _shiftLock;
 
         public SaleBill()
         {
@@ -130,14 +131,17 @@ namespace Store_System.UI.ControlPanelUi
                 {
                     sum += double.Parse(Items.Rows[i].Cells[8].Value.ToString());
                 }
-                TotalPriceBox.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                AfterDiscount.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                PaidUp.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
+                TotalPriceBox.Text = sum.ToString("0.000", new CultureInfo("ar-EG"));
+                AfterDiscount.Text = sum.ToString("0.000", new CultureInfo("ar-EG"));
+                PaidUp.Text = sum.ToString(new CultureInfo("ar-EG"));
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("لا يمكن إضافة بيانات فارغة الى الفاتورة قم بمراجعة بيانات المنتج مرة أخرى", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+            
 
         }
 
@@ -195,9 +199,9 @@ namespace Store_System.UI.ControlPanelUi
                 {
                     sum += double.Parse(Items.Rows[i].Cells[8].Value.ToString());
                 }
-                TotalPriceBox.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                AfterDiscount.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                PaidUp.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
+                TotalPriceBox.Text = sum.ToString("0.000", new CultureInfo("ar-EG"));
+                AfterDiscount.Text = sum.ToString("0.000",new CultureInfo("ar-EG"));
+                PaidUp.Text = sum.ToString(new CultureInfo("ar-EG"));
             }
             catch (Exception ex)
             {
@@ -235,8 +239,8 @@ namespace Store_System.UI.ControlPanelUi
             double TotalPrice = double.Parse(TotalPriceBox.Text, NumberStyles.Currency, new CultureInfo("ar-EG"));
             double Discount = double.Parse(FaturaDiscountBox.Text);
             double FinalPrice = (TotalPrice * (Discount / 100) - 1);
-            AfterDiscount.Text = FinalPrice.ToString("C3", new CultureInfo("ar-EG"));
-            PaidUp.Text = FinalPrice.ToString("C3", new CultureInfo("ar-EG"));
+            AfterDiscount.Text = FinalPrice.ToString("0.000",new CultureInfo("ar-EG"));
+            PaidUp.Text = FinalPrice.ToString(new CultureInfo("ar-EG"));
         }
 
         private void deletebtn_Click(object sender, EventArgs e)
@@ -291,12 +295,16 @@ namespace Store_System.UI.ControlPanelUi
                 order.user_id = int.Parse(UserIDBox.Text);
                 order.IsSale = false;
                 order.OrderDate = DateTime.Parse(Date.Text);
-                order.Customer_Id = int.Parse(customerIDBox.Text);
+                if(customerIDBox.Text!="")
+                    order.Customer_Id = int.Parse(customerIDBox.Text);
                 await _saleBillService.AddOrder(order);
                 int orderId = order.ID;
                 OrderItems orderItems = new OrderItems();
                 Product product = new Product();
-                
+
+                ShiftLockService.GetShiftMoneyChanged(double.Parse(PaidUp.Text,NumberStyles.Float));
+
+
 
                 for (int i = 0; i < Items.Rows.Count - 1; i++)
                 {
@@ -327,5 +335,8 @@ namespace Store_System.UI.ControlPanelUi
             }
         }
 
+        private void PaidUp_TextChanged(object sender, EventArgs e)
+        {
+        }
     }
 }

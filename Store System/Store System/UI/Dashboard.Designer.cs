@@ -1,6 +1,6 @@
 ﻿namespace Store_System.UI
 {
-    partial class AdminDashboard
+    partial class Dashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminDashboard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             shiftLockBtn = new Button();
             returnedBillBtn = new Button();
             saleBillBtn = new Button();
@@ -60,7 +60,7 @@
             shortFallsPage1 = new ShortFallsPage();
             welcomePage1 = new WelcomePage();
             returnedItems1 = new ControlPanelUi.ReturnedItems();
-            shiftLock1 = new ControlPanelUi.ShiftLock();
+            addBranchBtn = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -121,7 +121,7 @@
             groupBox1.Controls.Add(saleBillBtn);
             groupBox1.FlatStyle = FlatStyle.Flat;
             groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(16, 155);
+            groupBox1.Location = new Point(16, 138);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(391, 133);
             groupBox1.TabIndex = 0;
@@ -176,7 +176,7 @@
             groupBox2.Controls.Add(mainStockBtn);
             groupBox2.FlatStyle = FlatStyle.Flat;
             groupBox2.ForeColor = Color.White;
-            groupBox2.Location = new Point(16, 302);
+            groupBox2.Location = new Point(16, 278);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(391, 130);
             groupBox2.TabIndex = 1;
@@ -193,7 +193,7 @@
             groupBox3.Controls.Add(saleReportBtn);
             groupBox3.FlatStyle = FlatStyle.Flat;
             groupBox3.ForeColor = Color.White;
-            groupBox3.Location = new Point(16, 446);
+            groupBox3.Location = new Point(16, 415);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(391, 244);
             groupBox3.TabIndex = 2;
@@ -284,7 +284,7 @@
             addSupplierBtn.FlatStyle = FlatStyle.Flat;
             addSupplierBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             addSupplierBtn.ForeColor = Color.Black;
-            addSupplierBtn.Location = new Point(39, 174);
+            addSupplierBtn.Location = new Point(39, 171);
             addSupplierBtn.Name = "addSupplierBtn";
             addSupplierBtn.Size = new Size(320, 41);
             addSupplierBtn.TabIndex = 4;
@@ -298,7 +298,7 @@
             addProductBtn.FlatStyle = FlatStyle.Flat;
             addProductBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             addProductBtn.ForeColor = Color.Black;
-            addProductBtn.Location = new Point(37, 74);
+            addProductBtn.Location = new Point(37, 73);
             addProductBtn.Name = "addProductBtn";
             addProductBtn.Size = new Size(320, 41);
             addProductBtn.TabIndex = 3;
@@ -312,7 +312,7 @@
             addCategoryBtn.FlatStyle = FlatStyle.Flat;
             addCategoryBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             addCategoryBtn.ForeColor = Color.Black;
-            addCategoryBtn.Location = new Point(39, 124);
+            addCategoryBtn.Location = new Point(39, 122);
             addCategoryBtn.Name = "addCategoryBtn";
             addCategoryBtn.Size = new Size(320, 41);
             addCategoryBtn.TabIndex = 2;
@@ -336,15 +336,16 @@
             // 
             // ControlAdminGr
             // 
+            ControlAdminGr.Controls.Add(addBranchBtn);
             ControlAdminGr.Controls.Add(addSupplierBtn);
             ControlAdminGr.Controls.Add(addProductBtn);
             ControlAdminGr.Controls.Add(addCategoryBtn);
             ControlAdminGr.Controls.Add(addUserBtn);
             ControlAdminGr.FlatStyle = FlatStyle.Flat;
             ControlAdminGr.ForeColor = Color.White;
-            ControlAdminGr.Location = new Point(16, 704);
+            ControlAdminGr.Location = new Point(16, 666);
             ControlAdminGr.Name = "ControlAdminGr";
-            ControlAdminGr.Size = new Size(391, 231);
+            ControlAdminGr.Size = new Size(391, 271);
             ControlAdminGr.TabIndex = 4;
             ControlAdminGr.TabStop = false;
             ControlAdminGr.Text = "التحكم";
@@ -377,7 +378,7 @@
             backHomeBtn.FlatStyle = FlatStyle.Flat;
             backHomeBtn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             backHomeBtn.ForeColor = Color.White;
-            backHomeBtn.Location = new Point(16, 56);
+            backHomeBtn.Location = new Point(16, 39);
             backHomeBtn.Name = "backHomeBtn";
             backHomeBtn.Size = new Size(84, 62);
             backHomeBtn.TabIndex = 11;
@@ -389,7 +390,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(254, 68);
+            label1.Location = new Point(254, 51);
             label1.Name = "label1";
             label1.Size = new Size(66, 31);
             label1.TabIndex = 9;
@@ -398,7 +399,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(336, 49);
+            pictureBox1.Location = new Point(336, 32);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(71, 62);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -421,7 +422,7 @@
             logOutBtn.FlatStyle = FlatStyle.Flat;
             logOutBtn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             logOutBtn.ForeColor = Color.White;
-            logOutBtn.Location = new Point(1736, 6);
+            logOutBtn.Location = new Point(78, 5);
             logOutBtn.Name = "logOutBtn";
             logOutBtn.Size = new Size(119, 35);
             logOutBtn.TabIndex = 10;
@@ -432,7 +433,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(1861, 2);
+            pictureBox3.Location = new Point(28, 2);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(37, 42);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -475,16 +476,21 @@
             returnedItems1.Size = new Size(1496, 949);
             returnedItems1.TabIndex = 16;
             // 
-            // shiftLock1
+            // addBranchBtn
             // 
-            shiftLock1.BackColor = Color.FromArgb(24, 30, 46);
-            shiftLock1.Location = new Point(-5, 50);
-            shiftLock1.MinimumSize = new Size(1496, 949);
-            shiftLock1.Name = "shiftLock1";
-            shiftLock1.Size = new Size(1496, 949);
-            shiftLock1.TabIndex = 17;
+            addBranchBtn.BackColor = Color.PaleGreen;
+            addBranchBtn.FlatStyle = FlatStyle.Flat;
+            addBranchBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            addBranchBtn.ForeColor = Color.Black;
+            addBranchBtn.Location = new Point(38, 220);
+            addBranchBtn.Name = "addBranchBtn";
+            addBranchBtn.Size = new Size(320, 41);
+            addBranchBtn.TabIndex = 5;
+            addBranchBtn.Text = "إضافة وتعديل فرع";
+            addBranchBtn.UseVisualStyleBackColor = false;
+            addBranchBtn.Click += addBranchBtn_Click;
             // 
-            // AdminDashboard
+            // Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -492,16 +498,16 @@
             ClientSize = new Size(1924, 1004);
             Controls.Add(panel1);
             Controls.Add(panel2);
-            Controls.Add(shiftLock1);
-            Controls.Add(returnedItems1);
             Controls.Add(welcomePage1);
             Controls.Add(shortFallsPage1);
             Controls.Add(mainStockPage1);
+            Controls.Add(returnedItems1);
             MinimumSize = new Size(1918, 1028);
-            Name = "AdminDashboard";
+            Name = "Dashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Home";
             WindowState = FormWindowState.Maximized;
+            FormClosed += AdminDashboard_FormClosed;
             Load += AdminDashboard_Load;
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
@@ -555,5 +561,6 @@
         private ControlPanelUi.SaleBill saleBill1;
         private ControlPanelUi.ReturnedItems returnedItems1;
         private ControlPanelUi.ShiftLock shiftLock1;
+        private Button addBranchBtn;
     }
 }
