@@ -52,18 +52,25 @@ namespace Store_System.Services
                 return new List<Category>();
             }
         }
-        public async Task<int> DeleteCategory(int code)
+        
+
+        public async Task<List<Category>> Search(string Name)
         {
-            var category = await _context.Category.FirstOrDefaultAsync(u => u.Code == code);
-            if (category != null)
+            if (Name != "")
             {
-                _context.Category.Remove(category);
-                await _context.SaveChangesAsync();
-                return 1;
+                var Categories = await _context.Category.Where(p => p.Name.Contains(Name)).ToListAsync();
+                if (Categories != null)
+                {
+                    return Categories;
+                }
+                else
+                {
+                    return new List<Category>();
+                }
             }
-            else
-                return 0;
+            return new List<Category>();
         }
-       
+
+
     }
 }

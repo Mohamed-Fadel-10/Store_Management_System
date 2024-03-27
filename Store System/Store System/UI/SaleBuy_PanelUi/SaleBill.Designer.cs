@@ -72,6 +72,7 @@
             Total = new DataGridViewTextBoxColumn();
             _notes = new DataGridViewTextBoxColumn();
             product_id = new DataGridViewTextBoxColumn();
+            OrderID = new DataGridViewTextBoxColumn();
             Printbtn = new Button();
             panel1 = new Panel();
             button1 = new Button();
@@ -141,6 +142,7 @@
             // StockBox
             // 
             StockBox.BackColor = Color.FromArgb(24, 30, 46);
+            StockBox.Enabled = false;
             StockBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             StockBox.ForeColor = Color.White;
             StockBox.FormattingEnabled = true;
@@ -489,7 +491,7 @@
             Items.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Items.BackgroundColor = Color.Snow;
             Items.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Items.Columns.AddRange(new DataGridViewColumn[] { _Barcode, _Name, _Classification, _Quantity, _Color, _Size, SalePricePerOne, _Discount, Total, _notes, product_id });
+            Items.Columns.AddRange(new DataGridViewColumn[] { _Barcode, _Name, _Classification, _Quantity, _Color, _Size, SalePricePerOne, _Discount, Total, _notes, product_id, OrderID });
             Items.Location = new Point(26, 332);
             Items.Name = "Items";
             Items.RightToLeft = RightToLeft.Yes;
@@ -565,6 +567,13 @@
             product_id.MinimumWidth = 6;
             product_id.Name = "product_id";
             product_id.Visible = false;
+            // 
+            // OrderID
+            // 
+            OrderID.HeaderText = "رقم الفاتورة";
+            OrderID.MinimumWidth = 6;
+            OrderID.Name = "OrderID";
+            OrderID.Visible = false;
             // 
             // Printbtn
             // 
@@ -921,6 +930,10 @@
         private Label label10;
         private TextBox productID;
         private Label Date;
+        public TextBox cashierNameBox;
+        public ComboBox StockBox;
+        public TextBox UserIDBox;
+        private TextBox customerIDBox;
         private DataGridViewTextBoxColumn _Barcode;
         private DataGridViewTextBoxColumn _Name;
         private DataGridViewTextBoxColumn _Classification;
@@ -932,9 +945,6 @@
         private DataGridViewTextBoxColumn Total;
         private DataGridViewTextBoxColumn _notes;
         private DataGridViewTextBoxColumn product_id;
-        public TextBox cashierNameBox;
-        public ComboBox StockBox;
-        public TextBox UserIDBox;
-        private TextBox customerIDBox;
+        private DataGridViewTextBoxColumn OrderID;
     }
 }

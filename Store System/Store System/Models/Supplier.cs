@@ -15,10 +15,7 @@ namespace Store_System.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string? Address { get; set; }
-        [RegularExpression("^01[0-9]{9}$")]
-        [Phone(ErrorMessage = "رقم هاتف غير صالح يرجى ادخال الرقم مرة اخرى ")]
         public string Phone { get; set; }
-        [EmailAddress]
         public string? Email { get; set; }
         public DateTime?  ContractDate { get; set; }
         /// Relations

@@ -54,13 +54,6 @@ namespace Store_System.UI
             panel5 = new Panel();
             existUserLbl = new Label();
             existUsrsGridView = new DataGridView();
-            StockName = new DataGridViewTextBoxColumn();
-            Role = new DataGridViewTextBoxColumn();
-            Password = new DataGridViewTextBoxColumn();
-            _username = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
-            phone = new DataGridViewTextBoxColumn();
-            Name = new DataGridViewTextBoxColumn();
             usersPic = new PictureBox();
             searchUserBox = new TextBox();
             saerchUserLbl = new Label();
@@ -72,6 +65,14 @@ namespace Store_System.UI
             passerror = new Label();
             stockerror = new Label();
             roleerror = new Label();
+            updatebtm = new Button();
+            _Name = new DataGridViewTextBoxColumn();
+            phone = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            _username = new DataGridViewTextBoxColumn();
+            Password = new DataGridViewTextBoxColumn();
+            Role = new DataGridViewTextBoxColumn();
+            StockName = new DataGridViewTextBoxColumn();
             ((ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel5.SuspendLayout();
@@ -121,9 +122,9 @@ namespace Store_System.UI
             saveUserBtn.FlatStyle = FlatStyle.Flat;
             saveUserBtn.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             saveUserBtn.ForeColor = Color.White;
-            saveUserBtn.Location = new Point(284, 408);
+            saveUserBtn.Location = new Point(134, 415);
             saveUserBtn.Name = "saveUserBtn";
-            saveUserBtn.Size = new Size(194, 57);
+            saveUserBtn.Size = new Size(120, 57);
             saveUserBtn.TabIndex = 19;
             saveUserBtn.Text = "حفظ";
             saveUserBtn.UseVisualStyleBackColor = false;
@@ -313,56 +314,15 @@ namespace Store_System.UI
             existUsrsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             existUsrsGridView.BackgroundColor = Color.Snow;
             existUsrsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            existUsrsGridView.Columns.AddRange(new DataGridViewColumn[] { StockName, Role, Password, _username, Email, phone, Name });
+            existUsrsGridView.Columns.AddRange(new DataGridViewColumn[] { _Name, phone, Email, _username, Password, Role, StockName });
             existUsrsGridView.Location = new Point(16, 488);
             existUsrsGridView.Name = "existUsrsGridView";
+            existUsrsGridView.RightToLeft = RightToLeft.Yes;
             existUsrsGridView.RowHeadersWidth = 51;
             existUsrsGridView.RowTemplate.Height = 29;
             existUsrsGridView.Size = new Size(1460, 447);
             existUsrsGridView.TabIndex = 6;
             existUsrsGridView.RowHeaderMouseClick += existUsrsGridView_RowHeaderMouseClick;
-            // 
-            // StockName
-            // 
-            StockName.HeaderText = "إسم الخزنة";
-            StockName.MinimumWidth = 6;
-            StockName.Name = "StockName";
-            // 
-            // Role
-            // 
-            Role.HeaderText = "الصلاحية";
-            Role.MinimumWidth = 6;
-            Role.Name = "Role";
-            // 
-            // Password
-            // 
-            Password.HeaderText = "كلمة المرور";
-            Password.MinimumWidth = 6;
-            Password.Name = "Password";
-            // 
-            // _username
-            // 
-            _username.HeaderText = "اسم المستخدم";
-            _username.MinimumWidth = 6;
-            _username.Name = "_username";
-            // 
-            // Email
-            // 
-            Email.HeaderText = "الايميل";
-            Email.MinimumWidth = 6;
-            Email.Name = "Email";
-            // 
-            // phone
-            // 
-            phone.HeaderText = "رقم الهاتف";
-            phone.MinimumWidth = 6;
-            phone.Name = "phone";
-            // 
-            // Name
-            // 
-            Name.HeaderText = "الاسم";
-            Name.MinimumWidth = 6;
-            Name.Name = "Name";
             // 
             // usersPic
             // 
@@ -419,9 +379,9 @@ namespace Store_System.UI
             deleteUserBtn.FlatStyle = FlatStyle.Flat;
             deleteUserBtn.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             deleteUserBtn.ForeColor = Color.White;
-            deleteUserBtn.Location = new Point(85, 408);
+            deleteUserBtn.Location = new Point(16, 415);
             deleteUserBtn.Name = "deleteUserBtn";
-            deleteUserBtn.Size = new Size(183, 57);
+            deleteUserBtn.Size = new Size(105, 57);
             deleteUserBtn.TabIndex = 24;
             deleteUserBtn.Text = "حذف";
             deleteUserBtn.UseVisualStyleBackColor = false;
@@ -506,11 +466,69 @@ namespace Store_System.UI
             roleerror.Text = "لا يمكنك ترك هذا الحقل فارغ";
             roleerror.Visible = false;
             // 
+            // updatebtm
+            // 
+            updatebtm.Anchor = AnchorStyles.None;
+            updatebtm.BackColor = Color.LimeGreen;
+            updatebtm.FlatStyle = FlatStyle.Flat;
+            updatebtm.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            updatebtm.ForeColor = Color.White;
+            updatebtm.Location = new Point(266, 415);
+            updatebtm.Name = "updatebtm";
+            updatebtm.Size = new Size(120, 57);
+            updatebtm.TabIndex = 31;
+            updatebtm.Text = "تعديل";
+            updatebtm.UseVisualStyleBackColor = false;
+            updatebtm.Click += updatebtn_Click;
+            // 
+            // _Name
+            // 
+            _Name.HeaderText = "الاسم";
+            _Name.MinimumWidth = 6;
+            _Name.Name = "_Name";
+            // 
+            // phone
+            // 
+            phone.HeaderText = "رقم الهاتف";
+            phone.MinimumWidth = 6;
+            phone.Name = "phone";
+            // 
+            // Email
+            // 
+            Email.HeaderText = "الايميل";
+            Email.MinimumWidth = 6;
+            Email.Name = "Email";
+            // 
+            // _username
+            // 
+            _username.HeaderText = "اسم المستخدم";
+            _username.MinimumWidth = 6;
+            _username.Name = "_username";
+            // 
+            // Password
+            // 
+            Password.HeaderText = "كلمة المرور";
+            Password.MinimumWidth = 6;
+            Password.Name = "Password";
+            // 
+            // Role
+            // 
+            Role.HeaderText = "الصلاحية";
+            Role.MinimumWidth = 6;
+            Role.Name = "Role";
+            // 
+            // StockName
+            // 
+            StockName.HeaderText = "إسم الخزنة";
+            StockName.MinimumWidth = 6;
+            StockName.Name = "StockName";
+            // 
             // AddUserPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(updatebtm);
             Controls.Add(roleerror);
             Controls.Add(stockerror);
             Controls.Add(passerror);
@@ -541,7 +559,7 @@ namespace Store_System.UI
             Controls.Add(passwordBox);
             Controls.Add(userPhoneBox);
             MinimumSize = new Size(1496, 949);
-           // Name = "AddUserPage";
+            Name = "AddUserPage";
             Size = new Size(1496, 949);
             Load += AddUserPage_Load;
             ((ISupportInitialize)pictureBox1).EndInit();
@@ -584,17 +602,18 @@ namespace Store_System.UI
         private PictureBox pictureBox2;
         private Button deleteUserBtn;
         private ComboBox UserRoleBox;
-        private DataGridViewTextBoxColumn StockName;
-        private DataGridViewTextBoxColumn Role;
-        private DataGridViewTextBoxColumn Password;
-        private DataGridViewTextBoxColumn _username;
-        private DataGridViewTextBoxColumn Email;
-        private DataGridViewTextBoxColumn phone;
-        private DataGridViewTextBoxColumn Name;
         private Label nameerrore;
         private Label usernameerror;
         private Label passerror;
         private Label stockerror;
         private Label roleerror;
+        private Button updatebtm;
+        private DataGridViewTextBoxColumn _Name;
+        private DataGridViewTextBoxColumn phone;
+        private DataGridViewTextBoxColumn Email;
+        private DataGridViewTextBoxColumn _username;
+        private DataGridViewTextBoxColumn Password;
+        private DataGridViewTextBoxColumn Role;
+        private DataGridViewTextBoxColumn StockName;
     }
 }

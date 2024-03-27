@@ -29,49 +29,47 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainStockPage));
-            mainStockGridView = new DataGridView();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
             label1 = new Label();
             pictureBox2 = new PictureBox();
             searchStockLbl = new Label();
             searchStockBox = new TextBox();
-            nameOrderBtn = new Button();
+            Items = new DataGridView();
+            _Barcode = new DataGridViewTextBoxColumn();
+            _Name = new DataGridViewTextBoxColumn();
+            category = new DataGridViewTextBoxColumn();
+            Supplier = new DataGridViewTextBoxColumn();
+            _Quantity = new DataGridViewTextBoxColumn();
+            _cost = new DataGridViewTextBoxColumn();
+            _discount = new DataGridViewTextBoxColumn();
+            Sale = new DataGridViewTextBoxColumn();
+            _color = new DataGridViewTextBoxColumn();
+            _size = new DataGridViewTextBoxColumn();
+            notes = new DataGridViewTextBoxColumn();
+            panel3 = new Panel();
             label2 = new Label();
-            categoryOrderBtn = new Button();
-            supplierOrderBtn = new Button();
-            pictureBox3 = new PictureBox();
-            pictureBox4 = new PictureBox();
-            pictureBox5 = new PictureBox();
-            pictureBox6 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)mainStockGridView).BeginInit();
+            TotalStockSystem = new TextBox();
+            label3 = new Label();
+            AvailableProductsBox = new TextBox();
+            label4 = new Label();
+            ShortsCount = new TextBox();
+            label7 = new Label();
+            ItemChoosecomb = new ComboBox();
+            label5 = new Label();
+            CategoriesCombo = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             SuspendLayout();
-            // 
-            // mainStockGridView
-            // 
-            mainStockGridView.Anchor = AnchorStyles.None;
-            mainStockGridView.BackgroundColor = Color.Snow;
-            mainStockGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            mainStockGridView.Location = new Point(0, 252);
-            mainStockGridView.Name = "mainStockGridView";
-            mainStockGridView.RowHeadersWidth = 51;
-            mainStockGridView.RowTemplate.Height = 29;
-            mainStockGridView.Size = new Size(1496, 697);
-            mainStockGridView.TabIndex = 22;
             // 
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.None;
             pictureBox1.BackColor = Color.FromArgb(24, 30, 46);
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(1388, 25);
+            pictureBox1.Location = new Point(1396, 9);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(89, 87);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -83,7 +81,7 @@
             panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = Color.FromArgb(27, 156, 133);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(1178, 39);
+            panel1.Location = new Point(1178, 22);
             panel1.Name = "panel1";
             panel1.Size = new Size(327, 60);
             panel1.TabIndex = 24;
@@ -105,9 +103,9 @@
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BackColor = Color.FromArgb(24, 30, 46);
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(322, 61);
+            pictureBox2.Location = new Point(481, 39);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(38, 38);
+            pictureBox2.Size = new Size(38, 43);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 29;
             pictureBox2.TabStop = false;
@@ -118,7 +116,7 @@
             searchStockLbl.AutoSize = true;
             searchStockLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             searchStockLbl.ForeColor = Color.White;
-            searchStockLbl.Location = new Point(212, 42);
+            searchStockLbl.Location = new Point(380, 22);
             searchStockLbl.Name = "searchStockLbl";
             searchStockLbl.Size = new Size(95, 23);
             searchStockLbl.TabIndex = 28;
@@ -130,173 +128,309 @@
             searchStockBox.BackColor = Color.FromArgb(24, 30, 46);
             searchStockBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             searchStockBox.ForeColor = Color.White;
-            searchStockBox.Location = new Point(77, 56);
+            searchStockBox.Location = new Point(27, 39);
             searchStockBox.Name = "searchStockBox";
             searchStockBox.RightToLeft = RightToLeft.Yes;
-            searchStockBox.Size = new Size(239, 43);
+            searchStockBox.Size = new Size(448, 43);
             searchStockBox.TabIndex = 27;
+            searchStockBox.TextChanged += searchStockBox_TextChanged;
             // 
-            // nameOrderBtn
+            // Items
             // 
-            nameOrderBtn.Anchor = AnchorStyles.None;
-            nameOrderBtn.BackColor = Color.FromArgb(27, 156, 133);
-            nameOrderBtn.FlatStyle = FlatStyle.Flat;
-            nameOrderBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            nameOrderBtn.ForeColor = Color.White;
-            nameOrderBtn.Location = new Point(1145, 186);
-            nameOrderBtn.Name = "nameOrderBtn";
-            nameOrderBtn.Padding = new Padding(0, 0, 0, 8);
-            nameOrderBtn.Size = new Size(128, 48);
-            nameOrderBtn.TabIndex = 30;
-            nameOrderBtn.Text = "الاسم";
-            nameOrderBtn.TextAlign = ContentAlignment.MiddleRight;
-            nameOrderBtn.UseVisualStyleBackColor = false;
+            Items.AllowUserToAddRows = false;
+            Items.AllowUserToDeleteRows = false;
+            Items.Anchor = AnchorStyles.None;
+            Items.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Items.BackgroundColor = Color.Snow;
+            Items.BorderStyle = BorderStyle.Fixed3D;
+            Items.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Items.Columns.AddRange(new DataGridViewColumn[] { _Barcode, _Name, category, Supplier, _Quantity, _cost, _discount, Sale, _color, _size, notes });
+            Items.Location = new Point(7, 207);
+            Items.Name = "Items";
+            Items.ReadOnly = true;
+            Items.RightToLeft = RightToLeft.Yes;
+            Items.RowHeadersWidth = 51;
+            Items.RowTemplate.Height = 29;
+            Items.Size = new Size(1478, 654);
+            Items.TabIndex = 139;
+            // 
+            // _Barcode
+            // 
+            _Barcode.HeaderText = "الكود";
+            _Barcode.MinimumWidth = 6;
+            _Barcode.Name = "_Barcode";
+            _Barcode.ReadOnly = true;
+            // 
+            // _Name
+            // 
+            _Name.HeaderText = "إسم المنتج";
+            _Name.MinimumWidth = 6;
+            _Name.Name = "_Name";
+            _Name.ReadOnly = true;
+            // 
+            // category
+            // 
+            category.HeaderText = "نوع الصنف";
+            category.MinimumWidth = 6;
+            category.Name = "category";
+            category.ReadOnly = true;
+            // 
+            // Supplier
+            // 
+            Supplier.HeaderText = "المورد";
+            Supplier.MinimumWidth = 6;
+            Supplier.Name = "Supplier";
+            Supplier.ReadOnly = true;
+            // 
+            // _Quantity
+            // 
+            _Quantity.HeaderText = "الكمية";
+            _Quantity.MinimumWidth = 6;
+            _Quantity.Name = "_Quantity";
+            _Quantity.ReadOnly = true;
+            // 
+            // _cost
+            // 
+            _cost.HeaderText = "سعر الشراء";
+            _cost.MinimumWidth = 6;
+            _cost.Name = "_cost";
+            _cost.ReadOnly = true;
+            // 
+            // _discount
+            // 
+            _discount.HeaderText = "الخصم";
+            _discount.MinimumWidth = 6;
+            _discount.Name = "_discount";
+            _discount.ReadOnly = true;
+            // 
+            // Sale
+            // 
+            Sale.HeaderText = "سعر البيع";
+            Sale.MinimumWidth = 6;
+            Sale.Name = "Sale";
+            Sale.ReadOnly = true;
+            // 
+            // _color
+            // 
+            _color.HeaderText = "اللون";
+            _color.MinimumWidth = 6;
+            _color.Name = "_color";
+            _color.ReadOnly = true;
+            // 
+            // _size
+            // 
+            _size.HeaderText = "المقاس";
+            _size.MinimumWidth = 6;
+            _size.Name = "_size";
+            _size.ReadOnly = true;
+            // 
+            // notes
+            // 
+            notes.HeaderText = "ملاحظات";
+            notes.MinimumWidth = 6;
+            notes.Name = "notes";
+            notes.ReadOnly = true;
+            // 
+            // panel3
+            // 
+            panel3.Anchor = AnchorStyles.None;
+            panel3.BackColor = Color.FromArgb(27, 156, 133);
+            panel3.Enabled = false;
+            panel3.Location = new Point(-2, 189);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1501, 38);
+            panel3.TabIndex = 138;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(1305, 190);
+            label2.Location = new Point(1383, 110);
             label2.Name = "label2";
-            label2.RightToLeft = RightToLeft.Yes;
-            label2.Size = new Size(132, 31);
-            label2.TabIndex = 31;
-            label2.Text = "ترتيب حسب:";
+            label2.Size = new Size(104, 23);
+            label2.TabIndex = 141;
+            label2.Text = "إجمالى الخزنة";
             // 
-            // categoryOrderBtn
+            // TotalStockSystem
             // 
-            categoryOrderBtn.Anchor = AnchorStyles.None;
-            categoryOrderBtn.BackColor = Color.FromArgb(27, 156, 133);
-            categoryOrderBtn.FlatStyle = FlatStyle.Flat;
-            categoryOrderBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            categoryOrderBtn.ForeColor = Color.White;
-            categoryOrderBtn.Location = new Point(954, 186);
-            categoryOrderBtn.Name = "categoryOrderBtn";
-            categoryOrderBtn.Padding = new Padding(0, 0, 0, 8);
-            categoryOrderBtn.Size = new Size(128, 48);
-            categoryOrderBtn.TabIndex = 32;
-            categoryOrderBtn.Text = "النوع";
-            categoryOrderBtn.TextAlign = ContentAlignment.MiddleRight;
-            categoryOrderBtn.UseVisualStyleBackColor = false;
+            TotalStockSystem.Anchor = AnchorStyles.None;
+            TotalStockSystem.BackColor = Color.FromArgb(24, 30, 46);
+            TotalStockSystem.Enabled = false;
+            TotalStockSystem.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            TotalStockSystem.ForeColor = Color.White;
+            TotalStockSystem.Location = new Point(1291, 130);
+            TotalStockSystem.Name = "TotalStockSystem";
+            TotalStockSystem.RightToLeft = RightToLeft.Yes;
+            TotalStockSystem.Size = new Size(194, 43);
+            TotalStockSystem.TabIndex = 140;
             // 
-            // supplierOrderBtn
+            // label3
             // 
-            supplierOrderBtn.Anchor = AnchorStyles.None;
-            supplierOrderBtn.BackColor = Color.FromArgb(27, 156, 133);
-            supplierOrderBtn.FlatStyle = FlatStyle.Flat;
-            supplierOrderBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            supplierOrderBtn.ForeColor = Color.White;
-            supplierOrderBtn.Location = new Point(763, 186);
-            supplierOrderBtn.Name = "supplierOrderBtn";
-            supplierOrderBtn.Padding = new Padding(0, 0, 0, 8);
-            supplierOrderBtn.Size = new Size(128, 48);
-            supplierOrderBtn.TabIndex = 33;
-            supplierOrderBtn.Text = "المورد";
-            supplierOrderBtn.TextAlign = ContentAlignment.MiddleRight;
-            supplierOrderBtn.UseVisualStyleBackColor = false;
+            label3.Anchor = AnchorStyles.None;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(1107, 112);
+            label3.Name = "label3";
+            label3.Size = new Size(159, 23);
+            label3.TabIndex = 143;
+            label3.Text = "عدد المنتجات المتاحة";
             // 
-            // pictureBox3
+            // AvailableProductsBox
             // 
-            pictureBox3.Anchor = AnchorStyles.None;
-            pictureBox3.BackColor = Color.FromArgb(24, 30, 46);
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(1436, 190);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(44, 36);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 34;
-            pictureBox3.TabStop = false;
+            AvailableProductsBox.Anchor = AnchorStyles.None;
+            AvailableProductsBox.BackColor = Color.FromArgb(24, 30, 46);
+            AvailableProductsBox.Enabled = false;
+            AvailableProductsBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            AvailableProductsBox.ForeColor = Color.White;
+            AvailableProductsBox.Location = new Point(1071, 129);
+            AvailableProductsBox.Name = "AvailableProductsBox";
+            AvailableProductsBox.RightToLeft = RightToLeft.Yes;
+            AvailableProductsBox.Size = new Size(194, 43);
+            AvailableProductsBox.TabIndex = 142;
             // 
-            // pictureBox4
+            // label4
             // 
-            pictureBox4.Anchor = AnchorStyles.None;
-            pictureBox4.BackColor = Color.FromArgb(27, 156, 133);
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(1156, 197);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(31, 32);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 35;
-            pictureBox4.TabStop = false;
+            label4.Anchor = AnchorStyles.None;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(935, 112);
+            label4.Name = "label4";
+            label4.Size = new Size(114, 23);
+            label4.TabIndex = 145;
+            label4.Text = "نواقص المخزن";
             // 
-            // pictureBox5
+            // ShortsCount
             // 
-            pictureBox5.Anchor = AnchorStyles.None;
-            pictureBox5.BackColor = Color.FromArgb(27, 156, 133);
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(965, 197);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(31, 32);
-            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox5.TabIndex = 36;
-            pictureBox5.TabStop = false;
+            ShortsCount.Anchor = AnchorStyles.None;
+            ShortsCount.BackColor = Color.FromArgb(24, 30, 46);
+            ShortsCount.Enabled = false;
+            ShortsCount.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            ShortsCount.ForeColor = Color.White;
+            ShortsCount.Location = new Point(849, 129);
+            ShortsCount.Name = "ShortsCount";
+            ShortsCount.RightToLeft = RightToLeft.Yes;
+            ShortsCount.Size = new Size(194, 43);
+            ShortsCount.TabIndex = 144;
             // 
-            // pictureBox6
+            // label7
             // 
-            pictureBox6.Anchor = AnchorStyles.None;
-            pictureBox6.BackColor = Color.FromArgb(27, 156, 133);
-            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(773, 197);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(31, 32);
-            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox6.TabIndex = 37;
-            pictureBox6.TabStop = false;
+            label7.Anchor = AnchorStyles.None;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(702, 110);
+            label7.Name = "label7";
+            label7.Size = new Size(129, 23);
+            label7.TabIndex = 147;
+            label7.Text = "تحديد من المخزن";
+            // 
+            // ItemChoosecomb
+            // 
+            ItemChoosecomb.BackColor = Color.FromArgb(24, 30, 46);
+            ItemChoosecomb.Font = new Font("Segoe UI", 17F, FontStyle.Regular, GraphicsUnit.Point);
+            ItemChoosecomb.ForeColor = Color.White;
+            ItemChoosecomb.FormattingEnabled = true;
+            ItemChoosecomb.Items.AddRange(new object[] { "متاح", "على وشك انتهاء الكمية", "" });
+            ItemChoosecomb.Location = new Point(447, 127);
+            ItemChoosecomb.Name = "ItemChoosecomb";
+            ItemChoosecomb.RightToLeft = RightToLeft.Yes;
+            ItemChoosecomb.Size = new Size(384, 46);
+            ItemChoosecomb.TabIndex = 146;
+            ItemChoosecomb.SelectedIndexChanged += ItemChoosecomb_SelectedIndexChanged;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.None;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(293, 110);
+            label5.Name = "label5";
+            label5.Size = new Size(137, 23);
+            label5.TabIndex = 149;
+            label5.Text = "تحديد صنف معين";
+            // 
+            // CategoriesCombo
+            // 
+            CategoriesCombo.BackColor = Color.FromArgb(24, 30, 46);
+            CategoriesCombo.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            CategoriesCombo.ForeColor = Color.White;
+            CategoriesCombo.FormattingEnabled = true;
+            CategoriesCombo.Location = new Point(27, 127);
+            CategoriesCombo.Name = "CategoriesCombo";
+            CategoriesCombo.RightToLeft = RightToLeft.Yes;
+            CategoriesCombo.Size = new Size(403, 43);
+            CategoriesCombo.TabIndex = 148;
+            CategoriesCombo.SelectedIndexChanged += CategoriesCombo_SelectedIndexChanged;
             // 
             // MainStockPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
-            Controls.Add(pictureBox5);
-            Controls.Add(pictureBox6);
-            Controls.Add(pictureBox4);
-            Controls.Add(pictureBox3);
-            Controls.Add(supplierOrderBtn);
-            Controls.Add(categoryOrderBtn);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(ShortsCount);
+            Controls.Add(AvailableProductsBox);
+            Controls.Add(label5);
+            Controls.Add(CategoriesCombo);
+            Controls.Add(label7);
             Controls.Add(label2);
-            Controls.Add(nameOrderBtn);
+            Controls.Add(Items);
+            Controls.Add(panel3);
             Controls.Add(pictureBox2);
             Controls.Add(searchStockLbl);
             Controls.Add(searchStockBox);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
-            Controls.Add(mainStockGridView);
+            Controls.Add(ItemChoosecomb);
+            Controls.Add(TotalStockSystem);
             MinimumSize = new Size(1496, 949);
             Name = "MainStockPage";
             Size = new Size(1496, 949);
             Load += MainStockPage_Load;
-            ((System.ComponentModel.ISupportInitialize)mainStockGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Items).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private DataGridView mainStockGridView;
         private PictureBox pictureBox1;
         private Panel panel1;
         private Label label1;
         private PictureBox pictureBox2;
         private Label searchStockLbl;
         private TextBox searchStockBox;
-        private Button nameOrderBtn;
+        private DataGridView Items;
+        private DataGridViewTextBoxColumn _Barcode;
+        private DataGridViewTextBoxColumn _Name;
+        private DataGridViewTextBoxColumn category;
+        private DataGridViewTextBoxColumn Supplier;
+        private DataGridViewTextBoxColumn _Quantity;
+        private DataGridViewTextBoxColumn _cost;
+        private DataGridViewTextBoxColumn _discount;
+        private DataGridViewTextBoxColumn Sale;
+        private DataGridViewTextBoxColumn _color;
+        private DataGridViewTextBoxColumn _size;
+        private DataGridViewTextBoxColumn notes;
+        private Panel panel3;
         private Label label2;
-        private Button categoryOrderBtn;
-        private Button supplierOrderBtn;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox4;
-        private PictureBox pictureBox5;
-        private PictureBox pictureBox6;
+        private TextBox TotalStockSystem;
+        private Label label3;
+        private TextBox AvailableProductsBox;
+        private Label label4;
+        private TextBox ShortsCount;
+        private Label label7;
+        private ComboBox ItemChoosecomb;
+        private Label label5;
+        private ComboBox CategoriesCombo;
     }
 }

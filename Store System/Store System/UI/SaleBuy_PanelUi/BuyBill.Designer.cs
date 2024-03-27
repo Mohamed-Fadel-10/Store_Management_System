@@ -41,6 +41,7 @@
             TotalPrice = new DataGridViewTextBoxColumn();
             ProductDiscription = new DataGridViewTextBoxColumn();
             Product_id = new DataGridViewTextBoxColumn();
+            OrderID = new DataGridViewTextBoxColumn();
             Printbtn = new Button();
             panel1 = new Panel();
             label1 = new Label();
@@ -93,6 +94,7 @@
             editBtn = new Button();
             cashierNameBox = new TextBox();
             branchIdBox = new TextBox();
+            UserIDBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -105,7 +107,7 @@
             Items.Anchor = AnchorStyles.None;
             Items.BackgroundColor = Color.Snow;
             Items.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Items.Columns.AddRange(new DataGridViewColumn[] { ProductID, ProductName, ProductCategory, ProductAmount, ProductColor, ProductSize, ProductPrice, ProductDiscount, TotalPrice, ProductDiscription, Product_id });
+            Items.Columns.AddRange(new DataGridViewColumn[] { ProductID, ProductName, ProductCategory, ProductAmount, ProductColor, ProductSize, ProductPrice, ProductDiscount, TotalPrice, ProductDiscription, Product_id, OrderID });
             Items.Location = new Point(51, 335);
             Items.Name = "Items";
             Items.RightToLeft = RightToLeft.Yes;
@@ -192,6 +194,14 @@
             Product_id.Name = "Product_id";
             Product_id.Visible = false;
             Product_id.Width = 125;
+            // 
+            // OrderID
+            // 
+            OrderID.HeaderText = "رقم الفاتورة";
+            OrderID.MinimumWidth = 6;
+            OrderID.Name = "OrderID";
+            OrderID.Visible = false;
+            OrderID.Width = 125;
             // 
             // Printbtn
             // 
@@ -567,6 +577,7 @@
             TotalPriceBox.RightToLeft = RightToLeft.Yes;
             TotalPriceBox.Size = new Size(209, 34);
             TotalPriceBox.TabIndex = 69;
+            TotalPriceBox.Text = "0";
             TotalPriceBox.TextChanged += TotalPriceBox_TextChanged;
             // 
             // label16
@@ -831,12 +842,25 @@
             branchIdBox.Enabled = false;
             branchIdBox.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             branchIdBox.ForeColor = Color.White;
-            branchIdBox.Location = new Point(598, 891);
+            branchIdBox.Location = new Point(689, 899);
             branchIdBox.Name = "branchIdBox";
             branchIdBox.RightToLeft = RightToLeft.Yes;
             branchIdBox.Size = new Size(110, 30);
             branchIdBox.TabIndex = 145;
             branchIdBox.Visible = false;
+            // 
+            // UserIDBox
+            // 
+            UserIDBox.Anchor = AnchorStyles.None;
+            UserIDBox.BackColor = Color.FromArgb(24, 30, 46);
+            UserIDBox.Enabled = false;
+            UserIDBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            UserIDBox.ForeColor = Color.White;
+            UserIDBox.Location = new Point(570, 895);
+            UserIDBox.Name = "UserIDBox";
+            UserIDBox.RightToLeft = RightToLeft.Yes;
+            UserIDBox.Size = new Size(98, 34);
+            UserIDBox.TabIndex = 145;
             // 
             // BuyBill
             // 
@@ -844,6 +868,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
             Controls.Add(branchIdBox);
+            Controls.Add(UserIDBox);
             Controls.Add(editBtn);
             Controls.Add(ProductIDBox);
             Controls.Add(deletebtn);
@@ -960,6 +985,9 @@
         private Label Date;
         private Button deletebtn;
         private TextBox ProductIDBox;
+        private Button editBtn;
+        public TextBox cashierNameBox;
+        public TextBox UserIDBox;
         private DataGridViewTextBoxColumn ProductID;
         private DataGridViewTextBoxColumn ProductName;
         private DataGridViewTextBoxColumn ProductCategory;
@@ -971,8 +999,7 @@
         private DataGridViewTextBoxColumn TotalPrice;
         private DataGridViewTextBoxColumn ProductDiscription;
         private DataGridViewTextBoxColumn Product_id;
-        private Button editBtn;
-        public TextBox cashierNameBox;
         private TextBox branchIdBox;
+        private DataGridViewTextBoxColumn OrderID;
     }
 }

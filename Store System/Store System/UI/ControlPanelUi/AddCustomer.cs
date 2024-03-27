@@ -46,6 +46,11 @@ namespace Store_System.UI.ControlPanelUi
         private void AddCustomer_FormClosed(object sender, FormClosedEventArgs e)
         {
             CustomerName = _NameBox.Text;
-        } 
+        }
+
+        private void AddCustomer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

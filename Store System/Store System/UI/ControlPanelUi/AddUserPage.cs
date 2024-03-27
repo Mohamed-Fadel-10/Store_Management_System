@@ -1,4 +1,5 @@
-﻿using Store_System.Models;
+﻿using Store_System.Data;
+using Store_System.Models;
 using Store_System.Services;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace Store_System.UI
             List<User> Users = await _userServices.GetALlUsers();
             existUsrsGridView.AutoGenerateColumns = false;
             existUsrsGridView.DataSource = Users;
-            existUsrsGridView.Columns["Name"].DataPropertyName = "Name";
+            existUsrsGridView.Columns["_Name"].DataPropertyName = "Name";
             existUsrsGridView.Columns["phone"].DataPropertyName = "Phone";
             existUsrsGridView.Columns["Email"].DataPropertyName = "Email";
             existUsrsGridView.Columns["_UserName"].DataPropertyName = "UserName";
@@ -43,6 +44,7 @@ namespace Store_System.UI
         }
         private async void saveUserBtn_Click(object sender, EventArgs e)
         {
+            _user = new User();
             if (nameUserBox.Text != "" && userNameBox.Text != "" && passwordBox.Text != "" && UserRoleBox.SelectedIndex != -1 && stockNameBox.Text != "")
             {
                 if (await _userServices.isUnique(userNameBox.Text))
@@ -57,7 +59,8 @@ namespace Store_System.UI
                     await _userServices.AddUser(_user);
                     MessageBox.Show("تمت إضافة المستخدم بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear();
-               
+                    RefreshGridView();
+
                 }
                 else
                 {
@@ -96,11 +99,12 @@ namespace Store_System.UI
         private async void deleteUserBtn_Click(object sender, EventArgs e)
         {
             MessageBox.Show("هل انت متأكد من حذف هذا العنصر؟", "!system", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            string UserName = userNameBox.Text; 
-                if(userNameBox.Text != "") {
-            
-            await _userServices.DeleteUser(userNameBox.Text);
-            MessageBox.Show("تم حذف المستخدم بنجاح", "!system", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            string UserName = userNameBox.Text;
+            if (userNameBox.Text != "")
+            {
+
+                await _userServices.DeleteUser(userNameBox.Text);
+                MessageBox.Show("تم حذف المستخدم بنجاح", "!system", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             else
@@ -108,6 +112,8 @@ namespace Store_System.UI
                 MessageBox.Show("يرجى تحديي المستخدم لحذفه", "!system", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+            Clear();
+            RefreshGridView();
 
         }
 
@@ -138,13 +144,54 @@ namespace Store_System.UI
 
         private void existUsrsGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            nameUserBox.Text = existUsrsGridView.CurrentRow.Cells[6].Value.ToString();
-            userPhoneBox.Text= existUsrsGridView.CurrentRow.Cells[5].Value.ToString();
-            userMailBox.Text = existUsrsGridView.CurrentRow.Cells[4].Value.ToString();
+            nameUserBox.Text = existUsrsGridView.CurrentRow.Cells[0].Value.ToString();
+            userPhoneBox.Text = existUsrsGridView.CurrentRow.Cells[1].Value.ToString();
+            userMailBox.Text = existUsrsGridView.CurrentRow.Cells[2].Value.ToString();
             userNameBox.Text = existUsrsGridView.CurrentRow.Cells[3].Value.ToString();
-            passwordBox.Text = existUsrsGridView.CurrentRow.Cells[2].Value.ToString();
-            UserRoleBox.Text = existUsrsGridView.CurrentRow.Cells[1].Value.ToString();
-            stockNameBox.Text= existUsrsGridView.CurrentRow.Cells[0].Value.ToString();
+            passwordBox.Text = existUsrsGridView.CurrentRow.Cells[4].Value.ToString();
+            UserRoleBox.Text = existUsrsGridView.CurrentRow.Cells[5].Value.ToString();
+            stockNameBox.Text = existUsrsGridView.CurrentRow.Cells[6].Value.ToString();
+        }
+
+        private void RefreshGridView()
+        {
+            StoreContext storeContext = new StoreContext();
+            var Users = storeContext.User.ToList();
+            existUsrsGridView.DataSource = Users;
+        }
+        private async void updatebtn_Click(object sender, EventArgs e)
+        {
+            _user = new User();
+
+            _user = await _userServices.GetUserByUserName(userNameBox.Text);
+            if (_user != null)
+            {
+                try
+                {
+                    _user.Name = nameUserBox.Text;
+                    _user.Phone = userPhoneBox.Text;
+                    _user.Email = userMailBox.Text;
+                    _user.UserName = userNameBox.Text;
+                    _user.Password = passwordBox.Text;
+                    _user.Role = (Role)Convert.ToInt32(UserRoleBox.SelectedIndex);
+                    _user.MoneyStockName = stockNameBox.Text;
+                    await _userServices.UpdateUser(_user);
+                    MessageBox.Show("تم التعديل بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Clear();
+                    RefreshGridView();
+                }
+
+                catch (Exception)
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("يرجى تحديد باركود المنتج المراد تعديله من أسفل الجدول ", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
         }
     }
 }

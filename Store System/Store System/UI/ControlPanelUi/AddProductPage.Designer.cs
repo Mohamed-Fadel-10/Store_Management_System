@@ -70,7 +70,6 @@
             searchProductBox = new TextBox();
             searchProductLbl = new Label();
             searchLbl = new PictureBox();
-            deleteProductBtn = new Button();
             SizeBox = new ComboBox();
             ColorBox = new TextBox();
             updatebtn = new Button();
@@ -114,7 +113,7 @@
             AddProductBtn.FlatStyle = FlatStyle.Popup;
             AddProductBtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             AddProductBtn.ForeColor = Color.Snow;
-            AddProductBtn.Location = new Point(913, 405);
+            AddProductBtn.Location = new Point(856, 405);
             AddProductBtn.Name = "AddProductBtn";
             AddProductBtn.RightToLeft = RightToLeft.Yes;
             AddProductBtn.Size = new Size(153, 56);
@@ -563,22 +562,6 @@
             searchLbl.TabIndex = 58;
             searchLbl.TabStop = false;
             // 
-            // deleteProductBtn
-            // 
-            deleteProductBtn.Anchor = AnchorStyles.None;
-            deleteProductBtn.BackColor = Color.Firebrick;
-            deleteProductBtn.FlatStyle = FlatStyle.Popup;
-            deleteProductBtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            deleteProductBtn.ForeColor = Color.Snow;
-            deleteProductBtn.Location = new Point(596, 405);
-            deleteProductBtn.Name = "deleteProductBtn";
-            deleteProductBtn.RightToLeft = RightToLeft.Yes;
-            deleteProductBtn.Size = new Size(152, 56);
-            deleteProductBtn.TabIndex = 59;
-            deleteProductBtn.Text = "حذف";
-            deleteProductBtn.UseVisualStyleBackColor = false;
-            deleteProductBtn.Click += deleteProductBtn_Click;
-            // 
             // SizeBox
             // 
             SizeBox.Anchor = AnchorStyles.None;
@@ -611,7 +594,7 @@
             updatebtn.FlatStyle = FlatStyle.Popup;
             updatebtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             updatebtn.ForeColor = Color.Snow;
-            updatebtn.Location = new Point(754, 405);
+            updatebtn.Location = new Point(667, 405);
             updatebtn.Name = "updatebtn";
             updatebtn.RightToLeft = RightToLeft.Yes;
             updatebtn.Size = new Size(153, 56);
@@ -628,7 +611,6 @@
             Controls.Add(updatebtn);
             Controls.Add(ColorBox);
             Controls.Add(SizeBox);
-            Controls.Add(deleteProductBtn);
             Controls.Add(pictureBox2);
             Controls.Add(searchLbl);
             Controls.Add(searchProductLbl);
@@ -703,7 +685,6 @@
         private TextBox searchProductBox;
         private Label searchProductLbl;
         private PictureBox searchLbl;
-        private Button deleteProductBtn;
         private ComboBox SizeBox;
         private TextBox ColorBox;
         private DataGridViewTextBoxColumn _Barcode;

@@ -12,8 +12,8 @@ namespace Store_System.Models
         public virtual Supplier Supplier { get; set; }
         public virtual Product Product  { get; set; }
         [ForeignKey("Product")]
-        public int product_Id { get; set; }
+        public int? product_Id { get; set; }
         [ForeignKey("Supplier")]
-        public int Supplier_Id { get; set; }
+        public int? Supplier_Id { get; set; }
     }
 }

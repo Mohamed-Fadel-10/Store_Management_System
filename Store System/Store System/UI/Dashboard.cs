@@ -55,7 +55,7 @@ namespace Store_System.UI
                 Controls.Add(shiftLock1);
                 Controls.Add(addCategoryPage1);
 
-                saleBill1.Location = new System.Drawing.Point(-5, 50);
+                saleBill1.Location = new Point(-5, 50);
                 buyBill1.Location = new System.Drawing.Point(-5, 50);
                 addUserPage1.Location = new System.Drawing.Point(-5, 50);
                 addProductPage1.Location = new System.Drawing.Point(-5, 50);
@@ -101,6 +101,9 @@ namespace Store_System.UI
             shiftLock1.Visible = false;
 
             buyBill1.cashierNameBox.Text = CashierName;
+
+            buyBill1.cashierNameBox.Text= CashierName;
+            buyBill1.UserIDBox.Text=UserID.ToString();
             saleBill1.cashierNameBox.Text = CashierName;
             saleBill1.StockBox.Text = StockMoneyName;
             saleBill1.UserIDBox.Text = UserID.ToString();
@@ -148,6 +151,7 @@ namespace Store_System.UI
         {
             welcomePage1.Visible = true;
             welcomePage1.BringToFront();
+            welcomePage1.Location = new Point(-5, 50);
         }
 
         private void logOutBtn_Click(object sender, EventArgs e)
@@ -165,9 +169,11 @@ namespace Store_System.UI
 
         private void saleBillBtn_Click(object sender, EventArgs e)
         {
+            saleBill1.Username = label1.Text;
             saleBill1.Visible = true;
             saleBill1.BringToFront();
         }
+
 
         private void returnedBillBtn_Click(object sender, EventArgs e)
         {

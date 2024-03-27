@@ -45,9 +45,7 @@ namespace Store_System.Services
             else
             return new User();
         }
-
-
-        public async Task<User> GetByUserID(int id)
+        public async Task<User> GetUserByID(int id)
         {
             User user = await _context.User.FirstOrDefaultAsync(U => U.ID == id);
             if (user != null)
@@ -57,7 +55,6 @@ namespace Store_System.Services
             else
                 return new User();
         }
-
         public async Task<int> DeleteUser(string username)
         {
             var user = await _context.User.FirstOrDefaultAsync(u => u.UserName == username);
@@ -68,6 +65,16 @@ namespace Store_System.Services
             }
             else
             return 0;
+        }
+        public async Task<int> UpdateUser(User user)
+        {
+            if (user != null)
+            {
+                await _context.SaveChangesAsync();
+                return 1;
+            }
+            else
+                return 0;
         }
         public async Task<bool> isUnique(string username)
         {

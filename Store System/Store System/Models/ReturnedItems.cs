@@ -14,8 +14,15 @@ namespace Store_System.Models
         public Product Product { get; set; }
         [ForeignKey("Returned")]
         public int Returned_Id { get; set; }
-       [ForeignKey("Product")]
+        [ForeignKey("Product")]
         public int Product_Id { get; set; }
+        public string? Notes { get; set; } // سبب الارجاع
+        public int? OrderID { get; set; }
+        public int? ReturnedQuantity { get; set; }
+
+
+
+
 
     }
 }

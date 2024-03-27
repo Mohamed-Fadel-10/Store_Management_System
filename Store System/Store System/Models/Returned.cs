@@ -13,7 +13,5 @@ namespace Store_System.Models
         public DateTime Date { get; set; }
         public List<ReturnedItems> ReturnedItems { get; set; }
 
-
-
     }
 }

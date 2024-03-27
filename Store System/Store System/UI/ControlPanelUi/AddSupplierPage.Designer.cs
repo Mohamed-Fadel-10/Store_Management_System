@@ -36,8 +36,6 @@
             SupPhoneLbl = new Label();
             SupNameLbl = new Label();
             supplierNameBox = new TextBox();
-            SupCodeLbl = new Label();
-            SupCodeBox = new TextBox();
             SupMailBox = new TextBox();
             SupPhoneBox = new TextBox();
             contractDate = new Label();
@@ -49,18 +47,21 @@
             textBox2 = new TextBox();
             usersPic = new PictureBox();
             existSuppliersGridView = new DataGridView();
-            Name = new DataGridViewTextBoxColumn();
+            _Name = new DataGridViewTextBoxColumn();
             Phone = new DataGridViewTextBoxColumn();
             Email = new DataGridViewTextBoxColumn();
             Address = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            _ID = new DataGridViewTextBoxColumn();
             panel5 = new Panel();
             existUserLbl = new Label();
-            deleteSupplierBtn = new Button();
             nameError = new Label();
             phoneError = new Label();
             dateError = new Label();
             contractDateBox = new DateTimePicker();
+            Update = new Button();
+            SupplierID = new TextBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -109,7 +110,7 @@
             SupMailLbl.AutoSize = true;
             SupMailLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             SupMailLbl.ForeColor = Color.White;
-            SupMailLbl.Location = new Point(313, 200);
+            SupMailLbl.Location = new Point(524, 164);
             SupMailLbl.Name = "SupMailLbl";
             SupMailLbl.Size = new Size(57, 23);
             SupMailLbl.TabIndex = 22;
@@ -121,7 +122,7 @@
             SupPhoneLbl.AutoSize = true;
             SupPhoneLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             SupPhoneLbl.ForeColor = Color.White;
-            SupPhoneLbl.Location = new Point(625, 200);
+            SupPhoneLbl.Location = new Point(878, 164);
             SupPhoneLbl.Name = "SupPhoneLbl";
             SupPhoneLbl.Size = new Size(86, 23);
             SupPhoneLbl.TabIndex = 21;
@@ -133,7 +134,7 @@
             SupNameLbl.AutoSize = true;
             SupNameLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             SupNameLbl.ForeColor = Color.White;
-            SupNameLbl.Location = new Point(973, 200);
+            SupNameLbl.Location = new Point(1305, 164);
             SupNameLbl.Name = "SupNameLbl";
             SupNameLbl.Size = new Size(87, 23);
             SupNameLbl.TabIndex = 20;
@@ -145,36 +146,11 @@
             supplierNameBox.BackColor = Color.FromArgb(24, 30, 46);
             supplierNameBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             supplierNameBox.ForeColor = Color.White;
-            supplierNameBox.Location = new Point(773, 218);
+            supplierNameBox.Location = new Point(1005, 182);
             supplierNameBox.Name = "supplierNameBox";
             supplierNameBox.RightToLeft = RightToLeft.Yes;
-            supplierNameBox.Size = new Size(297, 47);
+            supplierNameBox.Size = new Size(397, 47);
             supplierNameBox.TabIndex = 17;
-            // 
-            // SupCodeLbl
-            // 
-            SupCodeLbl.Anchor = AnchorStyles.None;
-            SupCodeLbl.AutoSize = true;
-            SupCodeLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            SupCodeLbl.ForeColor = Color.White;
-            SupCodeLbl.Location = new Point(1326, 200);
-            SupCodeLbl.Name = "SupCodeLbl";
-            SupCodeLbl.Size = new Size(86, 23);
-            SupCodeLbl.TabIndex = 15;
-            SupCodeLbl.Text = "كود المورد";
-            // 
-            // SupCodeBox
-            // 
-            SupCodeBox.Anchor = AnchorStyles.None;
-            SupCodeBox.BackColor = Color.FromArgb(24, 30, 46);
-            SupCodeBox.Enabled = false;
-            SupCodeBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            SupCodeBox.ForeColor = Color.White;
-            SupCodeBox.Location = new Point(1124, 218);
-            SupCodeBox.Name = "SupCodeBox";
-            SupCodeBox.RightToLeft = RightToLeft.Yes;
-            SupCodeBox.Size = new Size(296, 47);
-            SupCodeBox.TabIndex = 16;
             // 
             // SupMailBox
             // 
@@ -182,7 +158,7 @@
             SupMailBox.BackColor = Color.FromArgb(24, 30, 46);
             SupMailBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             SupMailBox.ForeColor = Color.White;
-            SupMailBox.Location = new Point(87, 218);
+            SupMailBox.Location = new Point(298, 182);
             SupMailBox.Name = "SupMailBox";
             SupMailBox.RightToLeft = RightToLeft.Yes;
             SupMailBox.Size = new Size(292, 47);
@@ -194,7 +170,7 @@
             SupPhoneBox.BackColor = Color.FromArgb(24, 30, 46);
             SupPhoneBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             SupPhoneBox.ForeColor = Color.White;
-            SupPhoneBox.Location = new Point(436, 218);
+            SupPhoneBox.Location = new Point(689, 182);
             SupPhoneBox.Name = "SupPhoneBox";
             SupPhoneBox.RightToLeft = RightToLeft.Yes;
             SupPhoneBox.Size = new Size(283, 47);
@@ -206,7 +182,7 @@
             contractDate.AutoSize = true;
             contractDate.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             contractDate.ForeColor = Color.White;
-            contractDate.Location = new Point(807, 295);
+            contractDate.Location = new Point(867, 288);
             contractDate.Name = "contractDate";
             contractDate.Size = new Size(97, 23);
             contractDate.TabIndex = 31;
@@ -218,7 +194,7 @@
             SupAddressLbl.AutoSize = true;
             SupAddressLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             SupAddressLbl.ForeColor = Color.White;
-            SupAddressLbl.Location = new Point(1210, 292);
+            SupAddressLbl.Location = new Point(1332, 288);
             SupAddressLbl.Name = "SupAddressLbl";
             SupAddressLbl.Size = new Size(60, 23);
             SupAddressLbl.TabIndex = 32;
@@ -230,10 +206,10 @@
             SupAddressBox.BackColor = Color.FromArgb(24, 30, 46);
             SupAddressBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             SupAddressBox.ForeColor = Color.White;
-            SupAddressBox.Location = new Point(984, 312);
+            SupAddressBox.Location = new Point(1005, 308);
             SupAddressBox.Name = "SupAddressBox";
             SupAddressBox.RightToLeft = RightToLeft.Yes;
-            SupAddressBox.Size = new Size(296, 47);
+            SupAddressBox.Size = new Size(397, 47);
             SupAddressBox.TabIndex = 33;
             // 
             // saveSupplierBtn
@@ -244,10 +220,10 @@
             saveSupplierBtn.FlatStyle = FlatStyle.Popup;
             saveSupplierBtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             saveSupplierBtn.ForeColor = Color.White;
-            saveSupplierBtn.Location = new Point(298, 312);
+            saveSupplierBtn.Location = new Point(358, 312);
             saveSupplierBtn.Name = "saveSupplierBtn";
             saveSupplierBtn.RightToLeft = RightToLeft.Yes;
-            saveSupplierBtn.Size = new Size(219, 47);
+            saveSupplierBtn.Size = new Size(162, 47);
             saveSupplierBtn.TabIndex = 34;
             saveSupplierBtn.Text = "حفظ";
             saveSupplierBtn.UseVisualStyleBackColor = false;
@@ -258,7 +234,7 @@
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BackColor = Color.FromArgb(24, 30, 46);
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(305, 433);
+            pictureBox2.Location = new Point(524, 433);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(38, 38);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -271,7 +247,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(199, 414);
+            label4.Location = new Point(423, 414);
             label4.Name = "label4";
             label4.Size = new Size(95, 23);
             label4.TabIndex = 39;
@@ -286,8 +262,9 @@
             textBox2.Location = new Point(87, 433);
             textBox2.Name = "textBox2";
             textBox2.RightToLeft = RightToLeft.Yes;
-            textBox2.Size = new Size(213, 38);
+            textBox2.Size = new Size(431, 38);
             textBox2.TabIndex = 38;
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // usersPic
             // 
@@ -304,9 +281,10 @@
             // existSuppliersGridView
             // 
             existSuppliersGridView.Anchor = AnchorStyles.None;
+            existSuppliersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             existSuppliersGridView.BackgroundColor = Color.Snow;
             existSuppliersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            existSuppliersGridView.Columns.AddRange(new DataGridViewColumn[] { Name, Phone, Email, Address, dataGridViewTextBoxColumn1 });
+            existSuppliersGridView.Columns.AddRange(new DataGridViewColumn[] { _Name, Phone, Email, Address, dataGridViewTextBoxColumn1, _ID });
             existSuppliersGridView.Location = new Point(87, 481);
             existSuppliersGridView.Name = "existSuppliersGridView";
             existSuppliersGridView.RightToLeft = RightToLeft.Yes;
@@ -316,40 +294,42 @@
             existSuppliersGridView.TabIndex = 36;
             existSuppliersGridView.RowHeaderMouseClick += existSuppliersGridView_RowHeaderMouseClick;
             // 
-            // Name
+            // _Name
             // 
-            Name.HeaderText = "الاسم";
-            Name.MinimumWidth = 10;
-            Name.Name = "Name";
-            Name.Width = 220;
+            _Name.HeaderText = "الاسم";
+            _Name.MinimumWidth = 10;
+            _Name.Name = "_Name";
             // 
             // Phone
             // 
             Phone.HeaderText = "رقم الهاتف";
             Phone.MinimumWidth = 10;
             Phone.Name = "Phone";
-            Phone.Width = 220;
             // 
             // Email
             // 
             Email.HeaderText = "الايميل";
             Email.MinimumWidth = 10;
             Email.Name = "Email";
-            Email.Width = 220;
             // 
             // Address
             // 
             Address.HeaderText = "العنوان";
             Address.MinimumWidth = 10;
             Address.Name = "Address";
-            Address.Width = 220;
             // 
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.HeaderText = "تاريخ التعاقد";
             dataGridViewTextBoxColumn1.MinimumWidth = 6;
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // _ID
+            // 
+            _ID.HeaderText = "كود المورد";
+            _ID.MinimumWidth = 6;
+            _ID.Name = "_ID";
+            _ID.Visible = false;
             // 
             // panel5
             // 
@@ -373,30 +353,13 @@
             existUserLbl.TabIndex = 0;
             existUserLbl.Text = "الموردون الموجودون";
             // 
-            // deleteSupplierBtn
-            // 
-            deleteSupplierBtn.Anchor = AnchorStyles.None;
-            deleteSupplierBtn.BackColor = Color.Firebrick;
-            deleteSupplierBtn.FlatAppearance.BorderColor = Color.White;
-            deleteSupplierBtn.FlatStyle = FlatStyle.Popup;
-            deleteSupplierBtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            deleteSupplierBtn.ForeColor = Color.White;
-            deleteSupplierBtn.Location = new Point(87, 312);
-            deleteSupplierBtn.Name = "deleteSupplierBtn";
-            deleteSupplierBtn.RightToLeft = RightToLeft.Yes;
-            deleteSupplierBtn.Size = new Size(187, 47);
-            deleteSupplierBtn.TabIndex = 41;
-            deleteSupplierBtn.Text = "حذف";
-            deleteSupplierBtn.UseVisualStyleBackColor = false;
-            deleteSupplierBtn.Click += deleteSupplierBtn_ClickAsync;
-            // 
             // nameError
             // 
             nameError.Anchor = AnchorStyles.None;
             nameError.AutoSize = true;
             nameError.Font = new Font("Segoe UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             nameError.ForeColor = Color.Red;
-            nameError.Location = new Point(909, 268);
+            nameError.Location = new Point(1241, 232);
             nameError.Name = "nameError";
             nameError.Size = new Size(161, 17);
             nameError.TabIndex = 43;
@@ -409,7 +372,7 @@
             phoneError.AutoSize = true;
             phoneError.Font = new Font("Segoe UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             phoneError.ForeColor = Color.Red;
-            phoneError.Location = new Point(558, 268);
+            phoneError.Location = new Point(811, 232);
             phoneError.Name = "phoneError";
             phoneError.Size = new Size(161, 17);
             phoneError.TabIndex = 44;
@@ -422,7 +385,7 @@
             dateError.AutoSize = true;
             dateError.Font = new Font("Segoe UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             dateError.ForeColor = Color.Red;
-            dateError.Location = new Point(749, 362);
+            dateError.Location = new Point(795, 351);
             dateError.Name = "dateError";
             dateError.Size = new Size(161, 17);
             dateError.TabIndex = 46;
@@ -433,22 +396,67 @@
             // 
             contractDateBox.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             contractDateBox.Format = DateTimePickerFormat.Short;
-            contractDateBox.Location = new Point(638, 317);
+            contractDateBox.Location = new Point(712, 308);
             contractDateBox.Name = "contractDateBox";
-            contractDateBox.Size = new Size(272, 38);
+            contractDateBox.Size = new Size(252, 38);
             contractDateBox.TabIndex = 47;
+            // 
+            // Update
+            // 
+            Update.Anchor = AnchorStyles.None;
+            Update.BackColor = Color.LimeGreen;
+            Update.FlatAppearance.BorderColor = Color.White;
+            Update.FlatStyle = FlatStyle.Popup;
+            Update.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            Update.ForeColor = Color.White;
+            Update.Location = new Point(149, 312);
+            Update.Name = "Update";
+            Update.RightToLeft = RightToLeft.Yes;
+            Update.Size = new Size(162, 47);
+            Update.TabIndex = 48;
+            Update.Text = "تعديل";
+            Update.UseVisualStyleBackColor = false;
+            Update.Click += Update_Click;
+            // 
+            // SupplierID
+            // 
+            SupplierID.Anchor = AnchorStyles.None;
+            SupplierID.BackColor = Color.FromArgb(24, 30, 46);
+            SupplierID.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            SupplierID.ForeColor = Color.White;
+            SupplierID.Location = new Point(64, 182);
+            SupplierID.Name = "SupplierID";
+            SupplierID.RightToLeft = RightToLeft.Yes;
+            SupplierID.Size = new Size(205, 47);
+            SupplierID.TabIndex = 49;
+            SupplierID.Visible = false;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.None;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(188, 156);
+            label2.Name = "label2";
+            label2.Size = new Size(86, 23);
+            label2.TabIndex = 50;
+            label2.Text = "كود المورد";
+            label2.Visible = false;
             // 
             // AddSupplierPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(label2);
+            Controls.Add(SupplierID);
+            Controls.Add(Update);
+            Controls.Add(contractDate);
             Controls.Add(contractDateBox);
             Controls.Add(dateError);
-            Controls.Add(contractDate);
             Controls.Add(phoneError);
             Controls.Add(nameError);
-            Controls.Add(deleteSupplierBtn);
             Controls.Add(pictureBox2);
             Controls.Add(label4);
             Controls.Add(textBox2);
@@ -462,14 +470,12 @@
             Controls.Add(SupPhoneLbl);
             Controls.Add(SupNameLbl);
             Controls.Add(supplierNameBox);
-            Controls.Add(SupCodeLbl);
-            Controls.Add(SupCodeBox);
             Controls.Add(SupMailBox);
             Controls.Add(SupPhoneBox);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
             MinimumSize = new Size(1496, 949);
-            //Name = "AddSupplierPage";
+            Name = "AddSupplierPage";
             Size = new Size(1496, 949);
             Load += AddSupplierPage_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -493,8 +499,6 @@
         private Label SupPhoneLbl;
         private Label SupNameLbl;
         private TextBox supplierNameBox;
-        private Label SupCodeLbl;
-        private TextBox SupCodeBox;
         private TextBox SupMailBox;
         private TextBox SupPhoneBox;
         private Label contractDate;
@@ -508,15 +512,18 @@
         private DataGridView existSuppliersGridView;
         private Panel panel5;
         private Label existUserLbl;
-        private Button deleteSupplierBtn;
         private Label nameError;
         private Label phoneError;
         private Label dateError;
-        private DataGridViewTextBoxColumn Name;
+        private DateTimePicker contractDateBox;
+        private Button Update;
+        private DataGridViewTextBoxColumn _Name;
         private DataGridViewTextBoxColumn Phone;
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn Address;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DateTimePicker contractDateBox;
+        private DataGridViewTextBoxColumn _ID;
+        private TextBox SupplierID;
+        private Label label2;
     }
 }

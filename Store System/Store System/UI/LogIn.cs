@@ -1,5 +1,6 @@
 ﻿using Store_System.Models;
 using Store_System.Services;
+using Store_System.UI.ControlPanelUi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,8 @@ namespace Store_System.UI
         Login Login;
 
         Dashboard home;
+        SaleBill _saleBill;
+        BuyBill _buyBill;
 
 
 
@@ -26,6 +29,8 @@ namespace Store_System.UI
             InitializeComponent();
             Login = new Login();
             home = new Dashboard();
+            _saleBill = new SaleBill();
+            _buyBill=new BuyBill();
         }
 
         private async void SignInBtn_Click(object sender, EventArgs e)
@@ -79,7 +84,14 @@ namespace Store_System.UI
                         {
                             if (user.Role == Role.Cashier && user.Password == PasswordBox.Text)
                             {
+                                //home.UserName = UserNameBox.Text;
+                                //_saleBill.Username = UserNameBox.Text;
+
                                 home.UserName = UserNameBox.Text;
+                                home.CashierName = user.Name;
+                                home.StockMoneyName = user.MoneyStockName;
+                                home.UserID = user.ID;
+
                                 this.Hide();
                                 home.Show();
                             }
@@ -102,7 +114,7 @@ namespace Store_System.UI
                 }
             }
         }
-
+        
         private void LogIn_Load(object sender, EventArgs e)
         {
 

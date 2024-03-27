@@ -117,6 +117,7 @@
             Name = "AddCustomer";
             Text = "AddCustomer";
             FormClosed += AddCustomer_FormClosed;
+            Load += AddCustomer_Load;
             ResumeLayout(false);
             PerformLayout();
         }

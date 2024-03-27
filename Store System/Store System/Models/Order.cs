@@ -25,5 +25,8 @@ namespace Store_System.Models
         public virtual Customer Customer { get; set; }
         [ForeignKey("Customer")]
         public int? Customer_Id { get; set; }
+
+        public virtual List<Returned>? Returneds { get; set; }
+
     }
 }

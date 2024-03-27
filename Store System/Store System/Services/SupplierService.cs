@@ -21,8 +21,23 @@ namespace Store_System.Services
 
         public async Task<int> AddSupplier(Supplier supplier)
         {
-            await _context.Supplier.AddAsync(supplier);
-            return await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Supplier.AddAsync(supplier);
+                return await _context.SaveChangesAsync();
+            }catch(Exception ex)
+            {
+                MessageBox.Show("لا يمكن إضافة نفس المورد مرتان", "System", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
+        public async Task<Supplier> GetSupplier(int id)
+        {
+            Supplier supplier =await _context.Supplier.FirstOrDefaultAsync(S => S.ID == id);
+            if(supplier != null) {
+                return supplier;
+            }
+            return new Supplier();
         }
 
         public async Task<List<Supplier>> GetAllSuppliers()
@@ -38,20 +53,36 @@ namespace Store_System.Services
             }
         }
 
-        public async Task<int> DeleteSupplier(string supplierName)
+        
+        public async Task<int> UpdateSupplier(Supplier supplier)
         {
-            var supplier = await _context.Supplier.FirstOrDefaultAsync(s => s.Name == supplierName);
             if (supplier != null)
             {
-                _context.Supplier.Remove(supplier);
-                await _context.SaveChangesAsync();
-                return 1;
+                return await _context.SaveChangesAsync();
             }
-            else
-                return 0;
+            else 
+            {
+                return 0; 
+            }
+
+        }
+        public async Task<List<Supplier>> Search(string Name)
+        {
+            if (Name != "")
+            {
+                var suppliers = await _context.Supplier.Where(p => p.Name.Contains(Name)).ToListAsync();
+                if (suppliers != null)
+                {
+                    return suppliers;
+                }
+                else
+                {
+                    return new List<Supplier>();
+                }
+            }
+            return new List<Supplier>();
         }
 
-        
 
     }
 }

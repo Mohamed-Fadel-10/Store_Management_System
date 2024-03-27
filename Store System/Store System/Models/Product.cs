@@ -37,6 +37,8 @@ namespace Store_System.Models
         public DateTime? Production_Date { get; set; }
         public DateTime? Expiry_date { get; set; }
         public int StockAmount { get; set; }
+        public string CategoryName => Category?.Name;
+
         public Category Category { get; set; }
         [ForeignKey("Category")]
         public int Category_id { get; set; }
@@ -45,7 +47,6 @@ namespace Store_System.Models
         public List<ProductsStocks>? ProductsStocks { get; set; }
         public List<ReturnedItems>? ReturnedItems { get; set; }
 
-  
-
+         
     }
 }

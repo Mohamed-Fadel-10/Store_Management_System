@@ -32,31 +32,21 @@ namespace Store_System.Services
         }
         public async Task<List<Product>> GetAllProducts()
         {
-          var Products=  await _context.Product.ToListAsync();
+          var Products=  await _context.Product.Include(P=>P.Category).ToListAsync();
             if (Products!=null)
             {
                 return Products;
             }
             return new List<Product>();
         }
-        public async Task<int> DeleteProduct(string Barcode)
-        {
-            var Product = await _context.Product.FirstOrDefaultAsync(u => u.Barcode == Barcode);
-            if (Product != null)
-            {
-                _context.Product.Remove(Product);
-                await _context.SaveChangesAsync();
-                return 1;
-            }
-            else
-                return 0;
-        }
+        
 
         public async Task<int>UpdateProduct(Product product)
         {
+            
             if (product != null)
             { 
-                return await _context.SaveChangesAsync(); 
+                return await _context.SaveChangesAsync();
             }
             else
             {

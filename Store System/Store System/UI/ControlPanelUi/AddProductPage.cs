@@ -20,6 +20,9 @@ namespace Store_System.UI
     {
         ProductService _productService;
         CategoryService _categoryService;
+        SupplierService _supplierService;
+        ProductsSuppliers _productsSuppliers;
+        SuppliersProductsService _suppliersProductsService;
 
         Product _product;
         public AddProductPage()
@@ -29,11 +32,19 @@ namespace Store_System.UI
             _categoryService = new CategoryService();
 
             _product = new Product();
+            _supplierService = new SupplierService();
+            _productsSuppliers = new ProductsSuppliers();
+            _suppliersProductsService = new SuppliersProductsService();
         }
 
 
         private async void AddProductPage_Load(object sender, EventArgs e)
         {
+            var Suppliers = await _supplierService.GetAllSuppliers();
+            SupplierComboBox.DataSource = Suppliers;
+            SupplierComboBox.DisplayMember = "Name";
+            SupplierComboBox.ValueMember = "ID";
+            SupplierComboBox.SelectedIndex = -1;
             var Categories = await _categoryService.GetALlCategories();
             CatComboBox.DataSource = Categories;
             CatComboBox.DisplayMember = "Name";
@@ -65,6 +76,9 @@ namespace Store_System.UI
                 _product.Size = (Models.Size)Convert.ToInt32(SizeBox.SelectedIndex);
                 _product.Discount = double.Parse(discountBox.Text);
                 await _productService.AddProduct(_product);
+                _productsSuppliers.Supplier_Id = (int)SupplierComboBox.SelectedValue;
+                _productsSuppliers.product_Id = _product.ID;
+                await _suppliersProductsService.addSuppliersforProducts(_productsSuppliers);
                 MessageBox.Show("تمت إضافة العنصر بنجاح", "system", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RefreshGridView();
                 Clear();
@@ -78,68 +92,42 @@ namespace Store_System.UI
             }
         }
 
-        private async void deleteProductBtn_Click(object sender, EventArgs e)
-        {
-            if (barCodeBox.Text != "")
-            {
-                DialogResult dialog = MessageBox.Show("هل تريد بالفعل حذف هذا المنتج؟", "System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialog == DialogResult.Yes)
-                {
-
-                    await _productService.DeleteProduct(barCodeBox.Text);
-                    MessageBox.Show("تم الحذف بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    RefreshGridView();
-                    Clear();
-
-                }
-            }
-            else
-            {
-                MessageBox.Show("يرجى تحديد كود المنتج لحذفه", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-
-        }
+        
 
         private async void updatebtn_Click(object sender, EventArgs e)
         {
-            try
+
+            Product product = await _productService.GetProductByBarcode(barCodeBox.Text);
+
+            if (product != null)
             {
-                Product product = await _productService.GetProductByBarcode(barCodeBox.Text);
-
-                if (product != null)
+                product.Barcode = barCodeBox.Text;
+                product.Name = productNameBox.Text;
+                product.Cost = double.Parse(costBox.Text);
+                product.SellingPrice = double.Parse(sellingPriceBox.Text);
+                product.StockAmount = int.Parse(stockBox.Text);
+                product.Description = noteBox.Text;
+                product.Category_id = int.Parse(CatComboBox.SelectedValue.ToString());
+                product.Color = ColorBox.Text;
+                if (SizeBox.SelectedIndex >= 0 && SizeBox.SelectedIndex <= (int)Models.Size.Custom)
                 {
-                    product.Barcode = barCodeBox.Text;
-                    product.Name = productNameBox.Text;
-                    product.Cost = double.Parse(costBox.Text);
-                    product.SellingPrice = double.Parse(sellingPriceBox.Text);
-                    product.StockAmount = int.Parse(stockBox.Text);
-                    product.Description = noteBox.Text;
-                    product.Color = ColorBox.Text;
-                    if (SizeBox.SelectedIndex >= 0 && SizeBox.SelectedIndex <= (int)Models.Size.Custom)
-                    {
-                        product.Size = (Models.Size)SizeBox.SelectedIndex;
-                    }
-                    else
-                    {
-                        MessageBox.Show("من فضلك قم إدخال مقاس صحيح", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    product.Discount = double.Parse(discountBox.Text);
-
-                    await _productService.UpdateProduct(product);
-                    MessageBox.Show("تم التعديل بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    RefreshGridView();
+                    product.Size = (Models.Size)SizeBox.SelectedIndex;
                 }
                 else
                 {
-                    MessageBox.Show("يرجى تحديد باركود المنتج المراد تعديله من أسفل الجدول ", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("من فضلك قم إدخال مقاس صحيح", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+
+                product.Discount = double.Parse(discountBox.Text);
+
+                await _productService.UpdateProduct(product);
+                MessageBox.Show("تم التعديل بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RefreshGridView();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("يرجى تحديد باركود المنتج المراد تعديله من أسفل الجدول ", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -160,6 +148,8 @@ namespace Store_System.UI
 
         }
 
+
+
         private async void BindingToGridView()
         {
             var Products = await _productService.GetAllProducts();
@@ -167,7 +157,7 @@ namespace Store_System.UI
             Items.DataSource = Products;
             Items.Columns["_Barcode"].DataPropertyName = "Barcode";
             Items.Columns["_Name"].DataPropertyName = "Name";
-            Items.Columns["category"].DataPropertyName = "Category.Name";
+            Items.Columns["category"].DataPropertyName = "CategoryName";
             Items.Columns["Supplier"].DataPropertyName = "ProductsSuppliers";
             Items.Columns["_Quantity"].DataPropertyName = "StockAmount";
             Items.Columns["_cost"].DataPropertyName = "Cost";
