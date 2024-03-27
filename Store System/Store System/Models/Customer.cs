@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class Customer
+    public class Customer
     {
         [Key]
         public int ID { get; set; }

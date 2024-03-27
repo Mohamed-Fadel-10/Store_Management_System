@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class ReturnedItems
+    public class ReturnedItems
     {
         public Returned Returned { get; set; }
         public Product Product { get; set; }

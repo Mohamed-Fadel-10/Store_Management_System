@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class Employee
+    public class Employee
     {
         [Key]
         public int ID { get; set; }

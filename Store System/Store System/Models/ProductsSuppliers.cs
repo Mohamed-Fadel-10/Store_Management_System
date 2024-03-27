@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class ProductsSuppliers
+    public class ProductsSuppliers
     {
         public virtual Supplier Supplier { get; set; }
         public virtual Product Product  { get; set; }

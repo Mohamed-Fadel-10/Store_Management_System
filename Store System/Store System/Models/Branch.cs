@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class Branch
+    public class Branch
     {
         [Key]
         public int ID { get; set; }

@@ -20,7 +20,7 @@ namespace Store_System.Models
         Custom=6
     }
 
-    internal class Product
+    public class Product
     {
 
         [Key]

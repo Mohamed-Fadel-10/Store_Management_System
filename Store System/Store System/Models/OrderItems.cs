@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class OrderItems
+    public class OrderItems
     {
 
-
+        
         public virtual Product Product { get; set; }
         public virtual Order Order { get; set; }
         //[Column("ProductID")] 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class ProductsStocks
+    public class ProductsStocks
     {
         public Stock Stock { get; set; }
         public Product Product { get; set; }

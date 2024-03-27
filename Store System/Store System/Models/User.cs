@@ -14,7 +14,7 @@ namespace Store_System.Models
         Cashier=1,
     }
 
-    internal class User
+    public class User
     {
         
 

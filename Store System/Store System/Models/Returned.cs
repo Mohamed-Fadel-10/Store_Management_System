@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class Returned
+    public class Returned
     {
         public int id { get; set; }
         public DateTime Date { get; set; }

@@ -62,15 +62,7 @@ namespace Store_System.UI
 
             else
             {
-                if (supplierNameBox.Text == "")
-                    nameError.Visible = true;
-                else nameError.Visible = false;
-                if (SupPhoneBox.Text == "")
-                    phoneError.Visible = true;
-                else phoneError.Visible = false;
-                if (contractDateBox.Text == "")
-                    dateError.Visible = true;
-                else dateError.Visible = false;
+                MessageBox.Show("يرجى إدخال الاسم ورقم الهاتف", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

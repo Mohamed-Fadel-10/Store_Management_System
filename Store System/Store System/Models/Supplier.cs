@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class Supplier
+    public class Supplier
     {
         [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }

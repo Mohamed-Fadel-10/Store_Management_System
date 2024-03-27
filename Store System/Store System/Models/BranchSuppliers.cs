@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store_System.Models
 {
-    internal class BranchSuppliers
+    public class BranchSuppliers
     {
         public Branch Branch { get; set; }
         public Supplier Supplier  { get; set; }
