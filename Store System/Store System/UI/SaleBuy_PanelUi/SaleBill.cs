@@ -123,18 +123,7 @@ namespace Store_System.UI.ControlPanelUi
         {
             try
             {
-                bool flag = false;
-                for (int i = 0; i < Items.Rows.Count - 1; ++i)
-                {
-                    if (ProductCodeBox.Text == Items.Rows[i].Cells[0].Value.ToString())
-                    {
-                        MessageBox.Show("هذا المنتج موجود بالفعل" +
-                                        " يمكنك التعديل عليه بدلا من اضافته مجددا", "انتبه!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        flag = true;
-                    }
-                }
-                if (!flag)
-                {
+                
                     _product = await _productService.GetProductByID(int.Parse(productID.Text));
 
                     if (_discountBox.Text == "")
@@ -168,7 +157,7 @@ namespace Store_System.UI.ControlPanelUi
                         AfterDiscount.Text = sum.ToString("F3");
                         PaidUp.Text = sum.ToString("F3");
                     }
-                }
+                
             }
             catch (Exception ex)
             {

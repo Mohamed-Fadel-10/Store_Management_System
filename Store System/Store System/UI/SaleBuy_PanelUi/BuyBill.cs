@@ -110,19 +110,7 @@ namespace Store_System.UI.ControlPanelUi
         {
             try
             {
-                bool flag=false;
-                for (int i = 0; i < Items.Rows.Count - 1; ++i)
-                {
-                    if (ProductCodeBox.Text == Items.Rows[i].Cells[0].Value.ToString())
-                    {
-                        MessageBox.Show("هذا المنتج موجود بالفعل" +
-                                        " يمكنك التعديل عليه بدلا من اضافته مجددا", "انتبه!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        flag = true;
-                    }
-                }
-
-                if (!flag)
-                {
+                
                     if (DiscountBox.Text == "")
                     {
                         DiscountBox.Text = 0.ToString();
@@ -150,7 +138,7 @@ namespace Store_System.UI.ControlPanelUi
                     TotalPriceBox.Text = sum.ToString("F3");
                     AfterDiscount.Text = sum.ToString("F3");
                     PaidUp.Text = sum.ToString("F3");
-                }
+                
             }
             catch (Exception ex)
             {
