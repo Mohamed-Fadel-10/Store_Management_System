@@ -121,6 +121,7 @@ namespace Store_System.UI.ControlPanelUi
 
         private async void Addbtn_Click(object sender, EventArgs e)
         {
+            _product= new Product();
             try
             {
                 

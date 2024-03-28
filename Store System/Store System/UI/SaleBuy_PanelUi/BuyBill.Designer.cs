@@ -629,7 +629,6 @@
             AfterDiscount.RightToLeft = RightToLeft.Yes;
             AfterDiscount.Size = new Size(209, 34);
             AfterDiscount.TabIndex = 73;
-            AfterDiscount.TextChanged += AfterDiscount_TextChanged;
             // 
             // label18
             // 

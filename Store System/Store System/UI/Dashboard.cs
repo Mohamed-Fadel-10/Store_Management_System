@@ -1,5 +1,7 @@
 ﻿using Store_System.Models;
 using Store_System.Services;
+using Store_System.UI.DevExpReports;
+using Store_System.UI.UiReportsUserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +25,8 @@ namespace Store_System.UI
         public int UserID { get; set; }
 
         UserServices _userServices;
-
+        SaleingReports saleingReports;
+        BuyReports buyReports;
         public Dashboard()
         {
             InitializeComponent();
@@ -41,6 +44,8 @@ namespace Store_System.UI
                 shiftLock1 = new ControlPanelUi.ShiftLock();
                 addCategoryPage1 = new AddCategoryPage();
                 welcomePage1 = new WelcomePage();
+                saleingReports = new SaleingReports();
+                buyReports = new BuyReports();
                 //AddBranchPage1 = new AddBranchPage();
 
                 Controls.Add(welcomePage1);
@@ -54,6 +59,8 @@ namespace Store_System.UI
                 Controls.Add(returnedItems1);
                 Controls.Add(shiftLock1);
                 Controls.Add(addCategoryPage1);
+                Controls.Add(saleingReports);
+                Controls.Add(buyReports);
 
                 saleBill1.Location = new Point(-5, 50);
                 buyBill1.Location = new System.Drawing.Point(-5, 50);
@@ -65,7 +72,8 @@ namespace Store_System.UI
                 mainStockPage1.Location = new System.Drawing.Point(-5, 50);
                 shortFallsPage1.Location = new System.Drawing.Point(-5, 50);
                 returnedItems1.Location = new System.Drawing.Point(-5, 50);
-
+                saleingReports.Location = new System.Drawing.Point(-5, 50);
+                buyReports.Location = new System.Drawing.Point(-5, 50);
 
 
             }
@@ -102,8 +110,8 @@ namespace Store_System.UI
 
             buyBill1.cashierNameBox.Text = CashierName;
 
-            buyBill1.cashierNameBox.Text= CashierName;
-            buyBill1.UserIDBox.Text=UserID.ToString();
+            buyBill1.cashierNameBox.Text = CashierName;
+            buyBill1.UserIDBox.Text = UserID.ToString();
             saleBill1.cashierNameBox.Text = CashierName;
             saleBill1.StockBox.Text = StockMoneyName;
             saleBill1.UserIDBox.Text = UserID.ToString();
@@ -195,8 +203,21 @@ namespace Store_System.UI
 
         private void addBranchBtn_Click(object sender, EventArgs e)
         {
-            AddBranchPage addBranch= new AddBranchPage();
+            AddBranchPage addBranch = new AddBranchPage();
             addBranch.Show();
+        }
+
+
+        private void saleReportBtn_Click_1(object sender, EventArgs e)
+        {
+            saleingReports.BringToFront();
+
+        }
+
+        private void buyReportBtn_Click_1(object sender, EventArgs e)
+        {
+            buyReports.BringToFront();
+
         }
     }
 }

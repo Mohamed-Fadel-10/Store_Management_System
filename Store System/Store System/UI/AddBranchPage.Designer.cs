@@ -162,6 +162,7 @@
             Controls.Add(panel1);
             Controls.Add(branchNameBox);
             Name = "AddBranchPage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AddBranchPage";
             FormClosed += AddBranchPage_FormClosed;
             panel2.ResumeLayout(false);

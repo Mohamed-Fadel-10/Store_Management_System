@@ -30,7 +30,7 @@ namespace Store_System.UI
             Login = new Login();
             home = new Dashboard();
             _saleBill = new SaleBill();
-            _buyBill=new BuyBill();
+            _buyBill = new BuyBill();
         }
 
         private async void SignInBtn_Click(object sender, EventArgs e)

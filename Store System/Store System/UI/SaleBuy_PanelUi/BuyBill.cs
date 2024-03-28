@@ -338,9 +338,5 @@ namespace Store_System.UI.ControlPanelUi
             }
         }
 
-        private void AfterDiscount_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
