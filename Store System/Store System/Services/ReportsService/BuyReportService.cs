@@ -39,7 +39,7 @@ namespace Store_System.Services.ReportsService
                   Date = x.Order.OrderDate.Value,
                   Quantity = x.OrderItem.OrderItem.Quantity,
                   Discount = x.OrderItem.OrderItem.Discount,
-                  TotalPrice = x.OrderItem.OrderItem.TotalPrice,
+                  OrderTotalPrice = x.OrderItem.OrderItem.TotalPrice,
                   Barcode = x.OrderItem.Product.Barcode.ToString()
               })
                 .ToList();
@@ -69,7 +69,7 @@ namespace Store_System.Services.ReportsService
                   Date = x.Order.OrderDate.Value,
                   Quantity = x.OrderItem.OrderItem.Quantity,
                   Discount = x.OrderItem.OrderItem.Discount,
-                  TotalPrice = x.OrderItem.OrderItem.TotalPrice,
+                  OrderTotalPrice = x.OrderItem.OrderItem.TotalPrice,
                   Barcode = x.OrderItem.Product.Barcode.ToString()
               })
                 .ToList();
@@ -98,7 +98,7 @@ namespace Store_System.Services.ReportsService
                     Date = x.Order.OrderDate.Value,
                     Quantity = x.OrderItem.Quantity,
                     Discount = x.OrderItem.Discount,
-                    TotalPrice = x.OrderItem.TotalPrice,
+                    OrderTotalPrice = x.OrderItem.TotalPrice,
                     Barcode = x.OrderItem.Product.Barcode.ToString()
                 })
                 .ToList();
@@ -123,7 +123,7 @@ namespace Store_System.Services.ReportsService
                     Date = x.Order.OrderDate.Value,
                     Quantity = x.OrderItem.Quantity,
                     Discount = x.OrderItem.Discount,
-                    TotalPrice = x.OrderItem.TotalPrice,
+                    OrderTotalPrice = x.OrderItem.TotalPrice,
                     Barcode = x.OrderItem.Product.Barcode.ToString()
                 })
                 .ToList();

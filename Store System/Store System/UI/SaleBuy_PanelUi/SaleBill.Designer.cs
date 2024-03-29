@@ -76,7 +76,7 @@
             Printbtn = new Button();
             panel1 = new Panel();
             button1 = new Button();
-            _CustomerNameBox = new TextBox();
+            CustomerNameBox = new TextBox();
             label3 = new Label();
             label9 = new Label();
             SellingPrice = new TextBox();
@@ -92,6 +92,9 @@
             cashierNameBox = new TextBox();
             UserIDBox = new TextBox();
             customerIDBox = new TextBox();
+            CustomerPhone = new TextBox();
+            totalQuantityBox = new TextBox();
+            label11 = new Label();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -588,6 +591,7 @@
             Printbtn.TabIndex = 83;
             Printbtn.Text = "طباعة";
             Printbtn.UseVisualStyleBackColor = false;
+            Printbtn.Click += Printbtn_Click;
             // 
             // panel1
             // 
@@ -614,17 +618,17 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
-            // _CustomerNameBox
+            // CustomerNameBox
             // 
-            _CustomerNameBox.Anchor = AnchorStyles.None;
-            _CustomerNameBox.BackColor = Color.FromArgb(24, 30, 46);
-            _CustomerNameBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            _CustomerNameBox.ForeColor = Color.White;
-            _CustomerNameBox.Location = new Point(402, 57);
-            _CustomerNameBox.Name = "_CustomerNameBox";
-            _CustomerNameBox.RightToLeft = RightToLeft.Yes;
-            _CustomerNameBox.Size = new Size(385, 39);
-            _CustomerNameBox.TabIndex = 126;
+            CustomerNameBox.Anchor = AnchorStyles.None;
+            CustomerNameBox.BackColor = Color.FromArgb(24, 30, 46);
+            CustomerNameBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            CustomerNameBox.ForeColor = Color.White;
+            CustomerNameBox.Location = new Point(402, 57);
+            CustomerNameBox.Name = "CustomerNameBox";
+            CustomerNameBox.RightToLeft = RightToLeft.Yes;
+            CustomerNameBox.Size = new Size(385, 39);
+            CustomerNameBox.TabIndex = 126;
             // 
             // label3
             // 
@@ -768,7 +772,7 @@
             Date.AutoSize = true;
             Date.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             Date.ForeColor = Color.White;
-            Date.Location = new Point(1155, 896);
+            Date.Location = new Point(1263, 896);
             Date.Name = "Date";
             Date.Size = new Size(153, 38);
             Date.TabIndex = 139;
@@ -805,20 +809,62 @@
             // 
             customerIDBox.Anchor = AnchorStyles.None;
             customerIDBox.BackColor = Color.FromArgb(24, 30, 46);
-            customerIDBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            customerIDBox.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
             customerIDBox.ForeColor = Color.White;
-            customerIDBox.Location = new Point(402, 15);
+            customerIDBox.Location = new Point(402, 21);
             customerIDBox.Name = "customerIDBox";
             customerIDBox.RightToLeft = RightToLeft.Yes;
-            customerIDBox.Size = new Size(109, 34);
+            customerIDBox.Size = new Size(109, 25);
             customerIDBox.TabIndex = 142;
             customerIDBox.Visible = false;
+            // 
+            // CustomerPhone
+            // 
+            CustomerPhone.Anchor = AnchorStyles.None;
+            CustomerPhone.BackColor = Color.FromArgb(24, 30, 46);
+            CustomerPhone.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            CustomerPhone.ForeColor = Color.White;
+            CustomerPhone.Location = new Point(517, 21);
+            CustomerPhone.Name = "CustomerPhone";
+            CustomerPhone.RightToLeft = RightToLeft.Yes;
+            CustomerPhone.Size = new Size(165, 25);
+            CustomerPhone.TabIndex = 143;
+            CustomerPhone.Visible = false;
+            // 
+            // totalQuantityBox
+            // 
+            totalQuantityBox.Anchor = AnchorStyles.None;
+            totalQuantityBox.BackColor = Color.FromArgb(24, 30, 46);
+            totalQuantityBox.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            totalQuantityBox.ForeColor = Color.White;
+            totalQuantityBox.Location = new Point(1015, 909);
+            totalQuantityBox.Name = "totalQuantityBox";
+            totalQuantityBox.RightToLeft = RightToLeft.Yes;
+            totalQuantityBox.Size = new Size(103, 25);
+            totalQuantityBox.TabIndex = 144;
+            totalQuantityBox.Visible = false;
+            // 
+            // label11
+            // 
+            label11.Anchor = AnchorStyles.None;
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.White;
+            label11.Location = new Point(1124, 911);
+            label11.Name = "label11";
+            label11.Size = new Size(86, 23);
+            label11.TabIndex = 145;
+            label11.Text = "عدد القطع";
+            label11.Visible = false;
             // 
             // SaleBill
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(label11);
+            Controls.Add(totalQuantityBox);
+            Controls.Add(CustomerPhone);
             Controls.Add(customerIDBox);
             Controls.Add(UserIDBox);
             Controls.Add(label19);
@@ -836,7 +882,7 @@
             Controls.Add(label9);
             Controls.Add(SellingPrice);
             Controls.Add(label3);
-            Controls.Add(_CustomerNameBox);
+            Controls.Add(CustomerNameBox);
             Controls.Add(button1);
             Controls.Add(Addbtn);
             Controls.Add(Savebtn);
@@ -888,13 +934,9 @@
         private Label label20;
         private Label label19;
         private Label label18;
-        private TextBox FaturaDiscountBox;
         private Label label17;
-        private TextBox AfterDiscount;
         private Label label16;
-        private TextBox PaidUp;
         private Label label15;
-        private TextBox TotalPriceBox;
         private Label label14;
         private TextBox NotesBox;
         private Label label12;
@@ -912,12 +954,10 @@
         private Label label4;
         private TextBox SearchBox;
         private Label label2;
-        private TextBox BillCodeBox;
         private DataGridView Items;
         private Button Printbtn;
         private Panel panel1;
         private Button button1;
-        private TextBox _CustomerNameBox;
         private Label label3;
         private Label label9;
         private TextBox SellingPrice;
@@ -946,5 +986,14 @@
         private DataGridViewTextBoxColumn _notes;
         private DataGridViewTextBoxColumn product_id;
         private DataGridViewTextBoxColumn OrderID;
+        public TextBox FaturaDiscountBox;
+        public TextBox AfterDiscount;
+        public TextBox PaidUp;
+        public TextBox TotalPriceBox;
+        public TextBox BillCodeBox;
+        public TextBox CustomerNameBox;
+        public TextBox CustomerPhone;
+        public TextBox totalQuantityBox;
+        private Label label11;
     }
 }

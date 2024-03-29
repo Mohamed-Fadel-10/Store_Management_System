@@ -38,6 +38,8 @@
             addBranchBtn = new Button();
             label2 = new Label();
             branchPhoneBox = new TextBox();
+            addressBox = new TextBox();
+            label3 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -116,7 +118,7 @@
             addBranchBtn.FlatStyle = FlatStyle.Flat;
             addBranchBtn.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
             addBranchBtn.ForeColor = Color.White;
-            addBranchBtn.Location = new Point(314, 321);
+            addBranchBtn.Location = new Point(314, 418);
             addBranchBtn.Name = "addBranchBtn";
             addBranchBtn.Size = new Size(234, 51);
             addBranchBtn.TabIndex = 87;
@@ -148,12 +150,38 @@
             branchPhoneBox.Size = new Size(293, 43);
             branchPhoneBox.TabIndex = 88;
             // 
+            // addressBox
+            // 
+            addressBox.Anchor = AnchorStyles.None;
+            addressBox.BackColor = Color.FromArgb(24, 30, 46);
+            addressBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
+            addressBox.ForeColor = Color.White;
+            addressBox.Location = new Point(292, 304);
+            addressBox.Name = "addressBox";
+            addressBox.RightToLeft = RightToLeft.Yes;
+            addressBox.Size = new Size(293, 43);
+            addressBox.TabIndex = 90;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.None;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(514, 288);
+            label3.Name = "label3";
+            label3.Size = new Size(60, 23);
+            label3.TabIndex = 91;
+            label3.Text = "العنوان";
+            // 
             // AddBranchPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
             ClientSize = new Size(889, 577);
+            Controls.Add(label3);
+            Controls.Add(addressBox);
             Controls.Add(label2);
             Controls.Add(branchPhoneBox);
             Controls.Add(addBranchBtn);
@@ -184,5 +212,7 @@
         private Button addBranchBtn;
         private Label label2;
         private TextBox branchPhoneBox;
+        private TextBox addressBox;
+        private Label label3;
     }
 }

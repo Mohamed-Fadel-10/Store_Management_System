@@ -60,7 +60,7 @@ namespace Store_System.UI
             CategoriesCombo.SelectedIndex = 0;
 
         }
-        private async void RefreshGridView()
+        public async void RefreshGridView()
         {
             StoreContext storeContext = new StoreContext();
             var Products = await storeContext.Product.ToListAsync();

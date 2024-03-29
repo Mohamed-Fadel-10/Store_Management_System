@@ -31,6 +31,8 @@ namespace Store_System.UI
             home = new Dashboard();
             _saleBill = new SaleBill();
             _buyBill = new BuyBill();
+
+            PasswordBox.UseSystemPasswordChar = true;
         }
 
         private async void SignInBtn_Click(object sender, EventArgs e)

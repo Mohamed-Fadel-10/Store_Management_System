@@ -51,7 +51,7 @@ namespace Store_System.UI.ControlPanelUi
 
 
             order = await buyBillService.GetLastOrderID();
-            //BillCodeBox.Text = (order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
+            BillCodeBox.Text = (order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
             var Categories = await categoryService.GetALlCategories();
             ClassificationBox.DataSource = Categories;
             ClassificationBox.DisplayMember = "Name";

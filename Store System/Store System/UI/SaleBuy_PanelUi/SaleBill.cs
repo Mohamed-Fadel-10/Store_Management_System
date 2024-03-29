@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Store_System.UI.DevExpReports;
+using DevExpress.XtraReports.UI;
 
 namespace Store_System.UI.ControlPanelUi
 {
@@ -26,6 +28,9 @@ namespace Store_System.UI.ControlPanelUi
         Product _product;
         User _user;
         UserServices _userService;
+        BindingOrdersAndItems _bindingOrder;
+        FaturaOrdrRpt _faturaOrdrRpt;
+        MainStockPage _mainStockPage;  // to refresh main stock after every order
 
         public string CustomerName { get; set; }
         public string Username { get; set; }
@@ -41,6 +46,7 @@ namespace Store_System.UI.ControlPanelUi
             _product = new Product();
             _user = new User();
             _userService = new UserServices();
+            _mainStockPage = new MainStockPage();
         }
 
 
@@ -89,7 +95,7 @@ namespace Store_System.UI.ControlPanelUi
 
             _order = await _saleBillService.GetLastOrderID();
 
-            //BillCodeBox.Text = (_order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
+            BillCodeBox.Text = (_order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
             var Categories = await _categoryService.GetALlCategories();
             ClassificationBox.DataSource = Categories;
             ClassificationBox.DisplayMember = "Name";
@@ -115,50 +121,60 @@ namespace Store_System.UI.ControlPanelUi
         {
             if (addCustomer != null && !string.IsNullOrEmpty(addCustomer.CustomerName))
             {
-                _CustomerNameBox.Text = addCustomer.CustomerName;
+                CustomerNameBox.Text = addCustomer.CustomerName;
+                CustomerPhone.Text = addCustomer.CustomerPhone;
             }
         }
 
         private async void Addbtn_Click(object sender, EventArgs e)
         {
-            _product= new Product();
+            _product = new Product();
             try
             {
-                
-                    _product = await _productService.GetProductByID(int.Parse(productID.Text));
 
-                    if (_discountBox.Text == "")
-                    {
-                        _discountBox.Text = 0.ToString();
-                    }
-                    if (_product.StockAmount <= 0 || _product.StockAmount < int.Parse(QuantityBox.Text))
-                    {
-                        MessageBox.Show($"{_product.StockAmount} : هذا المنتج لا يحتوى على كميات متاحة فى المخزن، المتاح حاليا ", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else
-                    {
+                _product = await _productService.GetProductByID(int.Parse(productID.Text));
 
-                        double Quantity = int.Parse(QuantityBox.Text);
-                        double Price = double.Parse(SellingPrice.Text);
-                        double Discount = double.Parse(_discountBox.Text);
-                        double TotalPrice = Quantity * Price;
-                        double afterDiscount = TotalPrice - (TotalPrice * ((Discount / 100)));
-                        string formattedResult = afterDiscount.ToString("F3");
-                        //=================================================
-                        Order lastOrderID = await _saleBillService.GetLastOrderID();
-                        Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, SellingPrice.Text, _discountBox.Text, formattedResult, NotesBox.Text, productID.Text, ((lastOrderID.ID) + 1));
+                if (_discountBox.Text == "")
+                {
+                    _discountBox.Text = 0.ToString();
+                }
+                if (_product.StockAmount <= 0 || _product.StockAmount < int.Parse(QuantityBox.Text))
+                {
+                    MessageBox.Show($"{_product.StockAmount} : هذا المنتج لا يحتوى على كميات متاحة فى المخزن، المتاح حاليا ", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
 
-                        ///------------------------------------------------------
-                        double sum = 0;
-                        for (int i = 0; i < Items.Rows.Count - 1; ++i)
-                        {
-                            sum += double.Parse(Items.Rows[i].Cells[8].Value.ToString());
-                        }
-                        TotalPriceBox.Text = sum.ToString("F3");
-                        AfterDiscount.Text = sum.ToString("F3");
-                        PaidUp.Text = sum.ToString("F3");
+                    double Quantity = int.Parse(QuantityBox.Text);
+                    double Price = double.Parse(SellingPrice.Text);
+                    double Discount = double.Parse(_discountBox.Text);
+                    double TotalPrice = Quantity * Price;
+                    double afterDiscount = TotalPrice - (TotalPrice * ((Discount / 100)));
+                    string formattedResult = afterDiscount.ToString("F3");
+                    //=================================================
+                    Order lastOrderID = await _saleBillService.GetLastOrderID();
+                    Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, SellingPrice.Text, _discountBox.Text, formattedResult, NotesBox.Text, productID.Text, ((lastOrderID.ID) + 1));
+
+                    _product.StockAmount -= int.Parse(QuantityBox.Text);
+                    await _productService.UpdateProduct(_product);
+                    ///------------------------------------------------------
+                    double sum = 0;
+                    for (int i = 0; i < Items.Rows.Count - 1; ++i)
+                    {
+                        sum += double.Parse(Items.Rows[i].Cells[8].Value.ToString());
                     }
-                
+                    TotalPriceBox.Text = sum.ToString("F3");
+                    AfterDiscount.Text = sum.ToString("F3");
+                    PaidUp.Text = sum.ToString("F3");
+
+                    int count = 0;
+                    for (int i = 0; i < Items.Rows.Count - 1; ++i)
+                    {
+                        count += int.Parse(Items.Rows[i].Cells[3].Value.ToString());
+                    }
+                    totalQuantityBox.Text = count.ToString();
+                }
+
             }
             catch (Exception ex)
             {
@@ -224,6 +240,8 @@ namespace Store_System.UI.ControlPanelUi
                 TotalPriceBox.Text = sum.ToString("F3");
                 AfterDiscount.Text = sum.ToString("F3");
                 PaidUp.Text = sum.ToString("F3");
+
+
             }
             catch (Exception ex)
             {
@@ -265,8 +283,11 @@ namespace Store_System.UI.ControlPanelUi
             PaidUp.Text = FinalPrice.ToString("F3");
         }
 
-        private void deletebtn_Click(object sender, EventArgs e)
+        private async void deletebtn_Click(object sender, EventArgs e)
         {
+
+            _product = await _productService.GetProductByID(int.Parse(productID.Text));
+
             if (Items.SelectedCells.Count > 1)
             {
                 int RowIndex = Items.SelectedCells[0].RowIndex;
@@ -279,6 +300,10 @@ namespace Store_System.UI.ControlPanelUi
                             double SelectedCellPrice = double.Parse(Items.CurrentRow.Cells[8].Value.ToString());
                             double CurrentTotalPrice = double.Parse(TotalPriceBox.Text);
                             CurrentTotalPrice -= SelectedCellPrice;
+
+                            _product.StockAmount += int.Parse(QuantityBox.Text);
+                            await _productService.UpdateProduct(_product);
+
                             Items.Rows.RemoveAt(RowIndex);
                             TotalPriceBox.Text = CurrentTotalPrice.ToString();
 
@@ -348,8 +373,7 @@ namespace Store_System.UI.ControlPanelUi
                         orderItems.Discount = double.Parse(Items.Rows[i].Cells[7].Value.ToString());
                         orderItems.Quantity = int.Parse(Items.Rows[i].Cells[3].Value.ToString());
                         _product = await _productService.GetProductByBarcode(Items.Rows[i].Cells[0].Value.ToString());
-                        _product.StockAmount -= int.Parse(Items.Rows[i].Cells[3].Value.ToString());
-                        await _productService.UpdateProduct(_product);
+
                         _saleBillService.AddOrderItem(orderItems);
                     }
                     else
@@ -363,6 +387,10 @@ namespace Store_System.UI.ControlPanelUi
                 _user = await _userService.GetUserByID(int.Parse(UserIDBox.Text));
                 _user.MoneyStockAmount += double.Parse(PaidUp.Text);
                 await _userService.UpdateUser(_user);
+
+                _mainStockPage.RefreshGridView();
+                PrintBill(sender, e);  // to print bill after save the order
+
                 Items.Rows.Clear();
                 Clear();
             }
@@ -370,6 +398,53 @@ namespace Store_System.UI.ControlPanelUi
 
         private void PaidUp_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void Printbtn_Click(object sender, EventArgs e)
+        {
+            //_bindingOrder.Order_ID = int.Parse(BillCodeBox.Text);
+            ////_bindingOrder.Date = DateTime.Parse(Date.Text);
+            //_bindingOrder.CustomerName =CustomerNameBox.Text;
+            ////_bindingOrder.CustomerPhone;
+            //_bindingOrder.ProductName = Items.Rows[i].Cells[1].Value.ToString();
+            //_bindingOrder.Price = double.Parse(Items.Rows[i].Cells[6].Value.ToString());
+            //_bindingOrder.Quantity = int.Parse(Items.Rows[i].Cells[3].Value.ToString());
+            //_bindingOrder.ProductTotal = double.Parse(Items.Rows[i].Cells[8].Value.ToString());
+
+
+            List<BindingOrdersAndItems> items = new List<BindingOrdersAndItems>();
+
+            for (int i = 0; i < Items.Rows.Count - 1; i++)
+            {
+                string ProductName = Items.Rows[i].Cells[1].Value.ToString();
+                double Price = double.Parse(Items.Rows[i].Cells[6].Value.ToString());
+                int Quantity = int.Parse(Items.Rows[i].Cells[3].Value.ToString());
+                double TotalPrice = double.Parse(Items.Rows[i].Cells[8].Value.ToString());
+                _bindingOrder = new BindingOrdersAndItems() { ProductName = ProductName, Price = Price, Quantity = Quantity, ProductTotal = TotalPrice };
+                items.Add(_bindingOrder);
+            }
+            //SaleBill saleBill = new SaleBill();
+            _faturaOrdrRpt = new FaturaOrdrRpt(items, this);
+            _faturaOrdrRpt.ShowPreviewDialog();
+
+        }
+
+        private void PrintBill(object sender, EventArgs e)
+        {
+            List<BindingOrdersAndItems> items = new List<BindingOrdersAndItems>();
+
+            for (int i = 0; i < Items.Rows.Count - 1; i++)
+            {
+                string ProductName = Items.Rows[i].Cells[1].Value.ToString();
+                double Price = double.Parse(Items.Rows[i].Cells[6].Value.ToString());
+                int Quantity = int.Parse(Items.Rows[i].Cells[3].Value.ToString());
+                double TotalPrice = double.Parse(Items.Rows[i].Cells[8].Value.ToString());
+                _bindingOrder = new BindingOrdersAndItems() { ProductName = ProductName, Price = Price, Quantity = Quantity, ProductTotal = TotalPrice };
+                items.Add(_bindingOrder);
+            }
+            //SaleBill saleBill = new SaleBill();
+            _faturaOrdrRpt = new FaturaOrdrRpt(items, this);
+            _faturaOrdrRpt.ShowPreviewDialog();
         }
     }
 }
