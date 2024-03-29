@@ -30,6 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuyBill));
             Items = new DataGridView();
+            ProductID = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
+            ProductCategory = new DataGridViewTextBoxColumn();
+            ProductAmount = new DataGridViewTextBoxColumn();
+            ProductColor = new DataGridViewTextBoxColumn();
+            ProductSize = new DataGridViewTextBoxColumn();
+            ProductPrice = new DataGridViewTextBoxColumn();
+            ProductDiscount = new DataGridViewTextBoxColumn();
+            TotalPrice = new DataGridViewTextBoxColumn();
+            ProductDiscription = new DataGridViewTextBoxColumn();
+            Product_id = new DataGridViewTextBoxColumn();
+            OrderID = new DataGridViewTextBoxColumn();
             Printbtn = new Button();
             panel1 = new Panel();
             label1 = new Label();
@@ -82,18 +94,7 @@
             editBtn = new Button();
             cashierNameBox = new TextBox();
             UserIDBox = new TextBox();
-            ProductID = new DataGridViewTextBoxColumn();
-            ProductName = new DataGridViewTextBoxColumn();
-            ProductCategory = new DataGridViewTextBoxColumn();
-            ProductAmount = new DataGridViewTextBoxColumn();
-            ProductColor = new DataGridViewTextBoxColumn();
-            ProductSize = new DataGridViewTextBoxColumn();
-            ProductPrice = new DataGridViewTextBoxColumn();
-            ProductDiscount = new DataGridViewTextBoxColumn();
-            TotalPrice = new DataGridViewTextBoxColumn();
-            ProductDiscription = new DataGridViewTextBoxColumn();
-            Product_id = new DataGridViewTextBoxColumn();
-            OrderID = new DataGridViewTextBoxColumn();
+            searchBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -115,6 +116,92 @@
             Items.Size = new Size(1397, 470);
             Items.TabIndex = 36;
             Items.RowHeaderMouseClick += Items_RowHeaderMouseClick;
+            // 
+            // ProductID
+            // 
+            ProductID.HeaderText = "كود المنتج";
+            ProductID.MinimumWidth = 6;
+            ProductID.Name = "ProductID";
+            ProductID.Width = 150;
+            // 
+            // ProductName
+            // 
+            ProductName.HeaderText = "اسم المنتج";
+            ProductName.MinimumWidth = 6;
+            ProductName.Name = "ProductName";
+            ProductName.Width = 200;
+            // 
+            // ProductCategory
+            // 
+            ProductCategory.HeaderText = "نوع المنتج";
+            ProductCategory.MinimumWidth = 6;
+            ProductCategory.Name = "ProductCategory";
+            ProductCategory.Width = 125;
+            // 
+            // ProductAmount
+            // 
+            ProductAmount.HeaderText = "الكمية";
+            ProductAmount.MinimumWidth = 6;
+            ProductAmount.Name = "ProductAmount";
+            ProductAmount.Width = 125;
+            // 
+            // ProductColor
+            // 
+            ProductColor.HeaderText = "اللون";
+            ProductColor.MinimumWidth = 6;
+            ProductColor.Name = "ProductColor";
+            ProductColor.Width = 125;
+            // 
+            // ProductSize
+            // 
+            ProductSize.HeaderText = "المقاس";
+            ProductSize.MinimumWidth = 6;
+            ProductSize.Name = "ProductSize";
+            ProductSize.Width = 125;
+            // 
+            // ProductPrice
+            // 
+            ProductPrice.HeaderText = "سعر القطعة";
+            ProductPrice.MinimumWidth = 6;
+            ProductPrice.Name = "ProductPrice";
+            ProductPrice.Width = 125;
+            // 
+            // ProductDiscount
+            // 
+            ProductDiscount.HeaderText = "الخصم";
+            ProductDiscount.MinimumWidth = 6;
+            ProductDiscount.Name = "ProductDiscount";
+            ProductDiscount.Width = 125;
+            // 
+            // TotalPrice
+            // 
+            TotalPrice.HeaderText = "الإجمالي";
+            TotalPrice.MinimumWidth = 6;
+            TotalPrice.Name = "TotalPrice";
+            TotalPrice.Width = 125;
+            // 
+            // ProductDiscription
+            // 
+            ProductDiscription.HeaderText = "الوصف";
+            ProductDiscription.MinimumWidth = 6;
+            ProductDiscription.Name = "ProductDiscription";
+            ProductDiscription.Width = 125;
+            // 
+            // Product_id
+            // 
+            Product_id.HeaderText = "رقم المنتج";
+            Product_id.MinimumWidth = 6;
+            Product_id.Name = "Product_id";
+            Product_id.Visible = false;
+            Product_id.Width = 125;
+            // 
+            // OrderID
+            // 
+            OrderID.HeaderText = "رقم الفاتورة";
+            OrderID.MinimumWidth = 6;
+            OrderID.Name = "OrderID";
+            OrderID.Visible = false;
+            OrderID.Width = 125;
             // 
             // Printbtn
             // 
@@ -206,10 +293,10 @@
             SearchBox.BackColor = Color.FromArgb(24, 30, 46);
             SearchBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             SearchBox.ForeColor = Color.White;
-            SearchBox.Location = new Point(39, 55);
+            SearchBox.Location = new Point(136, 55);
             SearchBox.Name = "SearchBox";
             SearchBox.RightToLeft = RightToLeft.Yes;
-            SearchBox.Size = new Size(249, 39);
+            SearchBox.Size = new Size(224, 39);
             SearchBox.TabIndex = 46;
             // 
             // label4
@@ -218,7 +305,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(233, 37);
+            label4.Location = new Point(305, 37);
             label4.Name = "label4";
             label4.Size = new Size(46, 23);
             label4.TabIndex = 47;
@@ -662,7 +749,7 @@
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BackColor = Color.FromArgb(24, 30, 46);
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(293, 56);
+            pictureBox2.Location = new Point(365, 56);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(38, 38);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -760,97 +847,27 @@
             UserIDBox.Size = new Size(98, 34);
             UserIDBox.TabIndex = 145;
             // 
-            // ProductID
+            // searchBtn
             // 
-            ProductID.HeaderText = "كود المنتج";
-            ProductID.MinimumWidth = 6;
-            ProductID.Name = "ProductID";
-            ProductID.Width = 150;
-            // 
-            // ProductName
-            // 
-            ProductName.HeaderText = "اسم المنتج";
-            ProductName.MinimumWidth = 6;
-            ProductName.Name = "ProductName";
-            ProductName.Width = 200;
-            // 
-            // ProductCategory
-            // 
-            ProductCategory.HeaderText = "نوع المنتج";
-            ProductCategory.MinimumWidth = 6;
-            ProductCategory.Name = "ProductCategory";
-            ProductCategory.Width = 125;
-            // 
-            // ProductAmount
-            // 
-            ProductAmount.HeaderText = "الكمية";
-            ProductAmount.MinimumWidth = 6;
-            ProductAmount.Name = "ProductAmount";
-            ProductAmount.Width = 125;
-            // 
-            // ProductColor
-            // 
-            ProductColor.HeaderText = "اللون";
-            ProductColor.MinimumWidth = 6;
-            ProductColor.Name = "ProductColor";
-            ProductColor.Width = 125;
-            // 
-            // ProductSize
-            // 
-            ProductSize.HeaderText = "المقاس";
-            ProductSize.MinimumWidth = 6;
-            ProductSize.Name = "ProductSize";
-            ProductSize.Width = 125;
-            // 
-            // ProductPrice
-            // 
-            ProductPrice.HeaderText = "سعر القطعة";
-            ProductPrice.MinimumWidth = 6;
-            ProductPrice.Name = "ProductPrice";
-            ProductPrice.Width = 125;
-            // 
-            // ProductDiscount
-            // 
-            ProductDiscount.HeaderText = "الخصم";
-            ProductDiscount.MinimumWidth = 6;
-            ProductDiscount.Name = "ProductDiscount";
-            ProductDiscount.Width = 125;
-            // 
-            // TotalPrice
-            // 
-            TotalPrice.HeaderText = "الإجمالي";
-            TotalPrice.MinimumWidth = 6;
-            TotalPrice.Name = "TotalPrice";
-            TotalPrice.Width = 125;
-            // 
-            // ProductDiscription
-            // 
-            ProductDiscription.HeaderText = "الوصف";
-            ProductDiscription.MinimumWidth = 6;
-            ProductDiscription.Name = "ProductDiscription";
-            ProductDiscription.Width = 125;
-            // 
-            // Product_id
-            // 
-            Product_id.HeaderText = "رقم المنتج";
-            Product_id.MinimumWidth = 6;
-            Product_id.Name = "Product_id";
-            Product_id.Visible = false;
-            Product_id.Width = 125;
-            // 
-            // OrderID
-            // 
-            OrderID.HeaderText = "رقم الفاتورة";
-            OrderID.MinimumWidth = 6;
-            OrderID.Name = "OrderID";
-            OrderID.Visible = false;
-            OrderID.Width = 125;
+            searchBtn.Anchor = AnchorStyles.None;
+            searchBtn.BackColor = Color.FromArgb(27, 156, 133);
+            searchBtn.FlatStyle = FlatStyle.Flat;
+            searchBtn.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
+            searchBtn.ForeColor = Color.White;
+            searchBtn.Location = new Point(39, 55);
+            searchBtn.Name = "searchBtn";
+            searchBtn.Size = new Size(77, 38);
+            searchBtn.TabIndex = 146;
+            searchBtn.Text = "بحث";
+            searchBtn.UseVisualStyleBackColor = false;
+            searchBtn.Click += searchBtn_Click;
             // 
             // BuyBill
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(searchBtn);
             Controls.Add(UserIDBox);
             Controls.Add(editBtn);
             Controls.Add(ProductIDBox);
@@ -983,5 +1000,6 @@
         private DataGridViewTextBoxColumn ProductDiscription;
         private DataGridViewTextBoxColumn Product_id;
         private DataGridViewTextBoxColumn OrderID;
+        private Button searchBtn;
     }
 }

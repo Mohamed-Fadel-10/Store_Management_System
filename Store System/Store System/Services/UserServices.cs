@@ -85,6 +85,22 @@ namespace Store_System.Services
             }
             return false;  
         }
-        
+
+        public async Task<List<User>> Search(string Name)
+        {
+            if (Name != "")
+            {
+                var users = await _context.User.Where(u => u.Name.Contains(Name)).ToListAsync();
+                if (users != null)
+                {
+                    return users;
+                }
+                else
+                {
+                    return new List<User>();
+                }
+            }
+            return new List<User>();
+        }
     }
 }

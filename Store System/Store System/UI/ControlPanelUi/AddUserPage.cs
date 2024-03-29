@@ -1,4 +1,5 @@
-﻿using Store_System.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Store_System.Data;
 using Store_System.Models;
 using Store_System.Services;
 using System;
@@ -153,17 +154,17 @@ namespace Store_System.UI
             stockNameBox.Text = existUsrsGridView.CurrentRow.Cells[0].Value.ToString();
         }
 
-        private void RefreshGridView()
+        private async void RefreshGridView()
         {
             StoreContext storeContext = new StoreContext();
-            var Users = storeContext.User.ToList();
+            var Users = await storeContext.User.ToListAsync();
             existUsrsGridView.DataSource = Users;
         }
-        private async  void updatebtn_Click(object sender, EventArgs e)
+        private async void updatebtn_Click(object sender, EventArgs e)
         {
             _user = new User();
 
-           _user = await _userServices.GetUserByUserName(userNameBox.Text);
+            _user = await _userServices.GetUserByUserName(userNameBox.Text);
             if (_user != null)
             {
                 try
@@ -182,8 +183,8 @@ namespace Store_System.UI
                 }
 
                 catch (Exception)
-                { 
-                
+                {
+
                 }
             }
             else
@@ -192,6 +193,18 @@ namespace Store_System.UI
             }
 
 
+        }
+
+        private async void searchUserBox_TextChanged(object sender, EventArgs e)
+        {
+            if (searchUserBox.Text == "")
+            {
+                RefreshGridView();
+            }
+            List<User> users = await _userServices.Search(searchUserBox.Text);
+            existUsrsGridView.DataSource = users;
+
+            
         }
     }
 }

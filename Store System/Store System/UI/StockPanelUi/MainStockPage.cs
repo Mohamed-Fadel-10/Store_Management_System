@@ -99,7 +99,7 @@ namespace Store_System.UI
             {
                 RefreshGridView();
             }
-           List<Product> products= await _mainStockService.Search(searchStockBox.Text);
+            List<Product> products= await _mainStockService.Search(searchStockBox.Text);
             Items.DataSource = products;
         }
     }

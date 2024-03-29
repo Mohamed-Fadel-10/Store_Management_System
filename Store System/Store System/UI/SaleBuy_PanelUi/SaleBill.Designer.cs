@@ -61,6 +61,18 @@
             label2 = new Label();
             BillCodeBox = new TextBox();
             Items = new DataGridView();
+            _Barcode = new DataGridViewTextBoxColumn();
+            _Name = new DataGridViewTextBoxColumn();
+            _Classification = new DataGridViewTextBoxColumn();
+            _Quantity = new DataGridViewTextBoxColumn();
+            _Color = new DataGridViewTextBoxColumn();
+            _Size = new DataGridViewTextBoxColumn();
+            SalePricePerOne = new DataGridViewTextBoxColumn();
+            _Discount = new DataGridViewTextBoxColumn();
+            Total = new DataGridViewTextBoxColumn();
+            _notes = new DataGridViewTextBoxColumn();
+            product_id = new DataGridViewTextBoxColumn();
+            OrderID = new DataGridViewTextBoxColumn();
             Printbtn = new Button();
             panel1 = new Panel();
             button1 = new Button();
@@ -80,18 +92,7 @@
             cashierNameBox = new TextBox();
             UserIDBox = new TextBox();
             customerIDBox = new TextBox();
-            _Barcode = new DataGridViewTextBoxColumn();
-            _Name = new DataGridViewTextBoxColumn();
-            _Classification = new DataGridViewTextBoxColumn();
-            _Quantity = new DataGridViewTextBoxColumn();
-            _Color = new DataGridViewTextBoxColumn();
-            _Size = new DataGridViewTextBoxColumn();
-            SalePricePerOne = new DataGridViewTextBoxColumn();
-            _Discount = new DataGridViewTextBoxColumn();
-            Total = new DataGridViewTextBoxColumn();
-            _notes = new DataGridViewTextBoxColumn();
-            product_id = new DataGridViewTextBoxColumn();
-            OrderID = new DataGridViewTextBoxColumn();
+            searchBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -453,10 +454,10 @@
             SearchBox.BackColor = Color.FromArgb(24, 30, 46);
             SearchBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             SearchBox.ForeColor = Color.White;
-            SearchBox.Location = new Point(49, 56);
+            SearchBox.Location = new Point(142, 56);
             SearchBox.Name = "SearchBox";
             SearchBox.RightToLeft = RightToLeft.Yes;
-            SearchBox.Size = new Size(330, 39);
+            SearchBox.Size = new Size(237, 39);
             SearchBox.TabIndex = 89;
             // 
             // label2
@@ -499,6 +500,80 @@
             Items.TabIndex = 84;
             Items.RowHeaderMouseClick += Items_RowHeaderMouseClick;
             // 
+            // _Barcode
+            // 
+            _Barcode.HeaderText = "الكود";
+            _Barcode.MinimumWidth = 6;
+            _Barcode.Name = "_Barcode";
+            // 
+            // _Name
+            // 
+            _Name.HeaderText = "إسم المنتج";
+            _Name.MinimumWidth = 6;
+            _Name.Name = "_Name";
+            // 
+            // _Classification
+            // 
+            _Classification.HeaderText = "التصنيف";
+            _Classification.MinimumWidth = 6;
+            _Classification.Name = "_Classification";
+            // 
+            // _Quantity
+            // 
+            _Quantity.HeaderText = "الكمية";
+            _Quantity.MinimumWidth = 6;
+            _Quantity.Name = "_Quantity";
+            // 
+            // _Color
+            // 
+            _Color.HeaderText = "اللون";
+            _Color.MinimumWidth = 6;
+            _Color.Name = "_Color";
+            // 
+            // _Size
+            // 
+            _Size.HeaderText = "المقاس";
+            _Size.MinimumWidth = 6;
+            _Size.Name = "_Size";
+            // 
+            // SalePricePerOne
+            // 
+            SalePricePerOne.HeaderText = "سعر القطعة";
+            SalePricePerOne.MinimumWidth = 6;
+            SalePricePerOne.Name = "SalePricePerOne";
+            // 
+            // _Discount
+            // 
+            _Discount.HeaderText = "الخصم";
+            _Discount.MinimumWidth = 6;
+            _Discount.Name = "_Discount";
+            // 
+            // Total
+            // 
+            Total.HeaderText = "إجمالى";
+            Total.MinimumWidth = 6;
+            Total.Name = "Total";
+            // 
+            // _notes
+            // 
+            _notes.HeaderText = "الوصف";
+            _notes.MinimumWidth = 6;
+            _notes.Name = "_notes";
+            // 
+            // product_id
+            // 
+            product_id.HeaderText = "رقم المنتج";
+            product_id.MinimumWidth = 6;
+            product_id.Name = "product_id";
+            product_id.Visible = false;
+            // 
+            // OrderID
+            // 
+            OrderID.HeaderText = "رقم الفاتورة";
+            OrderID.MinimumWidth = 6;
+            OrderID.Name = "OrderID";
+            OrderID.Visible = false;
+            // 
             // Printbtn
             // 
             Printbtn.Anchor = AnchorStyles.None;
@@ -530,7 +605,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(798, 56);
+            button1.Location = new Point(764, 56);
             button1.Name = "button1";
             button1.Size = new Size(143, 38);
             button1.TabIndex = 125;
@@ -544,10 +619,10 @@
             _CustomerNameBox.BackColor = Color.FromArgb(24, 30, 46);
             _CustomerNameBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             _CustomerNameBox.ForeColor = Color.White;
-            _CustomerNameBox.Location = new Point(402, 57);
+            _CustomerNameBox.Location = new Point(418, 57);
             _CustomerNameBox.Name = "_CustomerNameBox";
             _CustomerNameBox.RightToLeft = RightToLeft.Yes;
-            _CustomerNameBox.Size = new Size(385, 39);
+            _CustomerNameBox.Size = new Size(335, 39);
             _CustomerNameBox.TabIndex = 126;
             // 
             // label3
@@ -556,7 +631,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(688, 38);
+            label3.Location = new Point(654, 38);
             label3.Name = "label3";
             label3.Size = new Size(90, 23);
             label3.TabIndex = 127;
@@ -731,92 +806,34 @@
             customerIDBox.BackColor = Color.FromArgb(24, 30, 46);
             customerIDBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             customerIDBox.ForeColor = Color.White;
-            customerIDBox.Location = new Point(402, 15);
+            customerIDBox.Location = new Point(418, 17);
             customerIDBox.Name = "customerIDBox";
             customerIDBox.RightToLeft = RightToLeft.Yes;
             customerIDBox.Size = new Size(109, 34);
             customerIDBox.TabIndex = 142;
             customerIDBox.Visible = false;
             // 
-            // _Barcode
+            // searchBtn
             // 
-            _Barcode.HeaderText = "الكود";
-            _Barcode.MinimumWidth = 6;
-            _Barcode.Name = "_Barcode";
-            // 
-            // _Name
-            // 
-            _Name.HeaderText = "إسم المنتج";
-            _Name.MinimumWidth = 6;
-            _Name.Name = "_Name";
-            // 
-            // _Classification
-            // 
-            _Classification.HeaderText = "التصنيف";
-            _Classification.MinimumWidth = 6;
-            _Classification.Name = "_Classification";
-            // 
-            // _Quantity
-            // 
-            _Quantity.HeaderText = "الكمية";
-            _Quantity.MinimumWidth = 6;
-            _Quantity.Name = "_Quantity";
-            // 
-            // _Color
-            // 
-            _Color.HeaderText = "اللون";
-            _Color.MinimumWidth = 6;
-            _Color.Name = "_Color";
-            // 
-            // _Size
-            // 
-            _Size.HeaderText = "المقاس";
-            _Size.MinimumWidth = 6;
-            _Size.Name = "_Size";
-            // 
-            // SalePricePerOne
-            // 
-            SalePricePerOne.HeaderText = "سعر القطعة";
-            SalePricePerOne.MinimumWidth = 6;
-            SalePricePerOne.Name = "SalePricePerOne";
-            // 
-            // _Discount
-            // 
-            _Discount.HeaderText = "الخصم";
-            _Discount.MinimumWidth = 6;
-            _Discount.Name = "_Discount";
-            // 
-            // Total
-            // 
-            Total.HeaderText = "إجمالى";
-            Total.MinimumWidth = 6;
-            Total.Name = "Total";
-            // 
-            // _notes
-            // 
-            _notes.HeaderText = "الوصف";
-            _notes.MinimumWidth = 6;
-            _notes.Name = "_notes";
-            // 
-            // product_id
-            // 
-            product_id.HeaderText = "رقم المنتج";
-            product_id.MinimumWidth = 6;
-            product_id.Name = "product_id";
-            product_id.Visible = false;
-            // 
-            // OrderID
-            // 
-            OrderID.HeaderText = "رقم الفاتورة";
-            OrderID.MinimumWidth = 6;
-            OrderID.Name = "OrderID";
-            OrderID.Visible = false;
+            searchBtn.Anchor = AnchorStyles.None;
+            searchBtn.BackColor = Color.FromArgb(27, 156, 133);
+            searchBtn.FlatStyle = FlatStyle.Flat;
+            searchBtn.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
+            searchBtn.ForeColor = Color.White;
+            searchBtn.Location = new Point(47, 56);
+            searchBtn.Name = "searchBtn";
+            searchBtn.Size = new Size(77, 38);
+            searchBtn.TabIndex = 143;
+            searchBtn.Text = "بحث";
+            searchBtn.UseVisualStyleBackColor = false;
+            searchBtn.Click += searchBtn_Click;
             // 
             // SaleBill
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(searchBtn);
             Controls.Add(customerIDBox);
             Controls.Add(UserIDBox);
             Controls.Add(label19);
@@ -944,5 +961,6 @@
         private DataGridViewTextBoxColumn _notes;
         private DataGridViewTextBoxColumn product_id;
         private DataGridViewTextBoxColumn OrderID;
+        private Button searchBtn;
     }
 }

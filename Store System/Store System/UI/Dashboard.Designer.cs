@@ -46,7 +46,6 @@
             panel1 = new Panel();
             groupBox3 = new GroupBox();
             profitLossBtn = new Button();
-            expensReportBtn = new Button();
             buyReportBtn = new Button();
             saleReportBtn = new Button();
             backHomeBtn = new Button();
@@ -286,7 +285,6 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(profitLossBtn);
-            groupBox3.Controls.Add(expensReportBtn);
             groupBox3.Controls.Add(buyReportBtn);
             groupBox3.Controls.Add(saleReportBtn);
             groupBox3.FlatStyle = FlatStyle.Flat;
@@ -310,19 +308,7 @@
             profitLossBtn.TabIndex = 4;
             profitLossBtn.Text = " ربح وخسارة";
             profitLossBtn.UseVisualStyleBackColor = false;
-            // 
-            // expensReportBtn
-            // 
-            expensReportBtn.BackColor = Color.White;
-            expensReportBtn.FlatStyle = FlatStyle.Flat;
-            expensReportBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            expensReportBtn.ForeColor = Color.Black;
-            expensReportBtn.Location = new Point(39, 141);
-            expensReportBtn.Name = "expensReportBtn";
-            expensReportBtn.Size = new Size(318, 41);
-            expensReportBtn.TabIndex = 3;
-            expensReportBtn.Text = "تقرير مصروفات";
-            expensReportBtn.UseVisualStyleBackColor = false;
+            profitLossBtn.Click += profitLossBtn_Click;
             // 
             // buyReportBtn
             // 
@@ -330,7 +316,7 @@
             buyReportBtn.FlatStyle = FlatStyle.Flat;
             buyReportBtn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             buyReportBtn.ForeColor = Color.Black;
-            buyReportBtn.Location = new Point(39, 92);
+            buyReportBtn.Location = new Point(39, 119);
             buyReportBtn.Name = "buyReportBtn";
             buyReportBtn.Size = new Size(318, 41);
             buyReportBtn.TabIndex = 2;
@@ -496,7 +482,6 @@
         private Button addBranchBtn;
         private GroupBox groupBox3;
         private Button profitLossBtn;
-        private Button expensReportBtn;
         private Button buyReportBtn;
         private Button saleReportBtn;
     }

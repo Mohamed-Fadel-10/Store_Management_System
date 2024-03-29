@@ -80,7 +80,7 @@ namespace Store_System.UI.ControlPanelUi
                         PriceBox.Text = Product.SellingPrice.ToString();
                         QuantityBox.Text = 1.ToString();
                         DiscountBox.Text = "";
-                       // SupplierBox.DataSource = Product.ToList();
+                        // SupplierBox.DataSource = Product.ToList();
                     }
                     else
                     {
@@ -168,7 +168,7 @@ namespace Store_System.UI.ControlPanelUi
             DiscountBox.Clear();
             PriceBox.Clear();
             NotesBox.Clear();
-            TotalPriceBox.Text="0";
+            TotalPriceBox.Text = "0";
             PaidUp.Clear();
             FaturaDiscountBox.Text = "0";
             AfterDiscount.Clear();
@@ -179,7 +179,7 @@ namespace Store_System.UI.ControlPanelUi
 
         private void FaturaDiscountBox_TextChanged(object sender, EventArgs e)
         {
-         
+
             if (FaturaDiscountBox.Text == "")
             {
                 FaturaDiscountBox.Text = 0.ToString();
@@ -244,7 +244,7 @@ namespace Store_System.UI.ControlPanelUi
 
                     }
                 }
-                
+
                 MessageBox.Show($"{orderId} : تم حفظ الفاتورة بنجاح رقم الفاتورة هو", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Items.Rows.Clear();
                 Clear();
@@ -327,5 +327,12 @@ namespace Store_System.UI.ControlPanelUi
             }
         }
 
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            if (SearchBox.Text != "")
+            {
+                ProductCodeBox.Text = SearchBox.Text;
+            }
+        }
     }
 }

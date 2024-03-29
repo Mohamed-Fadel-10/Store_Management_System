@@ -27,6 +27,7 @@ namespace Store_System.UI
         UserServices _userServices;
         SaleingReports saleingReports;
         BuyReports buyReports;
+        gain_loss_Control gain_Loss_Control;
         public Dashboard()
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace Store_System.UI
                 welcomePage1 = new WelcomePage();
                 saleingReports = new SaleingReports();
                 buyReports = new BuyReports();
+                gain_Loss_Control = new gain_loss_Control();
                 //AddBranchPage1 = new AddBranchPage();
 
                 Controls.Add(welcomePage1);
@@ -61,6 +63,7 @@ namespace Store_System.UI
                 Controls.Add(addCategoryPage1);
                 Controls.Add(saleingReports);
                 Controls.Add(buyReports);
+                Controls.Add(gain_Loss_Control);
 
                 saleBill1.Location = new System.Drawing.Point(-5, 50);
                 buyBill1.Location = new System.Drawing.Point(-5, 50);
@@ -74,7 +77,7 @@ namespace Store_System.UI
                 returnedItems1.Location = new System.Drawing.Point(-5, 50);
                 saleingReports.Location = new System.Drawing.Point(-5, 50);
                 buyReports.Location = new System.Drawing.Point(-5, 50);
-
+                gain_Loss_Control.Location= new System.Drawing.Point(-5, 50);
 
             }
 
@@ -159,6 +162,7 @@ namespace Store_System.UI
         {
             welcomePage1.Visible = true;
             welcomePage1.BringToFront();
+            welcomePage1.Location = new Point(-5, 50);
         }
 
         private void logOutBtn_Click(object sender, EventArgs e)
@@ -217,6 +221,11 @@ namespace Store_System.UI
         {
             buyReports.BringToFront();
 
+        }
+
+        private void profitLossBtn_Click(object sender, EventArgs e)
+        {
+            gain_Loss_Control.BringToFront();
         }
     }
 }

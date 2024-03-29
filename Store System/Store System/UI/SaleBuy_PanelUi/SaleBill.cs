@@ -38,7 +38,7 @@ namespace Store_System.UI.ControlPanelUi
             _productService = new ProductService();
             _order = new Order();
             _product = new Product();
-            _user=new User();
+            _user = new User();
             _userService = new UserServices();
         }
 
@@ -48,8 +48,8 @@ namespace Store_System.UI.ControlPanelUi
             string barcode = ProductCodeBox.Text;
             if (barcode != "")
             {
-                
-                    Product Product = await _saleBillService.GetProductCode(barcode);
+
+                Product Product = await _saleBillService.GetProductCode(barcode);
 
                 if (Product != null)
                 {
@@ -64,7 +64,7 @@ namespace Store_System.UI.ControlPanelUi
                         SellingPrice.Text = Product.SellingPrice.ToString();
                         QuantityBox.Text = 1.ToString();
                         QuantityBox.Focus();
-                        _discountBox.Text = "";                   
+                        _discountBox.Text = "";
                     }
                     catch (Exception ex)
                     {
@@ -120,7 +120,7 @@ namespace Store_System.UI.ControlPanelUi
 
         private async void Addbtn_Click(object sender, EventArgs e)
         {
-            _product= new Product();
+            _product = new Product();
             try
             {
                 _product = await _productService.GetProductByID(int.Parse(productID.Text));
@@ -144,7 +144,7 @@ namespace Store_System.UI.ControlPanelUi
                     string formattedResult = afterDiscount.ToString("0.000");
                     //=================================================
                     Order lastOrderID = await _saleBillService.GetLastOrderID();
-                    Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, SellingPrice.Text, _discountBox.Text, formattedResult, NotesBox.Text, productID.Text, ((lastOrderID.ID)+1));
+                    Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, SellingPrice.Text, _discountBox.Text, formattedResult, NotesBox.Text, productID.Text, ((lastOrderID.ID) + 1));
 
                     ///------------------------------------------------------
                     double sum = 0;
@@ -242,7 +242,7 @@ namespace Store_System.UI.ControlPanelUi
             NotesBox.Clear();
             TotalPriceBox.Text = "0";
             PaidUp.Clear();
-            FaturaDiscountBox.Text=0.ToString();
+            FaturaDiscountBox.Text = 0.ToString();
             AfterDiscount.Clear();
             _order = await _saleBillService.GetLastOrderID();
             BillCodeBox.Text = (_order.ID + 1).ToString();
@@ -310,8 +310,9 @@ namespace Store_System.UI.ControlPanelUi
             else
             {
                 _order = new Order();
-                if (customerIDBox.Text == "") { 
-                    _order.Customer_Id = null; 
+                if (customerIDBox.Text == "")
+                {
+                    _order.Customer_Id = null;
                 }
                 else
                 {
@@ -324,7 +325,7 @@ namespace Store_System.UI.ControlPanelUi
                 await _saleBillService.AddOrder(_order);
                 int orderId = _order.ID;
                 OrderItems orderItems = new OrderItems();
-                
+
 
                 for (int i = 0; i < Items.Rows.Count - 1; i++)
                 {
@@ -342,10 +343,10 @@ namespace Store_System.UI.ControlPanelUi
                         orderItems.Quantity = int.Parse(Items.Rows[i].Cells[3].Value.ToString());
                         _product = await _productService.GetProductByBarcode(Items.Rows[i].Cells[0].Value.ToString());
                         _product.StockAmount -= int.Parse(Items.Rows[i].Cells[3].Value.ToString());
-                         await _productService.UpdateProduct(_product);
+                        await _productService.UpdateProduct(_product);
                         _saleBillService.AddOrderItem(orderItems);
                     }
-                       else
+                    else
                     {
                         MessageBox.Show($"الفاتورة تحتوى على بيانات ناقصة يرجى ملئ جميع البيانات ومن ثم حفظها", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
@@ -353,7 +354,7 @@ namespace Store_System.UI.ControlPanelUi
                 }
 
                 MessageBox.Show($"{orderId} : تم حفظ الفاتورة بنجاح رقم الفاتورة هو", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _user= await _userService.GetUserByID(int.Parse(UserIDBox.Text));
+                _user = await _userService.GetUserByID(int.Parse(UserIDBox.Text));
                 _user.MoneyStockAmount += double.Parse(PaidUp.Text, NumberStyles.Currency, new CultureInfo("ar-EG"));
                 await _userService.UpdateUser(_user);
                 Items.Rows.Clear();
@@ -361,5 +362,12 @@ namespace Store_System.UI.ControlPanelUi
             }
         }
 
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            if (SearchBox.Text != "")
+            {
+                ProductCodeBox.Text = SearchBox.Text;
+            }
+        }
     }
 }

@@ -53,7 +53,8 @@ namespace Store_System.UI
             SizeBox.SelectedIndex = -1;
             BindingToGridView();
             Items.ClearSelection();
-
+            CatComboBox.SelectedIndex = 1;
+            SizeBox.SelectedIndex = 1;
 
 
         }
