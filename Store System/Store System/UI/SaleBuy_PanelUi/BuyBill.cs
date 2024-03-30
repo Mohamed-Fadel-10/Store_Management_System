@@ -21,8 +21,11 @@ namespace Store_System.UI.ControlPanelUi
         ProductService productService;
         Order order;
         SupplierService _supplierService;
+        Dashboard adminDashboard;
         ProductsSuppliers _productsSuppliers;
         SuppliersProductsService _suppliersProductsService;
+
+        private int branchID { get; set; }
 
         public BuyBill()
         {
@@ -30,6 +33,8 @@ namespace Store_System.UI.ControlPanelUi
             buyBillService = new BuyBillService();
             categoryService = new CategoryService();
             order = new Order();
+
+            branchIdBox.Text = 1.ToString();
             _supplierService = new SupplierService();
             _productsSuppliers = new ProductsSuppliers();
             _suppliersProductsService = new SuppliersProductsService();
@@ -46,7 +51,7 @@ namespace Store_System.UI.ControlPanelUi
 
 
             order = await buyBillService.GetLastOrderID();
-            //BillCodeBox.Text = (order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
+            BillCodeBox.Text = (order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
             var Categories = await categoryService.GetALlCategories();
             ClassificationBox.DataSource = Categories;
             ClassificationBox.DisplayMember = "Name";
@@ -105,30 +110,35 @@ namespace Store_System.UI.ControlPanelUi
         {
             try
             {
-                if (DiscountBox.Text == "")
-                {
-                    DiscountBox.Text = 0.ToString();
-                }
-                double Quantity = int.Parse(QuantityBox.Text);
-                double Price = double.Parse(PriceBox.Text);
-                double Discount = double.Parse(DiscountBox.Text);
-                double TotalPrice = Quantity * Price;
-                double afterDiscount = (TotalPrice * (1 - (Discount / 100)));
-                string formattedResult = afterDiscount.ToString("0.000");
-                //================================================================
-                Order lastOrderID = await buyBillService.GetLastOrderID();
+                
+                    if (DiscountBox.Text == "")
+                    {
+                        DiscountBox.Text = 0.ToString();
+                    }
+                    double Quantity = int.Parse(QuantityBox.Text);
+                    double Price = double.Parse(PriceBox.Text);
+                    double Discount = double.Parse(DiscountBox.Text);
+                    double TotalPrice = Quantity * Price;
+                    double afterDiscount = (TotalPrice * (1 - (Discount / 100)));
+                    string formattedResult = afterDiscount.ToString("F3");
+                    //================================================================
+                    Order lastOrderID = await buyBillService.GetLastOrderID();
 
-                Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, PriceBox.Text, DiscountBox.Text, formattedResult, NotesBox.Text, ProductIDBox.Text, ((lastOrderID.ID) + 1));
 
-                ///------------------------------------------------------
-                double sum = 0;
-                for (int i = 0; i < Items.Rows.Count - 1; ++i)
-                {
-                    sum += double.Parse(Items.Rows[i].Cells[8].Value.ToString());
-                }
-                TotalPriceBox.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                AfterDiscount.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                PaidUp.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
+                    Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, PriceBox.Text, DiscountBox.Text, formattedResult, NotesBox.Text, ProductIDBox.Text, ((lastOrderID.ID) + 1));
+
+
+
+                    ///------------------------------------------------------
+                    double sum = 0;
+                    for (int i = 0; i < Items.Rows.Count - 1; ++i)
+                    {
+                        sum += double.Parse(Items.Rows[i].Cells[8].Value.ToString());
+                    }
+                    TotalPriceBox.Text = sum.ToString("F3");
+                    AfterDiscount.Text = sum.ToString("F3");
+                    PaidUp.Text = sum.ToString("F3");
+                
             }
             catch (Exception ex)
             {
@@ -184,11 +194,11 @@ namespace Store_System.UI.ControlPanelUi
             {
                 FaturaDiscountBox.Text = 0.ToString();
             }
-            double totalPrice = double.Parse(TotalPriceBox.Text, NumberStyles.Currency, new CultureInfo("ar-EG"));
+            double totalPrice = double.Parse(TotalPriceBox.Text);
             double Discount = double.Parse(FaturaDiscountBox.Text);
             double FinalPrice = totalPrice - (totalPrice * ((Discount / 100)));
-            AfterDiscount.Text = FinalPrice.ToString("C3", new CultureInfo("ar-EG"));
-            PaidUp.Text = FinalPrice.ToString("C3", new CultureInfo("ar-EG"));
+            AfterDiscount.Text = FinalPrice.ToString("F3");
+            PaidUp.Text = FinalPrice.ToString("F3");
         }
 
 
@@ -230,6 +240,7 @@ namespace Store_System.UI.ControlPanelUi
                         product.StockAmount += int.Parse(Items.Rows[i].Cells[3].Value.ToString());
                         await productService.UpdateProduct(product);
                         buyBillService.AddOrderItem(orderItems);
+                        buyBillService.UpdateMoneyStock(int.Parse(branchIdBox.Text), double.Parse(PaidUp.Text));
                         if (SupplierBox.SelectedIndex != -1)
                         {
                             _productsSuppliers.Supplier_Id = (int)SupplierBox.SelectedValue;
@@ -263,7 +274,7 @@ namespace Store_System.UI.ControlPanelUi
                         if (RowIndex != null)
                         {
                             double SelectedCellPrice = double.Parse(Items.CurrentRow.Cells[8].Value.ToString());
-                            double CurrentTotalPrice = double.Parse(TotalPriceBox.Text, NumberStyles.Currency, new CultureInfo("ar-EG"));
+                            double CurrentTotalPrice = double.Parse(TotalPriceBox.Text);
                             CurrentTotalPrice -= SelectedCellPrice;
                             Items.Rows.RemoveAt(RowIndex);
                             TotalPriceBox.Text = CurrentTotalPrice.ToString();
@@ -298,7 +309,7 @@ namespace Store_System.UI.ControlPanelUi
                 double Discount = double.Parse(DiscountBox.Text);
                 double TotalPrice = Quantity * Price;
                 double afterDiscount = TotalPrice - (TotalPrice * (Discount / 100));
-                string formattedResult = afterDiscount.ToString("0.000");
+                string formattedResult = afterDiscount.ToString("F3");
 
 
                 Items.CurrentRow.Cells[0].Value = ProductCodeBox.Text;
@@ -316,9 +327,9 @@ namespace Store_System.UI.ControlPanelUi
                 {
                     sum += double.Parse(Items.Rows[i].Cells[8].Value.ToString());
                 }
-                TotalPriceBox.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                AfterDiscount.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
-                PaidUp.Text = sum.ToString("C3", new CultureInfo("ar-EG"));
+                TotalPriceBox.Text = sum.ToString("F3");
+                AfterDiscount.Text = sum.ToString("F3");
+                PaidUp.Text = sum.ToString("F3");
             }
             catch (Exception ex)
             {

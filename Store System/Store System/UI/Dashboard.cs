@@ -65,7 +65,7 @@ namespace Store_System.UI
                 Controls.Add(buyReports);
                 Controls.Add(gain_Loss_Control);
 
-                saleBill1.Location = new System.Drawing.Point(-5, 50);
+                saleBill1.Location = new Point(-5, 50);
                 buyBill1.Location = new System.Drawing.Point(-5, 50);
                 addUserPage1.Location = new System.Drawing.Point(-5, 50);
                 addProductPage1.Location = new System.Drawing.Point(-5, 50);
@@ -118,8 +118,8 @@ namespace Store_System.UI
             saleBill1.cashierNameBox.Text = CashierName;
             saleBill1.StockBox.Text = StockMoneyName;
             saleBill1.UserIDBox.Text = UserID.ToString();
-            //shiftLock1.userIDBox.Text = UserID.ToString();
-            //shiftLock1.branchIdBox.Text=1.ToString();
+            shiftLock1.userIDBox.Text = UserID.ToString();
+            shiftLock1.branchIdBox.Text=1.ToString();
         }
 
         private void addUserBtn_Click(object sender, EventArgs e)

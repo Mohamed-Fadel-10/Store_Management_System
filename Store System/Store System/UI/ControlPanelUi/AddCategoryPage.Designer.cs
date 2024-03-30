@@ -49,7 +49,6 @@
             pictureBox2 = new PictureBox();
             searchCatLbl = new Label();
             searchCatBox = new TextBox();
-            deleteCategoryBtn = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)existCategoriesGridView).BeginInit();
@@ -172,7 +171,7 @@
             AddCatBtn.FlatStyle = FlatStyle.Flat;
             AddCatBtn.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             AddCatBtn.ForeColor = Color.White;
-            AddCatBtn.Location = new Point(818, 313);
+            AddCatBtn.Location = new Point(725, 345);
             AddCatBtn.Name = "AddCatBtn";
             AddCatBtn.Size = new Size(125, 47);
             AddCatBtn.TabIndex = 20;
@@ -285,27 +284,11 @@
             searchCatBox.TabIndex = 24;
             searchCatBox.TextChanged += searchCatBox_TextChanged;
             // 
-            // deleteCategoryBtn
-            // 
-            deleteCategoryBtn.Anchor = AnchorStyles.None;
-            deleteCategoryBtn.BackColor = Color.Firebrick;
-            deleteCategoryBtn.FlatStyle = FlatStyle.Flat;
-            deleteCategoryBtn.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            deleteCategoryBtn.ForeColor = Color.White;
-            deleteCategoryBtn.Location = new Point(679, 312);
-            deleteCategoryBtn.Name = "deleteCategoryBtn";
-            deleteCategoryBtn.Size = new Size(125, 47);
-            deleteCategoryBtn.TabIndex = 27;
-            deleteCategoryBtn.Text = "حذف";
-            deleteCategoryBtn.UseVisualStyleBackColor = false;
-            deleteCategoryBtn.Click += deleteCategoryBtn_Click;
-            // 
             // AddCategoryPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
-            Controls.Add(deleteCategoryBtn);
             Controls.Add(pictureBox2);
             Controls.Add(searchCatLbl);
             Controls.Add(searchCatBox);
@@ -356,7 +339,6 @@
         private PictureBox pictureBox2;
         private Label searchCatLbl;
         private TextBox searchCatBox;
-        private Button deleteCategoryBtn;
         private DataGridViewTextBoxColumn _name;
         private DataGridViewTextBoxColumn Code;
         private DataGridViewTextBoxColumn Discription;

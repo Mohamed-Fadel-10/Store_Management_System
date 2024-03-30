@@ -47,7 +47,7 @@ namespace Store_System.UI
 
         private async void saveSupplierBtn_Click(object sender, EventArgs e)
         {
-            if (supplierNameBox.Text != "" && SupPhoneBox.Text != "" && SupplierID.Text != "")
+            if (supplierNameBox.Text != "" && SupPhoneBox.Text != "")
             {
                 supplier.Name = supplierNameBox.Text;
                 supplier.Email = SupMailBox.Text;
@@ -76,29 +76,7 @@ namespace Store_System.UI
             SupplierID.Clear();
         }
 
-        private async void deleteSupplierBtn_ClickAsync(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("هل انت متأكد من حذف هذا العنصر؟", "!system", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                if (supplierNameBox.Text != "" && SupPhoneBox.Text != "" && SupplierID.Text != "")
-                {
-                    int isDeleted = await supplierService.DeleteSupplier(int.Parse(SupplierID.Text));
-                    if (isDeleted == 1)
-                    {
-                        MessageBox.Show("تم حذف المورد بنجاح", "!system", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("يرجى تحديد المورد لحذفه", "!system", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                }
-            }
-
-            RefreshGridView();
-            Clear();
-        }
+        
 
 
         private async Task RefreshGridView()
@@ -165,7 +143,7 @@ namespace Store_System.UI
             }
             else
             {
-                var Suppliers = await  supplierService.Search(textBox2.Text);
+                var Suppliers = await supplierService.Search(textBox2.Text);
                 existSuppliersGridView.DataSource = Suppliers;
             }
         }

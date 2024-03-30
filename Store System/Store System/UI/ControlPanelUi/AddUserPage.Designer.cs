@@ -73,6 +73,13 @@ namespace Store_System.UI
             stockerror = new Label();
             roleerror = new Label();
             updatebtm = new Button();
+            _Name = new DataGridViewTextBoxColumn();
+            phone = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            _username = new DataGridViewTextBoxColumn();
+            Password = new DataGridViewTextBoxColumn();
+            Role = new DataGridViewTextBoxColumn();
+            StockName = new DataGridViewTextBoxColumn();
             ((ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel5.SuspendLayout();
@@ -314,9 +321,10 @@ namespace Store_System.UI
             existUsrsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             existUsrsGridView.BackgroundColor = Color.Snow;
             existUsrsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            existUsrsGridView.Columns.AddRange(new DataGridViewColumn[] { StockName, Role, Password, _username, Email, phone, _Name });
+            existUsrsGridView.Columns.AddRange(new DataGridViewColumn[] { _Name, phone, Email, _username, Password, Role, StockName });
             existUsrsGridView.Location = new Point(16, 488);
             existUsrsGridView.Name = "existUsrsGridView";
+            existUsrsGridView.RightToLeft = RightToLeft.Yes;
             existUsrsGridView.RowHeadersWidth = 51;
             existUsrsGridView.RowTemplate.Height = 29;
             existUsrsGridView.Size = new Size(1460, 447);
@@ -523,6 +531,48 @@ namespace Store_System.UI
             updatebtm.UseVisualStyleBackColor = false;
             updatebtm.Click += updatebtn_Click;
             // 
+            // _Name
+            // 
+            _Name.HeaderText = "الاسم";
+            _Name.MinimumWidth = 6;
+            _Name.Name = "_Name";
+            // 
+            // phone
+            // 
+            phone.HeaderText = "رقم الهاتف";
+            phone.MinimumWidth = 6;
+            phone.Name = "phone";
+            // 
+            // Email
+            // 
+            Email.HeaderText = "الايميل";
+            Email.MinimumWidth = 6;
+            Email.Name = "Email";
+            // 
+            // _username
+            // 
+            _username.HeaderText = "اسم المستخدم";
+            _username.MinimumWidth = 6;
+            _username.Name = "_username";
+            // 
+            // Password
+            // 
+            Password.HeaderText = "كلمة المرور";
+            Password.MinimumWidth = 6;
+            Password.Name = "Password";
+            // 
+            // Role
+            // 
+            Role.HeaderText = "الصلاحية";
+            Role.MinimumWidth = 6;
+            Role.Name = "Role";
+            // 
+            // StockName
+            // 
+            StockName.HeaderText = "إسم الخزنة";
+            StockName.MinimumWidth = 6;
+            StockName.Name = "StockName";
+            // 
             // AddUserPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -608,12 +658,12 @@ namespace Store_System.UI
         private Label stockerror;
         private Label roleerror;
         private Button updatebtm;
-        private DataGridViewTextBoxColumn StockName;
-        private DataGridViewTextBoxColumn Role;
-        private DataGridViewTextBoxColumn Password;
-        private DataGridViewTextBoxColumn _username;
-        private DataGridViewTextBoxColumn Email;
-        private DataGridViewTextBoxColumn phone;
         private DataGridViewTextBoxColumn _Name;
+        private DataGridViewTextBoxColumn phone;
+        private DataGridViewTextBoxColumn Email;
+        private DataGridViewTextBoxColumn _username;
+        private DataGridViewTextBoxColumn Password;
+        private DataGridViewTextBoxColumn Role;
+        private DataGridViewTextBoxColumn StockName;
     }
 }

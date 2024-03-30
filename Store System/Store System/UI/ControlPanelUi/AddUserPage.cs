@@ -145,13 +145,13 @@ namespace Store_System.UI
 
         private void existUsrsGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            nameUserBox.Text = existUsrsGridView.CurrentRow.Cells[6].Value.ToString();
-            userPhoneBox.Text = existUsrsGridView.CurrentRow.Cells[5].Value.ToString();
-            userMailBox.Text = existUsrsGridView.CurrentRow.Cells[4].Value.ToString();
+            nameUserBox.Text = existUsrsGridView.CurrentRow.Cells[0].Value.ToString();
+            userPhoneBox.Text = existUsrsGridView.CurrentRow.Cells[1].Value.ToString();
+            userMailBox.Text = existUsrsGridView.CurrentRow.Cells[2].Value.ToString();
             userNameBox.Text = existUsrsGridView.CurrentRow.Cells[3].Value.ToString();
-            passwordBox.Text = existUsrsGridView.CurrentRow.Cells[2].Value.ToString();
-            UserRoleBox.Text = existUsrsGridView.CurrentRow.Cells[1].Value.ToString();
-            stockNameBox.Text = existUsrsGridView.CurrentRow.Cells[0].Value.ToString();
+            passwordBox.Text = existUsrsGridView.CurrentRow.Cells[4].Value.ToString();
+            UserRoleBox.Text = existUsrsGridView.CurrentRow.Cells[5].Value.ToString();
+            stockNameBox.Text = existUsrsGridView.CurrentRow.Cells[6].Value.ToString();
         }
 
         private async void RefreshGridView()
@@ -169,7 +169,7 @@ namespace Store_System.UI
             {
                 try
                 {
-                    _user.Name = userNameBox.Text;
+                    _user.Name = nameUserBox.Text;
                     _user.Phone = userPhoneBox.Text;
                     _user.Email = userMailBox.Text;
                     _user.UserName = userNameBox.Text;

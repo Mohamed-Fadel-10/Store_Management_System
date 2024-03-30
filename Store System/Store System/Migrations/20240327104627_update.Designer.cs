@@ -12,8 +12,8 @@ using Store_System.Data;
 namespace Store_System.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240321030024_new")]
-    partial class @new
+    [Migration("20240327104627_update")]
+    partial class update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

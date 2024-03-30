@@ -55,7 +55,6 @@
             _ID = new DataGridViewTextBoxColumn();
             panel5 = new Panel();
             existUserLbl = new Label();
-            deleteSupplierBtn = new Button();
             nameError = new Label();
             phoneError = new Label();
             dateError = new Label();
@@ -221,7 +220,7 @@
             saveSupplierBtn.FlatStyle = FlatStyle.Popup;
             saveSupplierBtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             saveSupplierBtn.ForeColor = Color.White;
-            saveSupplierBtn.Location = new Point(400, 312);
+            saveSupplierBtn.Location = new Point(358, 312);
             saveSupplierBtn.Name = "saveSupplierBtn";
             saveSupplierBtn.RightToLeft = RightToLeft.Yes;
             saveSupplierBtn.Size = new Size(162, 47);
@@ -354,23 +353,6 @@
             existUserLbl.TabIndex = 0;
             existUserLbl.Text = "الموردون الموجودون";
             // 
-            // deleteSupplierBtn
-            // 
-            deleteSupplierBtn.Anchor = AnchorStyles.None;
-            deleteSupplierBtn.BackColor = Color.Firebrick;
-            deleteSupplierBtn.FlatAppearance.BorderColor = Color.White;
-            deleteSupplierBtn.FlatStyle = FlatStyle.Popup;
-            deleteSupplierBtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            deleteSupplierBtn.ForeColor = Color.White;
-            deleteSupplierBtn.Location = new Point(64, 312);
-            deleteSupplierBtn.Name = "deleteSupplierBtn";
-            deleteSupplierBtn.RightToLeft = RightToLeft.Yes;
-            deleteSupplierBtn.Size = new Size(162, 47);
-            deleteSupplierBtn.TabIndex = 41;
-            deleteSupplierBtn.Text = "حذف";
-            deleteSupplierBtn.UseVisualStyleBackColor = false;
-            deleteSupplierBtn.Click += deleteSupplierBtn_ClickAsync;
-            // 
             // nameError
             // 
             nameError.Anchor = AnchorStyles.None;
@@ -427,7 +409,7 @@
             Update.FlatStyle = FlatStyle.Popup;
             Update.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             Update.ForeColor = Color.White;
-            Update.Location = new Point(232, 312);
+            Update.Location = new Point(149, 312);
             Update.Name = "Update";
             Update.RightToLeft = RightToLeft.Yes;
             Update.Size = new Size(162, 47);
@@ -460,6 +442,7 @@
             label2.Size = new Size(86, 23);
             label2.TabIndex = 50;
             label2.Text = "كود المورد";
+            label2.Visible = false;
             // 
             // AddSupplierPage
             // 
@@ -474,7 +457,6 @@
             Controls.Add(dateError);
             Controls.Add(phoneError);
             Controls.Add(nameError);
-            Controls.Add(deleteSupplierBtn);
             Controls.Add(pictureBox2);
             Controls.Add(label4);
             Controls.Add(textBox2);
@@ -530,7 +512,6 @@
         private DataGridView existSuppliersGridView;
         private Panel panel5;
         private Label existUserLbl;
-        private Button deleteSupplierBtn;
         private Label nameError;
         private Label phoneError;
         private Label dateError;

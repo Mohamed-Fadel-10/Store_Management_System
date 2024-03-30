@@ -31,6 +31,8 @@ namespace Store_System.UI
             home = new Dashboard();
             _saleBill = new SaleBill();
             _buyBill = new BuyBill();
+
+            PasswordBox.UseSystemPasswordChar = true;
         }
 
         private async void SignInBtn_Click(object sender, EventArgs e)
@@ -64,8 +66,8 @@ namespace Store_System.UI
                             if (user.Role == Role.Admin && user.Password == PasswordBox.Text)
                             {
                                 home.UserName = UserNameBox.Text;
-                                home.CashierName= user.Name;
-                                home.StockMoneyName= user.MoneyStockName;
+                                home.CashierName = user.Name;
+                                home.StockMoneyName = user.MoneyStockName;
                                 home.UserID = user.ID;
                                 this.Hide();
                                 home.Show();
@@ -118,6 +120,11 @@ namespace Store_System.UI
         private void LogIn_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void LogIn_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

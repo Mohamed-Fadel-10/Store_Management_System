@@ -53,26 +53,7 @@ namespace Store_System.Services
             }
         }
 
-        public async Task<int> DeleteSupplier(int ID)
-        {
-            var supplier = await _context.Supplier.FirstOrDefaultAsync(s => s.ID == ID);
-            if (supplier != null)
-            {
-                try
-                {
-                    _context.Supplier.Remove(supplier);
-                    await _context.SaveChangesAsync();
-                    return 1;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("لا يمكن حذف هذا المورد لانه مربوط بمنتجات حالية فى السيستم", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return 0;
-                }
-            }
-            else
-                return 0;
-        }
+        
         public async Task<int> UpdateSupplier(Supplier supplier)
         {
             if (supplier != null)

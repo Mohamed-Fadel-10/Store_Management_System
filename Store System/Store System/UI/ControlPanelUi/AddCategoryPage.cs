@@ -25,32 +25,7 @@ namespace Store_System.UI
             _category = new Category();
         }
 
-        private async void deleteCategoryBtn_Click(object sender, EventArgs e)
-        {
-
-            DialogResult result = MessageBox.Show("هل انت متأكد من حذف هذا العنصر؟", "!انتبه", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
-            {
-                if (categoryCodeBox.Text != "")
-                {
-
-                    int isDeleted = await _categoryService.DeleteCategory(int.Parse(categoryCodeBox.Text));
-                    if (isDeleted == 1)
-                    {
-                        MessageBox.Show("تم حذف التصنيف بنجاح", "system", MessageBoxButtons.OK);
-                        Clear();
-                        existCategoriesGridView.ClearSelection();
-                        await RefreshGridView();
-
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("قم بتحديد تصنيف لحذفه اولا", "system", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-
-                }
-            }
-        }
+        
 
         private async void AddCatBtn_Click(object sender, EventArgs e)
         {
@@ -74,7 +49,7 @@ namespace Store_System.UI
             }
             else
             {
-                MessageBox.Show("يرجى إدخال جميع البيانات المطلوبة", "System", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("يرجى إدخال جميع البيانات المطلوبة", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
@@ -115,7 +90,7 @@ namespace Store_System.UI
         {
             if (searchCatBox.Text == "")
             {
-              await  RefreshGridView();
+                await RefreshGridView();
             }
             else
             {

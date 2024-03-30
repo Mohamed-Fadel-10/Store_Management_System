@@ -25,6 +25,8 @@ namespace Store_System.UI.ControlPanelUi
             _customer = new Customer();
         }
         public string CustomerName { get; set; }
+        public string CustomerPhone { get; set; }
+
 
         private async void AddClientBtn_Click(object sender, EventArgs e)
         {
@@ -46,6 +48,7 @@ namespace Store_System.UI.ControlPanelUi
         private void AddCustomer_FormClosed(object sender, FormClosedEventArgs e)
         {
             CustomerName = _NameBox.Text;
+            CustomerPhone= _PhoneBox.Text;
         }
 
         private void AddCustomer_Load(object sender, EventArgs e)

@@ -284,6 +284,7 @@
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LogIn";
+            FormClosed += LogIn_FormClosed;
             Load += LogIn_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

@@ -32,6 +32,7 @@ namespace Store_System.UI
             {
                 branch.Name = branchNameBox.Text;
                 branch.Phone = branchPhoneBox.Text;
+                branch.Address =addressBox.Text;
                 await branchService.AddBranch(branch);
                 BranchID = branch.ID;
                 MessageBox.Show("تمت إضافة الفرع بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);

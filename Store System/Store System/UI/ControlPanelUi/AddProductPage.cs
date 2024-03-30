@@ -33,15 +33,15 @@ namespace Store_System.UI
 
             _product = new Product();
             _supplierService = new SupplierService();
-            _productsSuppliers= new ProductsSuppliers();
+            _productsSuppliers = new ProductsSuppliers();
             _suppliersProductsService = new SuppliersProductsService();
         }
 
 
         private async void AddProductPage_Load(object sender, EventArgs e)
         {
-            var Suppliers=await _supplierService.GetAllSuppliers();
-            SupplierComboBox.DataSource= Suppliers;
+            var Suppliers = await _supplierService.GetAllSuppliers();
+            SupplierComboBox.DataSource = Suppliers;
             SupplierComboBox.DisplayMember = "Name";
             SupplierComboBox.ValueMember = "ID";
             SupplierComboBox.SelectedIndex = -1;
@@ -79,7 +79,7 @@ namespace Store_System.UI
                 await _productService.AddProduct(_product);
                 _productsSuppliers.Supplier_Id = (int)SupplierComboBox.SelectedValue;
                 _productsSuppliers.product_Id = _product.ID;
-               await _suppliersProductsService.addSuppliersforProducts(_productsSuppliers);
+                await _suppliersProductsService.addSuppliersforProducts(_productsSuppliers);
                 MessageBox.Show("تمت إضافة العنصر بنجاح", "system", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RefreshGridView();
                 Clear();
@@ -93,65 +93,44 @@ namespace Store_System.UI
             }
         }
 
-        private async void deleteProductBtn_Click(object sender, EventArgs e)
-        {
-            if (barCodeBox.Text != "")
-            {
-                DialogResult dialog = MessageBox.Show("هل تريد بالفعل حذف هذا المنتج؟", "System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialog == DialogResult.Yes)
-                {
-
-                    await _productService.DeleteProduct(barCodeBox.Text);
-                    MessageBox.Show("تم الحذف بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    RefreshGridView();
-                    Clear();
-
-                }
-            }
-            else
-            {
-                MessageBox.Show("يرجى تحديد كود المنتج لحذفه", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-
-        }
+        
 
         private async void updatebtn_Click(object sender, EventArgs e)
         {
-           
-                Product product = await _productService.GetProductByBarcode(barCodeBox.Text);
 
-                if (product != null)
+            Product product = await _productService.GetProductByBarcode(barCodeBox.Text);
+
+            if (product != null)
+            {
+                product.Barcode = barCodeBox.Text;
+                product.Name = productNameBox.Text;
+                product.Cost = double.Parse(costBox.Text);
+                product.SellingPrice = double.Parse(sellingPriceBox.Text);
+                product.StockAmount = int.Parse(stockBox.Text);
+                product.Description = noteBox.Text;
+                product.Category_id = int.Parse(CatComboBox.SelectedValue.ToString());
+                product.Color = ColorBox.Text;
+                if (SizeBox.SelectedIndex >= 0 && SizeBox.SelectedIndex <= (int)Models.Size.Custom)
                 {
-                    product.Barcode = barCodeBox.Text;
-                    product.Name = productNameBox.Text;
-                    product.Cost = double.Parse(costBox.Text);
-                    product.SellingPrice = double.Parse(sellingPriceBox.Text);
-                    product.StockAmount = int.Parse(stockBox.Text);
-                    product.Description = noteBox.Text;
-                    product.Category_id = int.Parse(CatComboBox.SelectedValue.ToString());
-                    product.Color = ColorBox.Text;
-                    if (SizeBox.SelectedIndex >= 0 && SizeBox.SelectedIndex <= (int)Models.Size.Custom)
-                    {
-                        product.Size = (Models.Size)SizeBox.SelectedIndex;
-                    }
-                    else
-                    {
-                        MessageBox.Show("من فضلك قم إدخال مقاس صحيح", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    product.Discount = double.Parse(discountBox.Text);
-
-                    await _productService.UpdateProduct(product);
-                    MessageBox.Show("تم التعديل بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    RefreshGridView();
+                    product.Size = (Models.Size)SizeBox.SelectedIndex;
                 }
                 else
                 {
-                    MessageBox.Show("يرجى تحديد باركود المنتج المراد تعديله من أسفل الجدول ", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("من فضلك قم إدخال مقاس صحيح", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+
+                product.Discount = double.Parse(discountBox.Text);
+
+                await _productService.UpdateProduct(product);
+                MessageBox.Show("تم التعديل بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RefreshGridView();
             }
+            else
+            {
+                MessageBox.Show("يرجى تحديد باركود المنتج المراد تعديله من أسفل الجدول ", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
 
 

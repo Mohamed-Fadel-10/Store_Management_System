@@ -93,6 +93,7 @@
             ProductIDBox = new TextBox();
             editBtn = new Button();
             cashierNameBox = new TextBox();
+            branchIdBox = new TextBox();
             UserIDBox = new TextBox();
             searchBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
@@ -834,6 +835,20 @@
             cashierNameBox.Size = new Size(265, 34);
             cashierNameBox.TabIndex = 144;
             // 
+            // branchIdBox
+            // 
+            branchIdBox.Anchor = AnchorStyles.None;
+            branchIdBox.BackColor = Color.FromArgb(24, 30, 46);
+            branchIdBox.Enabled = false;
+            branchIdBox.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            branchIdBox.ForeColor = Color.White;
+            branchIdBox.Location = new Point(689, 899);
+            branchIdBox.Name = "branchIdBox";
+            branchIdBox.RightToLeft = RightToLeft.Yes;
+            branchIdBox.Size = new Size(110, 30);
+            branchIdBox.TabIndex = 145;
+            branchIdBox.Visible = false;
+            // 
             // UserIDBox
             // 
             UserIDBox.Anchor = AnchorStyles.None;
@@ -868,6 +883,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
             Controls.Add(searchBtn);
+            Controls.Add(branchIdBox);
             Controls.Add(UserIDBox);
             Controls.Add(editBtn);
             Controls.Add(ProductIDBox);
@@ -999,6 +1015,7 @@
         private DataGridViewTextBoxColumn TotalPrice;
         private DataGridViewTextBoxColumn ProductDiscription;
         private DataGridViewTextBoxColumn Product_id;
+        private TextBox branchIdBox;
         private DataGridViewTextBoxColumn OrderID;
         private Button searchBtn;
     }

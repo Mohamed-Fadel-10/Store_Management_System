@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using Store_System.Data;
 using Store_System.Models;
 using System;
@@ -62,6 +63,19 @@ namespace Store_System.Services
             {
                 return new Product();
             }
+        }
+
+        public async Task<int> UpdateMoneyStock(int branch_id,double money)
+        {
+            Branch branch = await _context.Branch.FirstOrDefaultAsync(b => b.ID == branch_id);
+
+            if (branch != null)
+            {
+                branch.MainMoneyStock -= money;
+                return await _context.SaveChangesAsync();
+            }
+
+            return 0;
         }
         
     }
