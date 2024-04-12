@@ -16,7 +16,6 @@ namespace Store_System.UI.DevExpReports
         {
             InitializeComponent();
             _reportService = new SaleReportService();
-            _reportService = new SaleReportService();
             this.objectDataSource1.DataSource = Data;
             DataSource = Data;
             label1.Text = Name;

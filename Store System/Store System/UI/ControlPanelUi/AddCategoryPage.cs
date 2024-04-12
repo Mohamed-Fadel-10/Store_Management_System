@@ -31,13 +31,14 @@ namespace Store_System.UI
         {
             if (categoryCodeBox.Text != "" && catNameBox.Text != "")
             {
-                if (await _categoryService.IsUniqe(int.Parse(categoryCodeBox.Text)))
+                if (await _categoryService.IsUniqe(categoryCodeBox.Text))
                 {
-                    _category.Code = int.Parse(categoryCodeBox.Text);
+                    _category.ID = 0;
+                    _category.Code = categoryCodeBox.Text;
                     _category.Name = catNameBox.Text;
                     _category.Description = catDescriptionBox.Text;
                     await _categoryService.AddCategory(_category);
-                    MessageBox.Show("تمت إضافة التصنيف بنجاح", "System", MessageBoxButtons.YesNo);
+                    MessageBox.Show("تمت إضافة التصنيف بنجاح", "System", MessageBoxButtons.OK,MessageBoxIcon.Information);
                     Clear();
                     await RefreshGridView();
                     existCategoriesGridView.ClearSelection();

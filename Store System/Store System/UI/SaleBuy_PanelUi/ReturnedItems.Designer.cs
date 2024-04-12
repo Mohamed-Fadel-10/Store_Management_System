@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReturnedItems));
-            label3 = new Label();
-            textBox1 = new TextBox();
             label1 = new Label();
             Addbtn = new Button();
             Savebtn = new Button();
@@ -49,7 +47,6 @@
             label2 = new Label();
             BillCodeBox = new TextBox();
             panel1 = new Panel();
-            button1 = new Button();
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
             ProductCodeBox = new TextBox();
@@ -57,12 +54,8 @@
             productID = new TextBox();
             ok = new Button();
             Items = new DataGridView();
-            CatComboBox = new ComboBox();
             SizeBox = new ComboBox();
             ReturnedItemsGridview = new DataGridView();
-            label4 = new Label();
-            label9 = new Label();
-            ReturnedID = new TextBox();
             _Name = new DataGridViewTextBoxColumn();
             _barcode = new DataGridViewTextBoxColumn();
             _Size = new DataGridViewTextBoxColumn();
@@ -72,36 +65,17 @@
             _discount = new DataGridViewTextBoxColumn();
             _ReturnedID = new DataGridViewTextBoxColumn();
             _ProductID = new DataGridViewTextBoxColumn();
+            label4 = new Label();
+            label9 = new Label();
+            ReturnedID = new TextBox();
+            CatComboBox = new TextBox();
+            DeleteitemBtn = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ReturnedItemsGridview).BeginInit();
             SuspendLayout();
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.None;
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(630, 39);
-            label3.Name = "label3";
-            label3.Size = new Size(90, 23);
-            label3.TabIndex = 169;
-            label3.Text = "إسم العميل";
-            // 
-            // textBox1
-            // 
-            textBox1.Anchor = AnchorStyles.None;
-            textBox1.BackColor = Color.FromArgb(24, 30, 46);
-            textBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.ForeColor = Color.White;
-            textBox1.Location = new Point(432, 58);
-            textBox1.Name = "textBox1";
-            textBox1.RightToLeft = RightToLeft.Yes;
-            textBox1.Size = new Size(297, 39);
-            textBox1.TabIndex = 168;
             // 
             // label1
             // 
@@ -137,7 +111,7 @@
             Savebtn.FlatStyle = FlatStyle.Flat;
             Savebtn.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
             Savebtn.ForeColor = Color.White;
-            Savebtn.Location = new Point(374, 886);
+            Savebtn.Location = new Point(55, 888);
             Savebtn.Name = "Savebtn";
             Savebtn.Size = new Size(264, 49);
             Savebtn.TabIndex = 165;
@@ -248,7 +222,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(802, 137);
+            label7.Location = new Point(760, 137);
             label7.Name = "label7";
             label7.Size = new Size(72, 23);
             label7.TabIndex = 142;
@@ -324,20 +298,6 @@
             panel1.Size = new Size(258, 61);
             panel1.TabIndex = 130;
             // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.None;
-            button1.BackColor = Color.Firebrick;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(55, 886);
-            button1.Name = "button1";
-            button1.Size = new Size(285, 49);
-            button1.TabIndex = 172;
-            button1.Text = "حذف الفاتورة بالكامل";
-            button1.UseVisualStyleBackColor = false;
-            // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.None;
@@ -393,6 +353,7 @@
             productID.RightToLeft = RightToLeft.Yes;
             productID.Size = new Size(115, 39);
             productID.TabIndex = 173;
+            productID.Visible = false;
             // 
             // ok
             // 
@@ -423,19 +384,6 @@
             Items.TabIndex = 175;
             Items.RowHeaderMouseClick += Items_RowHeaderMouseClick;
             // 
-            // CatComboBox
-            // 
-            CatComboBox.Anchor = AnchorStyles.None;
-            CatComboBox.BackColor = Color.FromArgb(24, 30, 46);
-            CatComboBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            CatComboBox.ForeColor = Color.White;
-            CatComboBox.FormattingEnabled = true;
-            CatComboBox.Location = new Point(559, 157);
-            CatComboBox.Name = "CatComboBox";
-            CatComboBox.RightToLeft = RightToLeft.Yes;
-            CatComboBox.Size = new Size(315, 49);
-            CatComboBox.TabIndex = 177;
-            // 
             // SizeBox
             // 
             SizeBox.Anchor = AnchorStyles.None;
@@ -456,49 +404,13 @@
             ReturnedItemsGridview.BackgroundColor = Color.White;
             ReturnedItemsGridview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ReturnedItemsGridview.Columns.AddRange(new DataGridViewColumn[] { _Name, _barcode, _Size, _Color, _Quantity, _Category, _discount, _ReturnedID, _ProductID });
-            ReturnedItemsGridview.Location = new Point(55, 650);
+            ReturnedItemsGridview.Location = new Point(55, 648);
             ReturnedItemsGridview.Name = "ReturnedItemsGridview";
             ReturnedItemsGridview.RightToLeft = RightToLeft.Yes;
             ReturnedItemsGridview.RowHeadersWidth = 51;
             ReturnedItemsGridview.RowTemplate.Height = 29;
-            ReturnedItemsGridview.Size = new Size(1388, 204);
+            ReturnedItemsGridview.Size = new Size(1388, 231);
             ReturnedItemsGridview.TabIndex = 179;
-            // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.None;
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(1338, 324);
-            label4.Name = "label4";
-            label4.Size = new Size(111, 23);
-            label4.TabIndex = 180;
-            label4.Text = "عناصر الفاتورة";
-            // 
-            // label9
-            // 
-            label9.Anchor = AnchorStyles.None;
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.ForeColor = Color.White;
-            label9.Location = new Point(1359, 624);
-            label9.Name = "label9";
-            label9.Size = new Size(82, 23);
-            label9.TabIndex = 181;
-            label9.Text = "المرتجعات";
-            // 
-            // ReturnedID
-            // 
-            ReturnedID.Anchor = AnchorStyles.None;
-            ReturnedID.BackColor = Color.FromArgb(24, 30, 46);
-            ReturnedID.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            ReturnedID.ForeColor = Color.White;
-            ReturnedID.Location = new Point(176, 53);
-            ReturnedID.Name = "ReturnedID";
-            ReturnedID.RightToLeft = RightToLeft.Yes;
-            ReturnedID.Size = new Size(115, 39);
-            ReturnedID.TabIndex = 182;
             // 
             // _Name
             // 
@@ -556,26 +468,88 @@
             _ProductID.Name = "_ProductID";
             _ProductID.Visible = false;
             // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.None;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(1338, 324);
+            label4.Name = "label4";
+            label4.Size = new Size(111, 23);
+            label4.TabIndex = 180;
+            label4.Text = "عناصر الفاتورة";
+            // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.None;
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.ForeColor = Color.White;
+            label9.Location = new Point(1359, 621);
+            label9.Name = "label9";
+            label9.Size = new Size(82, 23);
+            label9.TabIndex = 181;
+            label9.Text = "المرتجعات";
+            // 
+            // ReturnedID
+            // 
+            ReturnedID.Anchor = AnchorStyles.None;
+            ReturnedID.BackColor = Color.FromArgb(24, 30, 46);
+            ReturnedID.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            ReturnedID.ForeColor = Color.White;
+            ReturnedID.Location = new Point(176, 53);
+            ReturnedID.Name = "ReturnedID";
+            ReturnedID.RightToLeft = RightToLeft.Yes;
+            ReturnedID.Size = new Size(115, 39);
+            ReturnedID.TabIndex = 182;
+            ReturnedID.Visible = false;
+            // 
+            // CatComboBox
+            // 
+            CatComboBox.Anchor = AnchorStyles.None;
+            CatComboBox.BackColor = Color.FromArgb(24, 30, 46);
+            CatComboBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            CatComboBox.ForeColor = Color.White;
+            CatComboBox.Location = new Point(582, 164);
+            CatComboBox.Name = "CatComboBox";
+            CatComboBox.RightToLeft = RightToLeft.Yes;
+            CatComboBox.Size = new Size(268, 34);
+            CatComboBox.TabIndex = 183;
+            // 
+            // DeleteitemBtn
+            // 
+            DeleteitemBtn.Anchor = AnchorStyles.None;
+            DeleteitemBtn.BackColor = Color.LimeGreen;
+            DeleteitemBtn.FlatStyle = FlatStyle.Flat;
+            DeleteitemBtn.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
+            DeleteitemBtn.ForeColor = Color.White;
+            DeleteitemBtn.Location = new Point(338, 888);
+            DeleteitemBtn.Name = "DeleteitemBtn";
+            DeleteitemBtn.Size = new Size(264, 49);
+            DeleteitemBtn.TabIndex = 184;
+            DeleteitemBtn.Text = "حذف المنتج من الفاتورة";
+            DeleteitemBtn.UseVisualStyleBackColor = false;
+            DeleteitemBtn.Click += DeleteitemBtn_Click;
+            // 
             // ReturnedItems
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(DeleteitemBtn);
+            Controls.Add(CatComboBox);
             Controls.Add(ReturnedID);
             Controls.Add(label9);
             Controls.Add(label4);
             Controls.Add(ReturnedItemsGridview);
             Controls.Add(label12);
             Controls.Add(SizeBox);
-            Controls.Add(CatComboBox);
             Controls.Add(Items);
             Controls.Add(ok);
             Controls.Add(productID);
             Controls.Add(ColorBox);
             Controls.Add(panel2);
-            Controls.Add(button1);
-            Controls.Add(label3);
-            Controls.Add(textBox1);
             Controls.Add(Addbtn);
             Controls.Add(Savebtn);
             Controls.Add(label14);
@@ -608,8 +582,6 @@
         }
 
         #endregion
-        private Label label3;
-        private TextBox textBox1;
         private Label label1;
         private Button Addbtn;
         private Button Savebtn;
@@ -628,7 +600,6 @@
         private Label label2;
         private TextBox BillCodeBox;
         private Panel panel1;
-        private Button button1;
         private Panel panel2;
         private PictureBox pictureBox1;
         private TextBox ProductCodeBox;
@@ -636,7 +607,6 @@
         private TextBox productID;
         private Button ok;
         private DataGridView Items;
-        private ComboBox CatComboBox;
         private ComboBox SizeBox;
         private DataGridView ReturnedItemsGridview;
         private Label label4;
@@ -651,5 +621,7 @@
         private DataGridViewTextBoxColumn _discount;
         private DataGridViewTextBoxColumn _ReturnedID;
         private DataGridViewTextBoxColumn _ProductID;
+        private TextBox CatComboBox;
+        private Button DeleteitemBtn;
     }
 }

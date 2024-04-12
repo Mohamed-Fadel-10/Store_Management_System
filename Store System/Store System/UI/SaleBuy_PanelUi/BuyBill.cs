@@ -51,16 +51,23 @@ namespace Store_System.UI.ControlPanelUi
 
 
             order = await buyBillService.GetLastOrderID();
-            BillCodeBox.Text = (order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
-            var Categories = await categoryService.GetALlCategories();
-            ClassificationBox.DataSource = Categories;
-            ClassificationBox.DisplayMember = "Name";
-            ClassificationBox.ValueMember = "ID";
-            ClassificationBox.SelectedIndex = -1;
-            ProductCodeBox.Focus();
-            Date.Text = DateTime.Now.ToString("yyyy/dd/MM");
+            if (order == null)
+            {
+                BillCodeBox.Text = 1.ToString();
 
+            }
+            else
+            {
+                BillCodeBox.Text = (order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
+                var Categories = await categoryService.GetALlCategories();
+                ClassificationBox.DataSource = Categories;
+                ClassificationBox.DisplayMember = "Name";
+                ClassificationBox.ValueMember = "ID";
+                ClassificationBox.SelectedIndex = -1;
+                ProductCodeBox.Focus();
+                Date.Text = DateTime.Now.ToString("yyyy/dd/MM");
 
+            }
 
         }
 
@@ -78,7 +85,7 @@ namespace Store_System.UI.ControlPanelUi
                         ProductIDBox.Text = Product.ID.ToString();
                         ProductCodeBox.Text = Product.Barcode;
                         ProductnameBox.Text = Product.Name;
-                        ClassificationBox.Text = Product.Category.Name;
+                        ClassificationBox.Text = Product.CategoryName;
                         ColorBox.Text = Product.Color;
                         SizeBox.Text = Product.Size.ToString();
                         CostBox.Text = Product.Cost.ToString();
@@ -189,16 +196,23 @@ namespace Store_System.UI.ControlPanelUi
 
         private void FaturaDiscountBox_TextChanged(object sender, EventArgs e)
         {
-
+            
             if (FaturaDiscountBox.Text == "")
             {
                 FaturaDiscountBox.Text = 0.ToString();
             }
-            double totalPrice = double.Parse(TotalPriceBox.Text);
-            double Discount = double.Parse(FaturaDiscountBox.Text);
-            double FinalPrice = totalPrice - (totalPrice * ((Discount / 100)));
-            AfterDiscount.Text = FinalPrice.ToString("F3");
-            PaidUp.Text = FinalPrice.ToString("F3");
+            try
+            {
+                double totalPrice = double.Parse(TotalPriceBox.Text);
+                double Discount = double.Parse(FaturaDiscountBox.Text);
+                double FinalPrice = totalPrice - (totalPrice * ((Discount / 100)));
+                AfterDiscount.Text = FinalPrice.ToString("F3");
+                PaidUp.Text = FinalPrice.ToString("F3");
+            }catch(Exception ex)
+            {
+                MessageBox.Show("قيمة الخصم غير صحيحة", "!System", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
 
 
@@ -231,6 +245,7 @@ namespace Store_System.UI.ControlPanelUi
                     if (int.Parse(Items.Rows[i].Cells[10].Value.ToString()) != null && double.Parse(Items.Rows[i].Cells[8].Value.ToString()) != null && double.Parse(Items.Rows[i].Cells[7].Value.ToString()) != null
                         && int.Parse(Items.Rows[i].Cells[3].Value.ToString()) != null)
                     {
+                        orderItems.ID = 0;
                         orderItems.Order_Id = int.Parse(Items.Rows[i].Cells[11].Value.ToString());
                         orderItems.product_Id = int.Parse(Items.Rows[i].Cells[10].Value.ToString());
                         orderItems.TotalPrice = double.Parse(Items.Rows[i].Cells[8].Value.ToString());

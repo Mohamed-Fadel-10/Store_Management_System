@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store_System.Data;
 using Store_System.Models;
+using Store_System.UI.ControlPanelUi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReturnedItems = Store_System.Models.ReturnedItems;
 
 namespace Store_System.Services
 {
@@ -54,11 +56,11 @@ namespace Store_System.Services
         //  //  return result.ToList();
         //}
 
-        public async Task<Returned> AddReturned(Returned returned)
+        public Returned AddReturned(Returned returned)
         {
             if(returned != null) {
-               await _context.Returned.AddAsync(returned);
-               await _context.SaveChangesAsync();
+                _context.Returned.Add(returned);
+                _context.SaveChanges();
                 return returned;
             }
             else
@@ -67,12 +69,12 @@ namespace Store_System.Services
             }
 
         }
-        public async Task<ReturnedItems> AddReturnedItems(ReturnedItems returnedItems)
+        public ReturnedItems AddReturnedItems(ReturnedItems returnedItems)
         {
             if (returnedItems != null)
             {
-                await _context.ReturnedItems.AddAsync(returnedItems);
-                await _context.SaveChangesAsync();
+                 _context.ReturnedItems.Add(returnedItems);
+                 _context.SaveChanges();
                 return returnedItems;
             }
             else
@@ -89,20 +91,20 @@ namespace Store_System.Services
             }
             else { return new OrderItems(); }
         }
-        public async Task<Product> GetProduct(int ProductID)
+        public Product GetProduct(int ProductID)
         {
-            Product product = await _context.Product.FirstOrDefaultAsync(o => o.ID == ProductID);
+            Product product =  _context.Product.FirstOrDefault(o => o.ID == ProductID);
             if (product != null)
             {
                 return product;
             }
             else { return new Product(); }
         }
-        public async Task<int> UpdateProduct(Product product)
+        public int UpdateProduct(Product product)
         {
             if (product != null)
             {
-              return   await _context.SaveChangesAsync();
+              return _context.SaveChanges();
             }
             else
             {
@@ -110,10 +112,11 @@ namespace Store_System.Services
             }
             
         }
-        public async Task<int> DeleteOrderItem(OrderItems orderItems)
+        public int DeleteOrderItem(int productID,int orderID)
         {
-            if (orderItems != null) {
-                _context.OrderItems.Remove(orderItems);
+            if (productID != null&&orderID!=null) {
+                 var orderitem=  _context.OrderItems.Where(o=>o.Order_Id==orderID&&o.product_Id==productID).FirstOrDefault();
+               _context.OrderItems.Remove(orderitem);
                 _context.SaveChanges();
                 return 1;
                  }

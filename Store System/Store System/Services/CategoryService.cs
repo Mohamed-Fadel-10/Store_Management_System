@@ -22,14 +22,14 @@ namespace Store_System.Services
             {
                 await _context.Category.AddAsync(Category);
                 await _context.SaveChangesAsync();
-                return 1;
+                return Category.ID;
             }
             else
             {
                 return 0;
             }
         }
-        public async Task<bool> IsUniqe(int code)
+        public async Task<bool> IsUniqe(string code)
         {
           Category category=  await _context.Category.FirstOrDefaultAsync(c => c.Code == code);
             if (category == null)

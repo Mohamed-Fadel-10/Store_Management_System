@@ -31,7 +31,7 @@ namespace Store_System.Services
         }
 
         
-        public async Task<int >UpdateMoney(int user_id,int branch_id,double money)
+        public async Task<int>UpdateMoney(int user_id,int branch_id,double money)
         {
             User userID = await _context.User.FirstOrDefaultAsync(u => u.ID == user_id);
             Branch branch = await _context.Branch.FirstOrDefaultAsync(b => b.ID == branch_id);

@@ -65,12 +65,12 @@ namespace Store_System.UI.ControlPanelUi
                         productID.Text = Product.ID.ToString();
                         ProductCodeBox.Text = Product.Barcode;
                         ProductnameBox.Text = Product.Name;
-                        ClassificationBox.Text = Product.Category.Name;
+                        ClassificationBox.Text = Product.CategoryName;
                         ColorBox.Text = Product.Color;
                         SizeBox.Text = Product.Size.ToString();
                         SellingPrice.Text = Product.SellingPrice.ToString();
                         QuantityBox.Text = 1.ToString();
-                        QuantityBox.Focus();
+                      //  QuantityBox.Focus();
                         _discountBox.Text = "";
                     }
                     catch (Exception ex)
@@ -94,15 +94,22 @@ namespace Store_System.UI.ControlPanelUi
         {
 
             _order = await _saleBillService.GetLastOrderID();
+            if (_order == null)
+            {
+                BillCodeBox.Text = 1.ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
 
-            BillCodeBox.Text = (_order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
-            var Categories = await _categoryService.GetALlCategories();
-            ClassificationBox.DataSource = Categories;
-            ClassificationBox.DisplayMember = "Name";
-            ClassificationBox.ValueMember = "ID";
-            ClassificationBox.SelectedIndex = -1;
-            ProductCodeBox.Focus();
-            Date.Text = DateTime.Now.ToString("yyyy/dd/MM");
+            }
+            else
+            {
+                BillCodeBox.Text = (_order.ID + 1).ToString(); // add one to last id to insert it ( 0 ==> 0 + 1 = 1 ) ههههه
+                var Categories = await _categoryService.GetALlCategories();
+                ClassificationBox.DataSource = Categories;
+                ClassificationBox.DisplayMember = "Name";
+                ClassificationBox.ValueMember = "ID";
+                ClassificationBox.SelectedIndex = -1;
+                ProductCodeBox.Focus();
+                Date.Text = DateTime.Now.ToString("yyyy/dd/MM");
+            }
 
         }
         private AddCustomer addCustomer;
@@ -153,10 +160,19 @@ namespace Store_System.UI.ControlPanelUi
                     string formattedResult = afterDiscount.ToString("F3");
                     //=================================================
                     Order lastOrderID = await _saleBillService.GetLastOrderID();
-                    Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, SellingPrice.Text, _discountBox.Text, formattedResult, NotesBox.Text, productID.Text, ((lastOrderID.ID) + 1));
+                    if (lastOrderID == null)
+                    {
+                        Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, SellingPrice.Text, _discountBox.Text, formattedResult, NotesBox.Text, productID.Text, "1");
+                    }
+                    else
+                    {
 
-                    _product.StockAmount -= int.Parse(QuantityBox.Text);
-                    await _productService.UpdateProduct(_product);
+                        Items.Rows.Add(ProductCodeBox.Text, ProductnameBox.Text, ClassificationBox.Text, QuantityBox.Text, ColorBox.Text, SizeBox.Text, SellingPrice.Text, _discountBox.Text, formattedResult, NotesBox.Text, productID.Text, ((lastOrderID.ID) + 1));
+
+                        _product.StockAmount -= int.Parse(QuantityBox.Text);
+                        await _productService.UpdateProduct(_product);
+                    }
+                    
                     ///------------------------------------------------------
                     double sum = 0;
                     for (int i = 0; i < Items.Rows.Count - 1; ++i)
@@ -276,11 +292,18 @@ namespace Store_System.UI.ControlPanelUi
             {
                 FaturaDiscountBox.Text = 0.ToString();
             }
-            double totalPrice = double.Parse(TotalPriceBox.Text);
-            double Discount = double.Parse(FaturaDiscountBox.Text);
-            double FinalPrice = totalPrice - (totalPrice * ((Discount / 100)));
-            AfterDiscount.Text = FinalPrice.ToString("F3");
-            PaidUp.Text = FinalPrice.ToString("F3");
+            try
+            {
+                double totalPrice = double.Parse(TotalPriceBox.Text);
+                double Discount = double.Parse(FaturaDiscountBox.Text);
+                double FinalPrice = totalPrice - (totalPrice * ((Discount / 100)));
+                AfterDiscount.Text = FinalPrice.ToString("F3");
+                PaidUp.Text = FinalPrice.ToString("F3");
+            }catch(Exception ex)
+            {
+                MessageBox.Show("الخصم غير صحيح", "!System", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
 
         private async void deletebtn_Click(object sender, EventArgs e)
@@ -348,7 +371,9 @@ namespace Store_System.UI.ControlPanelUi
                 }
                 _order.user_id = int.Parse(UserIDBox.Text);
                 _order.IsSale = false;
-                _order.OrderDate = DateTime.ParseExact(Date.Text, "yyyy/dd/MM", CultureInfo.InvariantCulture);
+                string formattedDate = DateTime.Now.ToString("yyyy/dd/MM");
+
+                _order.OrderDate = DateTime.Now.Date;
 
                 await _saleBillService.AddOrder(_order);
                 int orderId = _order.ID;
@@ -366,6 +391,7 @@ namespace Store_System.UI.ControlPanelUi
                         && int.Parse(Items.Rows[i].Cells[3].Value.ToString()) != null)
                     {
                         orderItems.Size = Items.Rows[i].Cells[5].Value.ToString();
+                        orderItems.ID = 0;
                         orderItems.Color = Items.Rows[i].Cells[4].Value.ToString();
                         orderItems.Description = Items.Rows[i].Cells[9].Value.ToString();
                         orderItems.Order_Id = int.Parse(Items.Rows[i].Cells[11].Value.ToString());
@@ -387,7 +413,7 @@ namespace Store_System.UI.ControlPanelUi
 
                 MessageBox.Show($"{orderId} : تم حفظ الفاتورة بنجاح رقم الفاتورة هو", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _user = await _userService.GetUserByID(int.Parse(UserIDBox.Text));
-                _user.MoneyStockAmount += double.Parse(PaidUp.Text, NumberStyles.Currency, new CultureInfo("ar-EG"));
+                _user.MoneyStockAmount += double.Parse(PaidUp.Text);
                 await _userService.UpdateUser(_user);
 
                 _mainStockPage.RefreshGridView();

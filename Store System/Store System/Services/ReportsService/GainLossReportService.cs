@@ -55,7 +55,7 @@ namespace Store_System.Services.ReportsService
                   o => o.orderItem.Order_Id,
                   op => op.ID,
                   (o, op) => new { OrderItem = o, Order = op })
-                 .Where(x => x.Order.OrderDate == CurrentDate && x.Order.IsSale == true)
+                 .Where(x => x.Order.OrderDate == DateTime.Today && x.Order.IsSale == true)
                   .Sum(x => x.OrderItem.orderItem.TotalPrice);
             return query;
         }
@@ -88,12 +88,12 @@ namespace Store_System.Services.ReportsService
         public double TotalPriceSaleDay()
         {
             double query = _context.OrderItems 
-                  .Join(_context.Product, op => op.product_Id, p => p.ID, (op, p) => new { orderItem = op, product = p })
+                  .Join(_context.Product, op => op. product_Id, p => p.ID, (op, p) => new { orderItem = op, product = p })
                   .Join(_context.Order,
                   o => o.orderItem.Order_Id,
                   op => op.ID,
                   (o, op) => new { OrderItem = o, Order = op })
-                 .Where(x => x.Order.OrderDate == CurrentDate && x.Order.IsSale == false)
+                 .Where(x => x.Order.OrderDate == DateTime.Today && x.Order.IsSale == false)
                   .Sum(x => x.OrderItem.orderItem.TotalPrice);
             return query;
         }

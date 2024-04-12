@@ -30,6 +30,18 @@ namespace Store_System.Services
             }
             
         }
+        public int DeleteProduct(string Barcode)
+        {
+            var Product = _context.Product.FirstOrDefault(u => u.Barcode == Barcode);
+            if (Product != null)
+            {
+                _context.Product.Remove(Product);
+                 _context.SaveChanges();
+                return 1;
+            }
+            else
+                return 0;
+        }
         public async Task<List<Product>> GetAllProducts()
         {
           var Products=  await _context.Product.Include(P=>P.Category).ToListAsync();
@@ -83,7 +95,7 @@ namespace Store_System.Services
         }
 
 
-        public async Task<List<Product>> Search(string Name)
+        public async Task<List<Product>>Search(string Name)
         {
             if (Name != "") { 
                 var Products = await _context.Product.Where(p => p.Name.Contains(Name)).ToListAsync();
@@ -97,6 +109,16 @@ namespace Store_System.Services
                 }
             }
             return new List<Product>();
+        }
+        public async Task<bool> IsUniqe(string code)
+        {
+            Product category = await _context.Product.FirstOrDefaultAsync(c => c.Barcode == code);
+            if (category == null)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
     }

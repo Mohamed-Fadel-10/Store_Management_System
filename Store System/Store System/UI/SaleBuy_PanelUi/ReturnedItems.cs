@@ -21,7 +21,7 @@ namespace Store_System.UI.ControlPanelUi
         ReturnedItemsService _returnedItemsService;
         CategoryService _categoryService;
         StoreContext _context;
-        
+
 
         public ReturnedItems()
         {
@@ -32,13 +32,9 @@ namespace Store_System.UI.ControlPanelUi
         }
         private async void ReturnedItems_Load(object sender, EventArgs e)
         {
-            var Categories = await _categoryService.GetALlCategories();
-            CatComboBox.DataSource = Categories;
-            CatComboBox.DisplayMember = "Name";
-            CatComboBox.ValueMember = "ID";
-            CatComboBox.SelectedIndex = -1;
+
             SizeBox.SelectedIndex = -1;
-            Returned returned= await _returnedItemsService.GetLastReturnedID();
+            Returned returned = await _returnedItemsService.GetLastReturnedID();
             if (returned == null)
             {
                 ReturnedID.Text = "1";
@@ -59,7 +55,7 @@ namespace Store_System.UI.ControlPanelUi
                   .Where(po => po.Order.ID == int.Parse(BillCodeBox.Text))
                   .Select(po => new
                   {
-                      ID=po.ProductOrder.Product.ID,
+                      ID = po.ProductOrder.Product.ID,
                       Name = po.ProductOrder.Product.Name,
                       Barcode = po.ProductOrder.Product.Barcode,
                       Size = po.ProductOrder.OrderItem.Size,
@@ -95,7 +91,7 @@ namespace Store_System.UI.ControlPanelUi
 
             foreach (var item in result)
             {
-                dt.Rows.Add(item.ID,item.Name, item.Barcode, item.Size, item.Color, item.Quantity, item.CategoryName, item.Price, item.Discount);
+                dt.Rows.Add(item.ID, item.Name, item.Barcode, item.Size, item.Color, item.Quantity, item.CategoryName, item.Price, item.Discount);
             }
 
             Items.DataSource = dt;
@@ -115,34 +111,78 @@ namespace Store_System.UI.ControlPanelUi
 
         private void Addbtn_Click(object sender, EventArgs e)
         {
+            Returned returned = new Returned();
+            returned.Date = DateTime.Now.Date;
+            _returnedItemsService.AddReturned(returned);
             ReturnedItemsGridview.Rows.Add(ProductnameBox.Text, ProductCodeBox.Text, SizeBox.Text
-                , ColorBox.Text, QuantityBox.Text, CatComboBox.Text, _discountBox.Text, ReturnedID.Text,productID.Text);
+                , ColorBox.Text, QuantityBox.Text, CatComboBox.Text, _discountBox.Text, returned.id, productID.Text);
 
         }
 
-        private async void Savebtn_Click(object sender, EventArgs e)
+        private void Savebtn_Click(object sender, EventArgs e)
         {
             Models.ReturnedItems returnedItems = new Models.ReturnedItems();
             Returned returned = new Returned();
-            returned.Date=DateTime.Now;
-            await _returnedItemsService.AddReturned(returned);
+            returned.Date = DateTime.Now;
+            _returnedItemsService.AddReturned(returned);
 
             for (int i = 0; i < ReturnedItemsGridview.Rows.Count - 1; i++)
             {
                 returnedItems.OrderID = int.Parse(BillCodeBox.Text);
                 returnedItems.Returned_Id = int.Parse(ReturnedItemsGridview.Rows[i].Cells[7].Value.ToString());
-                returnedItems.ReturnedQuantity= int.Parse(ReturnedItemsGridview.Rows[i].Cells[4].Value.ToString());
+                returnedItems.ReturnedQuantity = int.Parse(ReturnedItemsGridview.Rows[i].Cells[4].Value.ToString());
                 returnedItems.Product_Id = int.Parse(ReturnedItemsGridview.Rows[i].Cells[8].Value.ToString());
-                await _returnedItemsService.AddReturnedItems(returnedItems);
-                OrderItems order = await _returnedItemsService.GetOrderItems(int.Parse(productID.Text), int.Parse(BillCodeBox.Text));
-                await _returnedItemsService.DeleteOrderItem(order);
-                Product product= await _returnedItemsService.GetProduct(int.Parse(productID.Text));
+                _returnedItemsService.AddReturnedItems(returnedItems);
+                _returnedItemsService.DeleteOrderItem(int.Parse(productID.Text), int.Parse(BillCodeBox.Text));
+                Product product = _returnedItemsService.GetProduct(int.Parse(productID.Text));
                 product.StockAmount += int.Parse(ReturnedItemsGridview.Rows[i].Cells[4].Value.ToString());
-                    await _returnedItemsService.UpdateProduct(product);
+                _returnedItemsService.UpdateProduct(product);
 
-                MessageBox.Show("تمت إضافة الفاتورة بنجاح ال المرتجعات","System",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("تمت إضافة الفاتورة بنجاح ال المرتجعات", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Clear();
 
             }
+        }
+
+        private void DeleteitemBtn_Click(object sender, EventArgs e)
+        {
+            if (ReturnedItemsGridview.SelectedCells.Count > 1)
+            {
+                int RowIndex = ReturnedItemsGridview.SelectedCells[0].RowIndex;
+                if (MessageBox.Show("هل انت متأكد من حذف هذا المنتج من هذه الفاتورة؟ ", "System", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        if (RowIndex != null)
+                        {
+                            ReturnedItemsGridview.Rows.RemoveAt(RowIndex);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("لا يوجد منتجات فى الفاتورة حتى الان لكى يتم حذفها ", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("يرجى تحديد منتج من الفاتورة لكى يتم حذفه", "System", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void Clear()
+        {
+            ReturnedItemsGridview.Rows.Clear();
+            BillCodeBox.Text = "";
+            ProductCodeBox.Text = "";
+            ProductnameBox.Text = ""; 
+            CatComboBox.Text = "";
+            QuantityBox.Text = ""; 
+            _discountBox.Text = "";
+            ColorBox.Text = "";
+            SizeBox.Text = ""; 
+            NotesBox.Text = "";
         }
     }
 }

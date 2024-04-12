@@ -29,8 +29,6 @@ namespace Store_System.UI.ControlPanelUi
 
             saleBill = new SaleBill();
             shiftLockService = new ShiftLockService();
-            //orderItem= new OrderItems();
-            //order = new Order();
             user = new User();
             userServices = new UserServices();
 
@@ -58,20 +56,32 @@ namespace Store_System.UI.ControlPanelUi
 
         private void ExpensesBox_TextChanged(object sender, EventArgs e)
         {
-            if (ExpensesBox.Text != string.Empty)
-                finalShiftMoneyBox.Text = ((double.Parse(shiftMoneyBox.Text))
-                                    - (double.Parse(ExpensesBox.Text))).ToString();
-            else finalShiftMoneyBox.Text = shiftMoneyBox.Text;
+            try
+            {
+                if (ExpensesBox.Text != string.Empty)
+                    finalShiftMoneyBox.Text = ((double.Parse(shiftMoneyBox.Text))
+                                        - (double.Parse(ExpensesBox.Text))).ToString();
+                else finalShiftMoneyBox.Text = shiftMoneyBox.Text;
+            }catch(Exception ex)
+            {
+                MessageBox.Show("لا يوجد مبيعات حتى الان", "!System", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
 
         private async void Addbtn_Click(object sender, EventArgs e)
         {
             int effectedRow = await shiftLockService.UpdateMoney(int.Parse(userIDBox.Text), int.Parse(branchIdBox.Text), double.Parse(finalShiftMoneyBox.Text));
-            if (effectedRow == 2)
+            if (effectedRow == 1)
             {
                 MessageBox.Show(".تم تقفيل الشيفت بنجاح", "!System", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Clear();
                 shiftMoney = 0;
+            }
+            else
+            {
+                MessageBox.Show("حدثت مشكلة يرجى اعادة المحاولة", "!System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
 
         }

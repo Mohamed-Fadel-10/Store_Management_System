@@ -12,8 +12,8 @@ using Store_System.Data;
 namespace Store_System.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240327104627_update")]
-    partial class update
+    [Migration("20240329114354_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,44 @@ namespace Store_System.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("OrderItems", b =>
+                {
+                    b.Property<int>("Order_Id")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("ItemID")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<int>("product_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Order_Id", "ItemID");
+
+                    b.HasIndex("product_Id");
+
+                    b.ToTable("OrderItems");
+                });
 
             modelBuilder.Entity("Store_System.Models.Branch", b =>
                 {
@@ -191,49 +229,6 @@ namespace Store_System.Migrations
                     b.HasIndex("user_id");
 
                     b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("Store_System.Models.OrderItems", b =>
-                {
-                    b.Property<int>("product_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Order_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Discount")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("OrderID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
-
-                    b.HasKey("product_Id", "Order_Id");
-
-                    b.HasIndex("OrderID");
-
-                    b.HasIndex("Order_Id");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Store_System.Models.Product", b =>
@@ -495,6 +490,25 @@ namespace Store_System.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("OrderItems", b =>
+                {
+                    b.HasOne("Store_System.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("Order_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Store_System.Models.Product", "Product")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("product_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Store_System.Models.BranchSuppliers", b =>
                 {
                     b.HasOne("Store_System.Models.Branch", null)
@@ -546,33 +560,6 @@ namespace Store_System.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("user");
-                });
-
-            modelBuilder.Entity("Store_System.Models.OrderItems", b =>
-                {
-                    b.HasOne("Store_System.Models.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderID");
-
-                    b.HasOne("Store_System.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("Order_Id")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Store_System.Models.Product", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("ProductID");
-
-                    b.HasOne("Store_System.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("product_Id")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Store_System.Models.Product", b =>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store_System.Data;
 
@@ -11,9 +12,10 @@ using Store_System.Data;
 namespace Store_System.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240329122022_updateCategoryIDidentity")]
+    partial class updateCategoryIDidentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,11 +26,13 @@ namespace Store_System.Migrations
 
             modelBuilder.Entity("OrderItems", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<int>("Order_Id")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    b.Property<int>("ItemID")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
@@ -38,9 +42,6 @@ namespace Store_System.Migrations
 
                     b.Property<double>("Discount")
                         .HasColumnType("float");
-
-                    b.Property<int>("Order_Id")
-                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -54,9 +55,7 @@ namespace Store_System.Migrations
                     b.Property<int>("product_Id")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("Order_Id");
+                    b.HasKey("Order_Id", "ItemID");
 
                     b.HasIndex("product_Id");
 

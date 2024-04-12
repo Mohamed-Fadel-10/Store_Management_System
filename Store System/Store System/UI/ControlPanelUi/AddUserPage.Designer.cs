@@ -54,13 +54,13 @@ namespace Store_System.UI
             panel5 = new Panel();
             existUserLbl = new Label();
             existUsrsGridView = new DataGridView();
-            StockName = new DataGridViewTextBoxColumn();
-            Role = new DataGridViewTextBoxColumn();
-            Password = new DataGridViewTextBoxColumn();
-            _username = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
-            phone = new DataGridViewTextBoxColumn();
             _Name = new DataGridViewTextBoxColumn();
+            phone = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            _username = new DataGridViewTextBoxColumn();
+            Password = new DataGridViewTextBoxColumn();
+            Role = new DataGridViewTextBoxColumn();
+            StockName = new DataGridViewTextBoxColumn();
             usersPic = new PictureBox();
             searchUserBox = new TextBox();
             saerchUserLbl = new Label();
@@ -73,13 +73,6 @@ namespace Store_System.UI
             stockerror = new Label();
             roleerror = new Label();
             updatebtm = new Button();
-            _Name = new DataGridViewTextBoxColumn();
-            phone = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
-            _username = new DataGridViewTextBoxColumn();
-            Password = new DataGridViewTextBoxColumn();
-            Role = new DataGridViewTextBoxColumn();
-            StockName = new DataGridViewTextBoxColumn();
             ((ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel5.SuspendLayout();
@@ -331,35 +324,11 @@ namespace Store_System.UI
             existUsrsGridView.TabIndex = 6;
             existUsrsGridView.RowHeaderMouseClick += existUsrsGridView_RowHeaderMouseClick;
             // 
-            // StockName
+            // _Name
             // 
-            StockName.HeaderText = "إسم الخزنة";
-            StockName.MinimumWidth = 6;
-            StockName.Name = "StockName";
-            // 
-            // Role
-            // 
-            Role.HeaderText = "الصلاحية";
-            Role.MinimumWidth = 6;
-            Role.Name = "Role";
-            // 
-            // Password
-            // 
-            Password.HeaderText = "كلمة المرور";
-            Password.MinimumWidth = 6;
-            Password.Name = "Password";
-            // 
-            // _username
-            // 
-            _username.HeaderText = "اسم المستخدم";
-            _username.MinimumWidth = 6;
-            _username.Name = "_username";
-            // 
-            // Email
-            // 
-            Email.HeaderText = "الايميل";
-            Email.MinimumWidth = 6;
-            Email.Name = "Email";
+            _Name.HeaderText = "الاسم";
+            _Name.MinimumWidth = 6;
+            _Name.Name = "_Name";
             // 
             // phone
             // 
@@ -367,11 +336,35 @@ namespace Store_System.UI
             phone.MinimumWidth = 6;
             phone.Name = "phone";
             // 
-            // _Name
+            // Email
             // 
-            _Name.HeaderText = "الاسم";
-            _Name.MinimumWidth = 6;
-            _Name.Name = "_Name";
+            Email.HeaderText = "الايميل";
+            Email.MinimumWidth = 6;
+            Email.Name = "Email";
+            // 
+            // _username
+            // 
+            _username.HeaderText = "اسم المستخدم";
+            _username.MinimumWidth = 6;
+            _username.Name = "_username";
+            // 
+            // Password
+            // 
+            Password.HeaderText = "كلمة المرور";
+            Password.MinimumWidth = 6;
+            Password.Name = "Password";
+            // 
+            // Role
+            // 
+            Role.HeaderText = "الصلاحية";
+            Role.MinimumWidth = 6;
+            Role.Name = "Role";
+            // 
+            // StockName
+            // 
+            StockName.HeaderText = "إسم الخزنة";
+            StockName.MinimumWidth = 6;
+            StockName.Name = "StockName";
             // 
             // usersPic
             // 
@@ -444,7 +437,7 @@ namespace Store_System.UI
             UserRoleBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             UserRoleBox.ForeColor = Color.White;
             UserRoleBox.FormattingEnabled = true;
-            UserRoleBox.Items.AddRange(new object[] { "أدمين", "كاشير" });
+            UserRoleBox.Items.AddRange(new object[] { "Admin", "Cashier" });
             UserRoleBox.Location = new Point(782, 290);
             UserRoleBox.Name = "UserRoleBox";
             UserRoleBox.RightToLeft = RightToLeft.Yes;
@@ -530,48 +523,6 @@ namespace Store_System.UI
             updatebtm.Text = "تعديل";
             updatebtm.UseVisualStyleBackColor = false;
             updatebtm.Click += updatebtn_Click;
-            // 
-            // _Name
-            // 
-            _Name.HeaderText = "الاسم";
-            _Name.MinimumWidth = 6;
-            _Name.Name = "_Name";
-            // 
-            // phone
-            // 
-            phone.HeaderText = "رقم الهاتف";
-            phone.MinimumWidth = 6;
-            phone.Name = "phone";
-            // 
-            // Email
-            // 
-            Email.HeaderText = "الايميل";
-            Email.MinimumWidth = 6;
-            Email.Name = "Email";
-            // 
-            // _username
-            // 
-            _username.HeaderText = "اسم المستخدم";
-            _username.MinimumWidth = 6;
-            _username.Name = "_username";
-            // 
-            // Password
-            // 
-            Password.HeaderText = "كلمة المرور";
-            Password.MinimumWidth = 6;
-            Password.Name = "Password";
-            // 
-            // Role
-            // 
-            Role.HeaderText = "الصلاحية";
-            Role.MinimumWidth = 6;
-            Role.Name = "Role";
-            // 
-            // StockName
-            // 
-            StockName.HeaderText = "إسم الخزنة";
-            StockName.MinimumWidth = 6;
-            StockName.Name = "StockName";
             // 
             // AddUserPage
             // 

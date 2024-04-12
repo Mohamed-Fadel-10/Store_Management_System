@@ -20,16 +20,9 @@ namespace Store_System.Services
         }
 
         public async Task<int> AddSupplier(Supplier supplier)
-        {
-            try
-            {
+        {       
                 await _context.Supplier.AddAsync(supplier);
-                return await _context.SaveChangesAsync();
-            }catch(Exception ex)
-            {
-                MessageBox.Show("لا يمكن إضافة نفس المورد مرتان", "System", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return 0;
-            }
+                return await _context.SaveChangesAsync();    
         }
         public async Task<Supplier> GetSupplier(int id)
         {
@@ -38,6 +31,16 @@ namespace Store_System.Services
                 return supplier;
             }
             return new Supplier();
+        }
+        public async Task<bool> IsUniqe(string Name)
+        {
+            Supplier Supplier = await _context.Supplier.FirstOrDefaultAsync(c => c.Name == Name);
+            if (Supplier == null)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public async Task<List<Supplier>> GetAllSuppliers()

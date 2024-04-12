@@ -278,12 +278,13 @@
             Controls.Add(label6);
             Controls.Add(panel1);
             Controls.Add(label7);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             MinimumSize = new Size(993, 775);
             Name = "LogIn";
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "LogIn";
+            Text = "تسجيل الدخول";
             FormClosed += LogIn_FormClosed;
             Load += LogIn_Load;
             panel1.ResumeLayout(false);

@@ -57,7 +57,7 @@ namespace Store_System.UI
             double TotalAmount = await _mainStockService.CountMoney();
             TotalStockSystem.Text = TotalAmount.ToString();
             //-----------------------------------------
-            CategoriesCombo.SelectedIndex = 0;
+            CategoriesCombo.SelectedIndex = -1;
 
         }
         public async void RefreshGridView()

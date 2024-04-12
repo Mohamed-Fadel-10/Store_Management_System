@@ -1,4 +1,6 @@
-﻿using Store_System.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Store_System.Data;
+using Store_System.Models;
 using Store_System.Services;
 using Store_System.UI.DevExpReports;
 using Store_System.UI.UiReportsUserControls;
@@ -28,6 +30,8 @@ namespace Store_System.UI
         SaleingReports saleingReports;
         BuyReports buyReports;
         gain_loss_Control gain_Loss_Control;
+        StoreContext _context;
+        ShortFallsPageService _shortFallsPageService;
         public Dashboard()
         {
             InitializeComponent();
@@ -48,8 +52,8 @@ namespace Store_System.UI
                 saleingReports = new SaleingReports();
                 buyReports = new BuyReports();
                 gain_Loss_Control = new gain_loss_Control();
-                //AddBranchPage1 = new AddBranchPage();
-
+                _context = new StoreContext();
+                _shortFallsPageService = new ShortFallsPageService();
                 Controls.Add(welcomePage1);
                 Controls.Add(addUserPage1);
                 Controls.Add(addProductPage1);
@@ -122,6 +126,7 @@ namespace Store_System.UI
             shiftLock1.branchIdBox.Text=1.ToString();
         }
 
+
         private void addUserBtn_Click(object sender, EventArgs e)
         {
             addUserPage1.Visible = true;
@@ -132,6 +137,16 @@ namespace Store_System.UI
         {
             addProductPage1.Visible = true;
             addProductPage1.BringToFront();
+            var Categories = _context.Category.ToList();
+            var Suppliers=_context.Supplier.ToList();
+            addProductPage1.CatComboBox.DataSource= Categories;
+            addProductPage1.CatComboBox.DisplayMember = "Name";
+            addProductPage1.CatComboBox.ValueMember = "ID";
+            addProductPage1.CatComboBox.SelectedIndex = -1;
+            addProductPage1.SupplierComboBox.DataSource= Suppliers;
+            addProductPage1.SupplierComboBox.DisplayMember = "Name";
+            addProductPage1.SupplierComboBox.ValueMember = "ID";
+            addProductPage1.SupplierComboBox.SelectedIndex = -1;
         }
 
         private void addCategoryBtn_Click(object sender, EventArgs e)
@@ -152,8 +167,11 @@ namespace Store_System.UI
             mainStockPage1.BringToFront();
         }
 
-        private void shortFallsBtn_Click(object sender, EventArgs e)
+        private async void shortFallsBtn_Click(object sender, EventArgs e)
         {
+            int ShortsNumber = await _shortFallsPageService.CountShorts();
+            shortFallsPage1.ShortsCount.Text = ShortsNumber.ToString();
+            shortFallsPage1.Items.DataSource = await _shortFallsPageService.GetAllShortFalls();
             shortFallsPage1.Visible = true;
             shortFallsPage1.BringToFront();
         }

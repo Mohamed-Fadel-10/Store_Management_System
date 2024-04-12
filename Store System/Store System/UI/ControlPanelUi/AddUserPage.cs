@@ -140,7 +140,14 @@ namespace Store_System.UI
             userNameBox.Clear();
             passwordBox.Clear();
             stockNameBox.Clear();
-            UserRoleBox.SelectedIndex = -1;
+            UserRoleBox.SelectedIndex = 0;
+            nameerrore.Visible = false;
+            usernameerror.Visible = false;
+            passerror.Visible = false;
+            roleerror.Visible = false;
+            stockerror.Visible = false;
+
+
         }
 
         private void existUsrsGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

@@ -16,7 +16,7 @@ namespace Store_System.UI.DevExpReports
             InitializeComponent();
 
             billCode.Text = saleBill.BillCodeBox.Text;
-            billDate.Text = DateTime.Now.ToString();
+            billDate.Text = DateTime.Now.ToString("yyyy/dd/MM");
             customerName.Text= saleBill.CustomerNameBox.Text;
             customerPhone.Text= saleBill.CustomerPhone.Text;
             StringBuilder productNames = new StringBuilder();

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Store_System.Data;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Store_System.UI
@@ -53,37 +54,45 @@ namespace Store_System.UI
             SizeBox.SelectedIndex = -1;
             BindingToGridView();
             Items.ClearSelection();
-            CatComboBox.SelectedIndex = 1;
-            SizeBox.SelectedIndex = 1;
 
 
         }
-
 
         private async void AddProductBtn_Click(object sender, EventArgs e)
         {
             if (barCodeBox.Text != "" && productNameBox.Text != "" && CatComboBox.SelectedItem != null && costBox.Text != "" && sellingPriceBox.Text != "" && stockBox.Text != "" && discountBox.Text != "")
             {
-                var CategoryID = CatComboBox.SelectedValue.ToString();
+                if (await _productService.IsUniqe(barCodeBox.Text) == true)
+                {
+                    var CategoryID = CatComboBox.SelectedValue.ToString();
+                    _product.ID = 0;
+                    _product.Barcode = barCodeBox.Text;
+                    _product.Name = productNameBox.Text;
+                    _product.Category_id = int.Parse(CategoryID);
+                    _product.Cost = double.Parse(costBox.Text);
+                    _product.SellingPrice = double.Parse(sellingPriceBox.Text);
+                    _product.StockAmount = int.Parse(stockBox.Text);
+                    _product.Description = noteBox.Text;
+                    _product.Color = ColorBox.Text;
+                    _product.Size = (Models.Size)Convert.ToInt32(SizeBox.SelectedIndex);
+                    _product.Discount = double.Parse(discountBox.Text);
+                    await _productService.AddProduct(_product);
+                    if (SupplierComboBox.SelectedValue != null)
+                    {
+                        _productsSuppliers.Supplier_Id = (int)SupplierComboBox.SelectedValue;
+                        _productsSuppliers.product_Id = _product.ID;
+                        await _suppliersProductsService.addSuppliersforProducts(_productsSuppliers);
+                    }
 
-                _product.Barcode = barCodeBox.Text;
-                _product.Name = productNameBox.Text;
-                _product.Category_id = int.Parse(CategoryID);
-                _product.Cost = double.Parse(costBox.Text);
-                _product.SellingPrice = double.Parse(sellingPriceBox.Text);
-                _product.StockAmount = int.Parse(stockBox.Text);
-                _product.Description = noteBox.Text;
-                _product.Color = ColorBox.Text;
-                _product.Size = (Models.Size)Convert.ToInt32(SizeBox.SelectedIndex);
-                _product.Discount = double.Parse(discountBox.Text);
-                await _productService.AddProduct(_product);
-                _productsSuppliers.Supplier_Id = (int)SupplierComboBox.SelectedValue;
-                _productsSuppliers.product_Id = _product.ID;
-                await _suppliersProductsService.addSuppliersforProducts(_productsSuppliers);
-                MessageBox.Show("تمت إضافة العنصر بنجاح", "system", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                RefreshGridView();
-                Clear();
+                    MessageBox.Show("تمت إضافة العنصر بنجاح", "system", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    RefreshGridView();
+                    Clear();
+                }
+                else
+                {
+                    MessageBox.Show("هذه الباركود تم إضافته من قبل لمنتج اخر ", "system", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                }
 
             }
             else
@@ -93,7 +102,7 @@ namespace Store_System.UI
             }
         }
 
-        
+
 
         private async void updatebtn_Click(object sender, EventArgs e)
         {
@@ -138,7 +147,7 @@ namespace Store_System.UI
         {
             barCodeBox.Text = Items.CurrentRow.Cells[0].Value.ToString();
             productNameBox.Text = Items.CurrentRow.Cells[1].Value.ToString();
-            //   CatComboBox.Text = Items.CurrentRow.Cells[2].Value.ToString();
+            CatComboBox.Text = Items.CurrentRow.Cells[2].Value.ToString();
             stockBox.Text = Items.CurrentRow.Cells[4].Value.ToString();
             costBox.Text = Items.CurrentRow.Cells[5].Value.ToString();
             discountBox.Text = Items.CurrentRow.Cells[6].Value.ToString();
@@ -173,14 +182,14 @@ namespace Store_System.UI
         private void RefreshGridView()
         {
             StoreContext storeContext = new StoreContext();
-            var Products = storeContext.Product.ToList();
+            var Products = storeContext.Product.Include(p => p.Category).ToList();
             Items.DataSource = Products;
         }
         private void Clear()
         {
             barCodeBox.Clear();
             productNameBox.Clear();
-            CatComboBox.Text = "";
+            CatComboBox.SelectedIndex = 0;
             stockBox.Clear();
             costBox.Clear();
             discountBox.Clear();
@@ -190,8 +199,6 @@ namespace Store_System.UI
             noteBox.Clear();
 
         }
-
-
         // سيبها هنهندلها بعدين عشان فيها مشكلة
         private void discountBox_TextChanged(object sender, EventArgs e)
         {
@@ -221,6 +228,28 @@ namespace Store_System.UI
                 var Products = await _productService.Search(searchProductBox.Text);
                 Items.DataSource = Products;
             }
+        }
+
+        private  void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            if (barCodeBox.Text != "")
+            {
+                DialogResult dialog = MessageBox.Show("هل تريد بالفعل حذف هذا المنتج؟", "System", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialog == DialogResult.Yes)
+                {
+
+                     _productService.DeleteProduct(barCodeBox.Text);
+                    MessageBox.Show("تم الحذف بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    RefreshGridView();
+                    Clear();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("يرجى تحديد كود المنتج لحذفه", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
     }
 }

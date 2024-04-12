@@ -51,17 +51,6 @@
             pNameLbl = new Label();
             productNameBox = new TextBox();
             Items = new DataGridView();
-            _Barcode = new DataGridViewTextBoxColumn();
-            _Name = new DataGridViewTextBoxColumn();
-            category = new DataGridViewTextBoxColumn();
-            Supplier = new DataGridViewTextBoxColumn();
-            _Quantity = new DataGridViewTextBoxColumn();
-            _cost = new DataGridViewTextBoxColumn();
-            _discount = new DataGridViewTextBoxColumn();
-            Sale = new DataGridViewTextBoxColumn();
-            _color = new DataGridViewTextBoxColumn();
-            _size = new DataGridViewTextBoxColumn();
-            notes = new DataGridViewTextBoxColumn();
             existProductsLbl = new Label();
             pictureBox1 = new PictureBox();
             label1 = new Label();
@@ -73,6 +62,18 @@
             SizeBox = new ComboBox();
             ColorBox = new TextBox();
             updatebtn = new Button();
+            DeleteBtn = new Button();
+            _Barcode = new DataGridViewTextBoxColumn();
+            _Name = new DataGridViewTextBoxColumn();
+            category = new DataGridViewTextBoxColumn();
+            Supplier = new DataGridViewTextBoxColumn();
+            _Quantity = new DataGridViewTextBoxColumn();
+            _cost = new DataGridViewTextBoxColumn();
+            _discount = new DataGridViewTextBoxColumn();
+            Sale = new DataGridViewTextBoxColumn();
+            _color = new DataGridViewTextBoxColumn();
+            _size = new DataGridViewTextBoxColumn();
+            notes = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -113,7 +114,7 @@
             AddProductBtn.FlatStyle = FlatStyle.Popup;
             AddProductBtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             AddProductBtn.ForeColor = Color.Snow;
-            AddProductBtn.Location = new Point(856, 405);
+            AddProductBtn.Location = new Point(964, 399);
             AddProductBtn.Name = "AddProductBtn";
             AddProductBtn.RightToLeft = RightToLeft.Yes;
             AddProductBtn.Size = new Size(153, 56);
@@ -385,83 +386,6 @@
             Items.TabIndex = 21;
             Items.RowHeaderMouseClick += Items_RowHeaderMouseClick;
             // 
-            // _Barcode
-            // 
-            _Barcode.HeaderText = "الكود";
-            _Barcode.MinimumWidth = 6;
-            _Barcode.Name = "_Barcode";
-            _Barcode.ReadOnly = true;
-            // 
-            // _Name
-            // 
-            _Name.HeaderText = "إسم المنتج";
-            _Name.MinimumWidth = 6;
-            _Name.Name = "_Name";
-            _Name.ReadOnly = true;
-            // 
-            // category
-            // 
-            category.HeaderText = "نوع الصنف";
-            category.MinimumWidth = 6;
-            category.Name = "category";
-            category.ReadOnly = true;
-            // 
-            // Supplier
-            // 
-            Supplier.HeaderText = "المورد";
-            Supplier.MinimumWidth = 6;
-            Supplier.Name = "Supplier";
-            Supplier.ReadOnly = true;
-            // 
-            // _Quantity
-            // 
-            _Quantity.HeaderText = "الكمية";
-            _Quantity.MinimumWidth = 6;
-            _Quantity.Name = "_Quantity";
-            _Quantity.ReadOnly = true;
-            // 
-            // _cost
-            // 
-            _cost.HeaderText = "سعر الشراء";
-            _cost.MinimumWidth = 6;
-            _cost.Name = "_cost";
-            _cost.ReadOnly = true;
-            // 
-            // _discount
-            // 
-            _discount.HeaderText = "الخصم";
-            _discount.MinimumWidth = 6;
-            _discount.Name = "_discount";
-            _discount.ReadOnly = true;
-            // 
-            // Sale
-            // 
-            Sale.HeaderText = "سعر البيع";
-            Sale.MinimumWidth = 6;
-            Sale.Name = "Sale";
-            Sale.ReadOnly = true;
-            // 
-            // _color
-            // 
-            _color.HeaderText = "اللون";
-            _color.MinimumWidth = 6;
-            _color.Name = "_color";
-            _color.ReadOnly = true;
-            // 
-            // _size
-            // 
-            _size.HeaderText = "المقاس";
-            _size.MinimumWidth = 6;
-            _size.Name = "_size";
-            _size.ReadOnly = true;
-            // 
-            // notes
-            // 
-            notes.HeaderText = "ملاحظات";
-            notes.MinimumWidth = 6;
-            notes.Name = "notes";
-            notes.ReadOnly = true;
-            // 
             // existProductsLbl
             // 
             existProductsLbl.Anchor = AnchorStyles.None;
@@ -594,7 +518,7 @@
             updatebtn.FlatStyle = FlatStyle.Popup;
             updatebtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             updatebtn.ForeColor = Color.Snow;
-            updatebtn.Location = new Point(667, 405);
+            updatebtn.Location = new Point(792, 399);
             updatebtn.Name = "updatebtn";
             updatebtn.RightToLeft = RightToLeft.Yes;
             updatebtn.Size = new Size(153, 56);
@@ -603,11 +527,106 @@
             updatebtn.UseVisualStyleBackColor = false;
             updatebtn.Click += updatebtn_Click;
             // 
+            // DeleteBtn
+            // 
+            DeleteBtn.Anchor = AnchorStyles.None;
+            DeleteBtn.BackColor = Color.LimeGreen;
+            DeleteBtn.FlatStyle = FlatStyle.Popup;
+            DeleteBtn.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            DeleteBtn.ForeColor = Color.Snow;
+            DeleteBtn.Location = new Point(616, 399);
+            DeleteBtn.Name = "DeleteBtn";
+            DeleteBtn.RightToLeft = RightToLeft.Yes;
+            DeleteBtn.Size = new Size(153, 56);
+            DeleteBtn.TabIndex = 64;
+            DeleteBtn.Text = "حذف";
+            DeleteBtn.UseVisualStyleBackColor = false;
+            DeleteBtn.Click += DeleteBtn_Click;
+            // 
+            // _Barcode
+            // 
+            _Barcode.HeaderText = "الكود";
+            _Barcode.MinimumWidth = 6;
+            _Barcode.Name = "_Barcode";
+            _Barcode.ReadOnly = true;
+            // 
+            // _Name
+            // 
+            _Name.HeaderText = "إسم المنتج";
+            _Name.MinimumWidth = 6;
+            _Name.Name = "_Name";
+            _Name.ReadOnly = true;
+            // 
+            // category
+            // 
+            category.HeaderText = "نوع الصنف";
+            category.MinimumWidth = 6;
+            category.Name = "category";
+            category.ReadOnly = true;
+            // 
+            // Supplier
+            // 
+            Supplier.HeaderText = "المورد";
+            Supplier.MinimumWidth = 6;
+            Supplier.Name = "Supplier";
+            Supplier.ReadOnly = true;
+            Supplier.Visible = false;
+            // 
+            // _Quantity
+            // 
+            _Quantity.HeaderText = "الكمية";
+            _Quantity.MinimumWidth = 6;
+            _Quantity.Name = "_Quantity";
+            _Quantity.ReadOnly = true;
+            // 
+            // _cost
+            // 
+            _cost.HeaderText = "سعر الشراء";
+            _cost.MinimumWidth = 6;
+            _cost.Name = "_cost";
+            _cost.ReadOnly = true;
+            // 
+            // _discount
+            // 
+            _discount.HeaderText = "الخصم";
+            _discount.MinimumWidth = 6;
+            _discount.Name = "_discount";
+            _discount.ReadOnly = true;
+            // 
+            // Sale
+            // 
+            Sale.HeaderText = "سعر البيع";
+            Sale.MinimumWidth = 6;
+            Sale.Name = "Sale";
+            Sale.ReadOnly = true;
+            // 
+            // _color
+            // 
+            _color.HeaderText = "اللون";
+            _color.MinimumWidth = 6;
+            _color.Name = "_color";
+            _color.ReadOnly = true;
+            // 
+            // _size
+            // 
+            _size.HeaderText = "المقاس";
+            _size.MinimumWidth = 6;
+            _size.Name = "_size";
+            _size.ReadOnly = true;
+            // 
+            // notes
+            // 
+            notes.HeaderText = "ملاحظات";
+            notes.MinimumWidth = 6;
+            notes.Name = "notes";
+            notes.ReadOnly = true;
+            // 
             // AddProductPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(DeleteBtn);
             Controls.Add(updatebtn);
             Controls.Add(ColorBox);
             Controls.Add(SizeBox);
@@ -658,7 +677,6 @@
         private Label barCodeLbl;
         private TextBox barCodeBox;
         private Label categoryLbl;
-        private ComboBox CatComboBox;
         private Label pNameLbl;
         private TextBox productNameBox;
         private Label costLbl;
@@ -666,7 +684,6 @@
         private Label sellingPriceLbl;
         private TextBox costBox;
         private Label supplierLbl;
-        private ComboBox SupplierComboBox;
         private Label stockLbl;
         private TextBox stockBox;
         private Label toDateLbl;
@@ -687,6 +704,10 @@
         private PictureBox searchLbl;
         private ComboBox SizeBox;
         private TextBox ColorBox;
+        private Button updatebtn;
+        public ComboBox CatComboBox;
+        private Button DeleteBtn;
+        public ComboBox SupplierComboBox;
         private DataGridViewTextBoxColumn _Barcode;
         private DataGridViewTextBoxColumn _Name;
         private DataGridViewTextBoxColumn category;
@@ -698,6 +719,5 @@
         private DataGridViewTextBoxColumn _color;
         private DataGridViewTextBoxColumn _size;
         private DataGridViewTextBoxColumn notes;
-        private Button updatebtn;
     }
 }

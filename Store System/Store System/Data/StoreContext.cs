@@ -22,23 +22,18 @@ namespace Store_System.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /// OrderItems
-            modelBuilder.Entity<OrderItems>()
-                   .HasKey(ps => new { ps.product_Id, ps.Order_Id });
 
             modelBuilder.Entity<OrderItems>()
-                .HasOne(ps => ps.Product)
-                .WithMany() 
-                .HasForeignKey(ps => ps.product_Id)
+                .HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(oi => oi.Order_Id)
+                .OnDelete(DeleteBehavior.Cascade); 
+
+            modelBuilder.Entity<OrderItems>()
+                .HasOne(oi => oi.Product)
+                .WithMany(o=>o.OrderItems)
+                .HasForeignKey(oi => oi.product_Id)
                 .OnDelete(DeleteBehavior.NoAction);
-
-
-            modelBuilder.Entity<OrderItems>()
-                .HasOne(ps => ps.Order)
-                .WithMany() 
-                .HasForeignKey(ps => ps.Order_Id)
-                 .OnDelete(DeleteBehavior.NoAction);
-
 
 
             /// ProductsSuppliers
@@ -107,7 +102,7 @@ namespace Store_System.Data
 
             base.OnModelCreating(modelBuilder);
         }
-
+       
         /// Configurations
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

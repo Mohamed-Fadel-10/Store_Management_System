@@ -49,15 +49,25 @@ namespace Store_System.UI
         {
             if (supplierNameBox.Text != "" && SupPhoneBox.Text != "")
             {
-                supplier.Name = supplierNameBox.Text;
-                supplier.Email = SupMailBox.Text;
-                supplier.Phone = SupPhoneBox.Text;
-                supplier.Address = SupAddressBox.Text;
-                supplier.ContractDate = contractDateBox.Value;
-                await supplierService.AddSupplier(supplier);
-                MessageBox.Show("تمت إضافة المورد بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                RefreshGridView();
-                Clear();
+
+                if (await supplierService.IsUniqe(supplierNameBox.Text) == true)
+                {
+                    supplier.Name = supplierNameBox.Text;
+                    supplier.Email = SupMailBox.Text;
+                    supplier.Phone = SupPhoneBox.Text;
+                    supplier.Address = SupAddressBox.Text;
+                    supplier.ContractDate = contractDateBox.Value;
+                    await supplierService.AddSupplier(supplier);
+                    MessageBox.Show("تمت إضافة المورد بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    RefreshGridView();
+                    Clear();
+                }
+                else
+                {
+                    MessageBox.Show("لا يمكن إضافة نفس المورد مرتان", "System", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+
             }
 
             else
@@ -119,6 +129,7 @@ namespace Store_System.UI
                         Sup.ContractDate = contractDateBox.Value;
                         await supplierService.UpdateSupplier(Sup);
                         MessageBox.Show("تم التعديل بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await RefreshGridView();
                         Clear();
                     }
                 }

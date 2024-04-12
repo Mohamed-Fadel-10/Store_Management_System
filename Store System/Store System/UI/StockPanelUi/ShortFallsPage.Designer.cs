@@ -293,8 +293,6 @@
         private Label label1;
         private Panel panel3;
         private Label label2;
-        private Label ShortsCount;
-        private DataGridView Items;
         private DataGridViewTextBoxColumn _Barcode;
         private DataGridViewTextBoxColumn _Name;
         private DataGridViewTextBoxColumn category;
@@ -306,5 +304,7 @@
         private DataGridViewTextBoxColumn _color;
         private DataGridViewTextBoxColumn _size;
         private DataGridViewTextBoxColumn notes;
+        public Label ShortsCount;
+        public DataGridView Items;
     }
 }

@@ -76,7 +76,6 @@
             Printbtn = new Button();
             panel1 = new Panel();
             button1 = new Button();
-            CustomerNameBox = new TextBox();
             label3 = new Label();
             label9 = new Label();
             SellingPrice = new TextBox();
@@ -96,6 +95,7 @@
             totalQuantityBox = new TextBox();
             label11 = new Label();
             searchBtn = new Button();
+            CustomerNameBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -242,7 +242,6 @@
             PaidUp.RightToLeft = RightToLeft.Yes;
             PaidUp.Size = new Size(209, 34);
             PaidUp.TabIndex = 114;
-            PaidUp.TextChanged += PaidUp_TextChanged;
             // 
             // label15
             // 
@@ -592,7 +591,6 @@
             Printbtn.TabIndex = 83;
             Printbtn.Text = "طباعة";
             Printbtn.UseVisualStyleBackColor = false;
-            Printbtn.Click += Printbtn_Click;
             // 
             // panel1
             // 
@@ -619,25 +617,13 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
-            // CustomerNameBox
-            // 
-            _CustomerNameBox.Anchor = AnchorStyles.None;
-            _CustomerNameBox.BackColor = Color.FromArgb(24, 30, 46);
-            _CustomerNameBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            _CustomerNameBox.ForeColor = Color.White;
-            _CustomerNameBox.Location = new Point(418, 57);
-            _CustomerNameBox.Name = "_CustomerNameBox";
-            _CustomerNameBox.RightToLeft = RightToLeft.Yes;
-            _CustomerNameBox.Size = new Size(335, 39);
-            _CustomerNameBox.TabIndex = 126;
-            // 
             // label3
             // 
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(654, 38);
+            label3.Location = new Point(654, 29);
             label3.Name = "label3";
             label3.Size = new Size(90, 23);
             label3.TabIndex = 127;
@@ -812,27 +798,12 @@
             customerIDBox.BackColor = Color.FromArgb(24, 30, 46);
             customerIDBox.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
             customerIDBox.ForeColor = Color.White;
-            customerIDBox.Location = new Point(418, 17);
+            customerIDBox.Location = new Point(464, 3);
             customerIDBox.Name = "customerIDBox";
             customerIDBox.RightToLeft = RightToLeft.Yes;
             customerIDBox.Size = new Size(109, 25);
             customerIDBox.TabIndex = 142;
             customerIDBox.Visible = false;
-            // 
-            // searchBtn
-            // 
-            searchBtn.Anchor = AnchorStyles.None;
-            searchBtn.BackColor = Color.FromArgb(27, 156, 133);
-            searchBtn.FlatStyle = FlatStyle.Flat;
-            searchBtn.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
-            searchBtn.ForeColor = Color.White;
-            searchBtn.Location = new Point(47, 56);
-            searchBtn.Name = "searchBtn";
-            searchBtn.Size = new Size(77, 38);
-            searchBtn.TabIndex = 143;
-            searchBtn.Text = "بحث";
-            searchBtn.UseVisualStyleBackColor = false;
-            searchBtn.Click += searchBtn_Click;
             // 
             // CustomerPhone
             // 
@@ -840,7 +811,7 @@
             CustomerPhone.BackColor = Color.FromArgb(24, 30, 46);
             CustomerPhone.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
             CustomerPhone.ForeColor = Color.White;
-            CustomerPhone.Location = new Point(517, 21);
+            CustomerPhone.Location = new Point(583, 2);
             CustomerPhone.Name = "CustomerPhone";
             CustomerPhone.RightToLeft = RightToLeft.Yes;
             CustomerPhone.Size = new Size(165, 25);
@@ -873,11 +844,39 @@
             label11.Text = "عدد القطع";
             label11.Visible = false;
             // 
+            // searchBtn
+            // 
+            searchBtn.Anchor = AnchorStyles.None;
+            searchBtn.BackColor = Color.FromArgb(27, 156, 133);
+            searchBtn.FlatStyle = FlatStyle.Flat;
+            searchBtn.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
+            searchBtn.ForeColor = Color.White;
+            searchBtn.Location = new Point(47, 56);
+            searchBtn.Name = "searchBtn";
+            searchBtn.Size = new Size(77, 38);
+            searchBtn.TabIndex = 143;
+            searchBtn.Text = "بحث";
+            searchBtn.UseVisualStyleBackColor = false;
+            searchBtn.Click += searchBtn_Click;
+            // 
+            // CustomerNameBox
+            // 
+            CustomerNameBox.Anchor = AnchorStyles.None;
+            CustomerNameBox.BackColor = Color.FromArgb(24, 30, 46);
+            CustomerNameBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            CustomerNameBox.ForeColor = Color.White;
+            CustomerNameBox.Location = new Point(511, 54);
+            CustomerNameBox.Name = "CustomerNameBox";
+            CustomerNameBox.RightToLeft = RightToLeft.Yes;
+            CustomerNameBox.Size = new Size(237, 39);
+            CustomerNameBox.TabIndex = 146;
+            // 
             // SaleBill
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
+            Controls.Add(CustomerNameBox);
             Controls.Add(label11);
             Controls.Add(totalQuantityBox);
             Controls.Add(CustomerPhone);
@@ -899,7 +898,6 @@
             Controls.Add(label9);
             Controls.Add(SellingPrice);
             Controls.Add(label3);
-            Controls.Add(CustomerNameBox);
             Controls.Add(button1);
             Controls.Add(Addbtn);
             Controls.Add(Savebtn);
@@ -1008,10 +1006,10 @@
         public TextBox PaidUp;
         public TextBox TotalPriceBox;
         public TextBox BillCodeBox;
-        public TextBox CustomerNameBox;
         public TextBox CustomerPhone;
         public TextBox totalQuantityBox;
         private Label label11;
         private Button searchBtn;
+        public TextBox CustomerNameBox;
     }
 }
