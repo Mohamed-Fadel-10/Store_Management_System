@@ -50,11 +50,13 @@ namespace Store_System.UI
             {
                 if (await _userServices.isUnique(userNameBox.Text))
                 {
+                    int BranchID = _userServices.GetLastBranchID();
                     _user.Name = nameUserBox.Text;
                     _user.Phone = userPhoneBox.Text;
                     _user.Email = userMailBox.Text;
                     _user.UserName = userNameBox.Text;
                     _user.Password = passwordBox.Text;
+                    _user.Branch_Id = BranchID;
                     _user.Role = (Role)Convert.ToInt32(UserRoleBox.SelectedIndex);
                     _user.MoneyStockName = stockNameBox.Text;
                     await _userServices.AddUser(_user);

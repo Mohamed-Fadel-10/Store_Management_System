@@ -40,9 +40,16 @@
             branchPhoneBox = new TextBox();
             addressBox = new TextBox();
             label3 = new Label();
+            Items = new DataGridView();
+            _Name = new DataGridViewTextBoxColumn();
+            _Phone = new DataGridViewTextBoxColumn();
+            _Address = new DataGridViewTextBoxColumn();
+            label4 = new Label();
+            SumMoney = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             SuspendLayout();
             // 
             // branchNameBox
@@ -51,7 +58,7 @@
             branchNameBox.BackColor = Color.FromArgb(24, 30, 46);
             branchNameBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             branchNameBox.ForeColor = Color.White;
-            branchNameBox.Location = new Point(472, 211);
+            branchNameBox.Location = new Point(578, 108);
             branchNameBox.Name = "branchNameBox";
             branchNameBox.RightToLeft = RightToLeft.Yes;
             branchNameBox.Size = new Size(293, 43);
@@ -62,7 +69,7 @@
             panel2.Anchor = AnchorStyles.None;
             panel2.BackColor = Color.FromArgb(24, 30, 46);
             panel2.Controls.Add(pictureBox1);
-            panel2.Location = new Point(775, 40);
+            panel2.Location = new Point(192, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(92, 85);
             panel2.TabIndex = 85;
@@ -82,7 +89,8 @@
             panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = Color.FromArgb(27, 156, 133);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(601, 43);
+            panel1.Controls.Add(panel2);
+            panel1.Location = new Point(597, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(291, 77);
             panel1.TabIndex = 84;
@@ -105,7 +113,7 @@
             branchNameLbl.AutoSize = true;
             branchNameLbl.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             branchNameLbl.ForeColor = Color.White;
-            branchNameLbl.Location = new Point(674, 193);
+            branchNameLbl.Location = new Point(780, 90);
             branchNameLbl.Name = "branchNameLbl";
             branchNameLbl.Size = new Size(79, 23);
             branchNameLbl.TabIndex = 86;
@@ -118,9 +126,9 @@
             addBranchBtn.FlatStyle = FlatStyle.Flat;
             addBranchBtn.Font = new Font("Segoe UI", 12.2F, FontStyle.Bold, GraphicsUnit.Point);
             addBranchBtn.ForeColor = Color.White;
-            addBranchBtn.Location = new Point(314, 418);
+            addBranchBtn.Location = new Point(12, 344);
             addBranchBtn.Name = "addBranchBtn";
-            addBranchBtn.Size = new Size(234, 51);
+            addBranchBtn.Size = new Size(195, 51);
             addBranchBtn.TabIndex = 87;
             addBranchBtn.Text = "إضافة";
             addBranchBtn.UseVisualStyleBackColor = false;
@@ -132,7 +140,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(302, 193);
+            label2.Location = new Point(454, 90);
             label2.Name = "label2";
             label2.Size = new Size(96, 23);
             label2.TabIndex = 89;
@@ -144,7 +152,7 @@
             branchPhoneBox.BackColor = Color.FromArgb(24, 30, 46);
             branchPhoneBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             branchPhoneBox.ForeColor = Color.White;
-            branchPhoneBox.Location = new Point(112, 211);
+            branchPhoneBox.Location = new Point(264, 108);
             branchPhoneBox.Name = "branchPhoneBox";
             branchPhoneBox.RightToLeft = RightToLeft.Yes;
             branchPhoneBox.Size = new Size(293, 43);
@@ -156,7 +164,7 @@
             addressBox.BackColor = Color.FromArgb(24, 30, 46);
             addressBox.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             addressBox.ForeColor = Color.White;
-            addressBox.Location = new Point(292, 304);
+            addressBox.Location = new Point(578, 175);
             addressBox.Name = "addressBox";
             addressBox.RightToLeft = RightToLeft.Yes;
             addressBox.Size = new Size(293, 43);
@@ -168,35 +176,97 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(514, 288);
+            label3.Location = new Point(808, 160);
             label3.Name = "label3";
             label3.Size = new Size(60, 23);
             label3.TabIndex = 91;
             label3.Text = "العنوان";
+            // 
+            // Items
+            // 
+            Items.Anchor = AnchorStyles.None;
+            Items.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Items.BackgroundColor = Color.Snow;
+            Items.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Items.Columns.AddRange(new DataGridViewColumn[] { _Name, _Phone, _Address });
+            Items.Location = new Point(12, 401);
+            Items.Name = "Items";
+            Items.RightToLeft = RightToLeft.Yes;
+            Items.RowHeadersWidth = 51;
+            Items.RowTemplate.Height = 29;
+            Items.Size = new Size(864, 248);
+            Items.TabIndex = 92;
+            Items.RowHeaderMouseClick += Items_RowHeaderMouseClick;
+            // 
+            // _Name
+            // 
+            _Name.HeaderText = "إسم الفرع";
+            _Name.MinimumWidth = 6;
+            _Name.Name = "_Name";
+            // 
+            // _Phone
+            // 
+            _Phone.HeaderText = "رقم الموبايل";
+            _Phone.MinimumWidth = 6;
+            _Phone.Name = "_Phone";
+            // 
+            // _Address
+            // 
+            _Address.HeaderText = "العنوان";
+            _Address.MinimumWidth = 6;
+            _Address.Name = "_Address";
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.None;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(733, 245);
+            label4.Name = "label4";
+            label4.Size = new Size(135, 23);
+            label4.TabIndex = 94;
+            label4.Text = "إجمالى خزنة الفرع";
+            // 
+            // SumMoney
+            // 
+            SumMoney.Anchor = AnchorStyles.None;
+            SumMoney.AutoSize = true;
+            SumMoney.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            SumMoney.ForeColor = Color.White;
+            SumMoney.Location = new Point(622, 245);
+            SumMoney.Name = "SumMoney";
+            SumMoney.Size = new Size(20, 23);
+            SumMoney.TabIndex = 95;
+            SumMoney.Text = "0";
             // 
             // AddBranchPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 46);
-            ClientSize = new Size(889, 577);
+            ClientSize = new Size(889, 674);
+            Controls.Add(SumMoney);
+            Controls.Add(label4);
+            Controls.Add(Items);
             Controls.Add(label3);
             Controls.Add(addressBox);
             Controls.Add(label2);
             Controls.Add(branchPhoneBox);
             Controls.Add(addBranchBtn);
             Controls.Add(branchNameLbl);
-            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(branchNameBox);
             Name = "AddBranchPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AddBranchPage";
             FormClosed += AddBranchPage_FormClosed;
+            Load += AddBranchPage_Load;
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)Items).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -214,5 +284,11 @@
         private TextBox branchPhoneBox;
         private TextBox addressBox;
         private Label label3;
+        private DataGridView Items;
+        private DataGridViewTextBoxColumn _Name;
+        private DataGridViewTextBoxColumn _Phone;
+        private DataGridViewTextBoxColumn _Address;
+        private Label label4;
+        private Label SumMoney;
     }
 }

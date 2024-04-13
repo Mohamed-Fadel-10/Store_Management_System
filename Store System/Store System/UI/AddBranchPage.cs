@@ -24,6 +24,18 @@ namespace Store_System.UI
             InitializeComponent();
             branch = new Branch();
             branchService = new BranchService();
+            
+        }
+
+        private async void AddBranchPage_Load(object sender, EventArgs e)
+        {
+            Items.AutoGenerateColumns = false;
+            Items.DataSource =  await branchService.getAll();
+            Items.Columns[0].DataPropertyName = "Name";
+            Items.Columns[1].DataPropertyName = "Phone";
+            Items.Columns[2].DataPropertyName = "Address";
+            var TotalAmount = await branchService.SumStockMoney();
+            SumMoney.Text = TotalAmount.ToString();
         }
 
         private async void addBranchBtn_Click(object sender, EventArgs e)
@@ -32,7 +44,7 @@ namespace Store_System.UI
             {
                 branch.Name = branchNameBox.Text;
                 branch.Phone = branchPhoneBox.Text;
-                branch.Address =addressBox.Text;
+                branch.Address = addressBox.Text;
                 await branchService.AddBranch(branch);
                 BranchID = branch.ID;
                 MessageBox.Show("تمت إضافة الفرع بنجاح", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -49,5 +61,24 @@ namespace Store_System.UI
         {
             BranchName = branchNameBox.Text;
         }
+
+        private void Items_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            branchNameBox.Text = Items.CurrentRow.Cells[0].Value.ToString();
+            branchPhoneBox.Text = Items.CurrentRow.Cells[1].Value.ToString();
+            addressBox.Text = Items.CurrentRow.Cells[2].Value.ToString();
+
+        }
+
+        private void updatebtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Deletebtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

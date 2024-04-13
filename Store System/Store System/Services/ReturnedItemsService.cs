@@ -19,43 +19,6 @@ namespace Store_System.Services
             _context = new StoreContext();
         }
 
-        
-
-         
-        //public List<(string Name, string Barcode, string Size, string Color, int Quantity, string CategoryName)> GetAllOrders(int id)
-        //{
-        //    var query = _context.Product
-        //        .Join(_context.OrderItems,
-        //              p => p.ID,
-        //              o => o.product_Id,
-        //              (p, o) => new { Product = p, OrderItem = o })
-        //        .Join(_context.Order,
-        //              po => po.OrderItem.Order_Id,
-        //              order => order.ID,
-        //              (po, order) => new { ProductOrder = po, Order = order })
-        //        .Where(po => po.Order.ID == 62)
-        //        .Select(po => new
-        //        {
-        //            Name = po.ProductOrder.Product.Name,
-        //            Barcode = po.ProductOrder.Product.Barcode,
-        //            Size = po.ProductOrder.Product.Size,
-        //            Color = po.ProductOrder.Product.Color,
-        //            Quantity = po.ProductOrder.OrderItem.Quantity,
-        //            CategoryName = po.ProductOrder.Product.CategoryName
-        //        });
-
-        //    var result = query.ToList().Select(x => (
-        //        x.Name,
-        //        x.Barcode,
-        //        x.Size,
-        //        x.Color,
-        //        x.Quantity,
-        //        x.CategoryName
-        //    )).ToList();
-
-        //  //  return result.ToList();
-        //}
-
         public Returned AddReturned(Returned returned)
         {
             if(returned != null) {

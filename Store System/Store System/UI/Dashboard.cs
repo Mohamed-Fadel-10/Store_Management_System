@@ -25,6 +25,8 @@ namespace Store_System.UI
         public string? CashierName { get; set; }
         public string? StockMoneyName { get; set; }
         public int UserID { get; set; }
+        public int BranchID { get; set; }
+
 
         UserServices _userServices;
         SaleingReports saleingReports;
@@ -147,6 +149,7 @@ namespace Store_System.UI
             addProductPage1.SupplierComboBox.DisplayMember = "Name";
             addProductPage1.SupplierComboBox.ValueMember = "ID";
             addProductPage1.SupplierComboBox.SelectedIndex = -1;
+
         }
 
         private void addCategoryBtn_Click(object sender, EventArgs e)
@@ -212,6 +215,7 @@ namespace Store_System.UI
 
         private void shiftLockBtn_Click(object sender, EventArgs e)
         {
+            shiftLock1.branchIdBox.Text = BranchID.ToString();
             shiftLock1.Visible = true;
             shiftLock1.BringToFront();
             shiftLock1.Refresh();

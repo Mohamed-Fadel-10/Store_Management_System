@@ -33,6 +33,33 @@ namespace Store_System.Services
             }
 
         }
+        public async Task<List<Branch>> getAll()
+        {
+
+            return await _context.Branch.ToListAsync();
+        }
+        public async Task<int> UpdateProduct(Branch branch)
+        {
+
+            if (branch != null)
+            {
+                return await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public async Task<Branch> GetLastBranchID()
+        {
+            Branch id = await _context.Branch.OrderByDescending(o => o.ID).FirstOrDefaultAsync();
+            return id;
+        }
+        public async Task<double> SumStockMoney()
+        {
+           
+            return await _context.Branch.SumAsync(b => b.MainMoneyStock);
+        }
 
         public async Task<Branch> GetBranchByID(int id)
         {

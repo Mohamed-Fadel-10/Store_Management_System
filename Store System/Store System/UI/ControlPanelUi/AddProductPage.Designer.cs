@@ -51,6 +51,17 @@
             pNameLbl = new Label();
             productNameBox = new TextBox();
             Items = new DataGridView();
+            _Barcode = new DataGridViewTextBoxColumn();
+            _Name = new DataGridViewTextBoxColumn();
+            category = new DataGridViewTextBoxColumn();
+            Supplier = new DataGridViewTextBoxColumn();
+            _Quantity = new DataGridViewTextBoxColumn();
+            _cost = new DataGridViewTextBoxColumn();
+            _discount = new DataGridViewTextBoxColumn();
+            Sale = new DataGridViewTextBoxColumn();
+            _color = new DataGridViewTextBoxColumn();
+            _size = new DataGridViewTextBoxColumn();
+            notes = new DataGridViewTextBoxColumn();
             existProductsLbl = new Label();
             pictureBox1 = new PictureBox();
             label1 = new Label();
@@ -63,17 +74,6 @@
             ColorBox = new TextBox();
             updatebtn = new Button();
             DeleteBtn = new Button();
-            _Barcode = new DataGridViewTextBoxColumn();
-            _Name = new DataGridViewTextBoxColumn();
-            category = new DataGridViewTextBoxColumn();
-            Supplier = new DataGridViewTextBoxColumn();
-            _Quantity = new DataGridViewTextBoxColumn();
-            _cost = new DataGridViewTextBoxColumn();
-            _discount = new DataGridViewTextBoxColumn();
-            Sale = new DataGridViewTextBoxColumn();
-            _color = new DataGridViewTextBoxColumn();
-            _size = new DataGridViewTextBoxColumn();
-            notes = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)Items).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -386,6 +386,84 @@
             Items.TabIndex = 21;
             Items.RowHeaderMouseClick += Items_RowHeaderMouseClick;
             // 
+            // _Barcode
+            // 
+            _Barcode.HeaderText = "الكود";
+            _Barcode.MinimumWidth = 6;
+            _Barcode.Name = "_Barcode";
+            _Barcode.ReadOnly = true;
+            // 
+            // _Name
+            // 
+            _Name.HeaderText = "إسم المنتج";
+            _Name.MinimumWidth = 6;
+            _Name.Name = "_Name";
+            _Name.ReadOnly = true;
+            // 
+            // category
+            // 
+            category.HeaderText = "نوع الصنف";
+            category.MinimumWidth = 6;
+            category.Name = "category";
+            category.ReadOnly = true;
+            // 
+            // Supplier
+            // 
+            Supplier.HeaderText = "المورد";
+            Supplier.MinimumWidth = 6;
+            Supplier.Name = "Supplier";
+            Supplier.ReadOnly = true;
+            Supplier.Visible = false;
+            // 
+            // _Quantity
+            // 
+            _Quantity.HeaderText = "الكمية";
+            _Quantity.MinimumWidth = 6;
+            _Quantity.Name = "_Quantity";
+            _Quantity.ReadOnly = true;
+            // 
+            // _cost
+            // 
+            _cost.HeaderText = "سعر الشراء";
+            _cost.MinimumWidth = 6;
+            _cost.Name = "_cost";
+            _cost.ReadOnly = true;
+            // 
+            // _discount
+            // 
+            _discount.HeaderText = "الخصم";
+            _discount.MinimumWidth = 6;
+            _discount.Name = "_discount";
+            _discount.ReadOnly = true;
+            // 
+            // Sale
+            // 
+            Sale.HeaderText = "سعر البيع";
+            Sale.MinimumWidth = 6;
+            Sale.Name = "Sale";
+            Sale.ReadOnly = true;
+            // 
+            // _color
+            // 
+            _color.HeaderText = "اللون";
+            _color.MinimumWidth = 6;
+            _color.Name = "_color";
+            _color.ReadOnly = true;
+            // 
+            // _size
+            // 
+            _size.HeaderText = "المقاس";
+            _size.MinimumWidth = 6;
+            _size.Name = "_size";
+            _size.ReadOnly = true;
+            // 
+            // notes
+            // 
+            notes.HeaderText = "ملاحظات";
+            notes.MinimumWidth = 6;
+            notes.Name = "notes";
+            notes.ReadOnly = true;
+            // 
             // existProductsLbl
             // 
             existProductsLbl.Anchor = AnchorStyles.None;
@@ -543,84 +621,6 @@
             DeleteBtn.UseVisualStyleBackColor = false;
             DeleteBtn.Click += DeleteBtn_Click;
             // 
-            // _Barcode
-            // 
-            _Barcode.HeaderText = "الكود";
-            _Barcode.MinimumWidth = 6;
-            _Barcode.Name = "_Barcode";
-            _Barcode.ReadOnly = true;
-            // 
-            // _Name
-            // 
-            _Name.HeaderText = "إسم المنتج";
-            _Name.MinimumWidth = 6;
-            _Name.Name = "_Name";
-            _Name.ReadOnly = true;
-            // 
-            // category
-            // 
-            category.HeaderText = "نوع الصنف";
-            category.MinimumWidth = 6;
-            category.Name = "category";
-            category.ReadOnly = true;
-            // 
-            // Supplier
-            // 
-            Supplier.HeaderText = "المورد";
-            Supplier.MinimumWidth = 6;
-            Supplier.Name = "Supplier";
-            Supplier.ReadOnly = true;
-            Supplier.Visible = false;
-            // 
-            // _Quantity
-            // 
-            _Quantity.HeaderText = "الكمية";
-            _Quantity.MinimumWidth = 6;
-            _Quantity.Name = "_Quantity";
-            _Quantity.ReadOnly = true;
-            // 
-            // _cost
-            // 
-            _cost.HeaderText = "سعر الشراء";
-            _cost.MinimumWidth = 6;
-            _cost.Name = "_cost";
-            _cost.ReadOnly = true;
-            // 
-            // _discount
-            // 
-            _discount.HeaderText = "الخصم";
-            _discount.MinimumWidth = 6;
-            _discount.Name = "_discount";
-            _discount.ReadOnly = true;
-            // 
-            // Sale
-            // 
-            Sale.HeaderText = "سعر البيع";
-            Sale.MinimumWidth = 6;
-            Sale.Name = "Sale";
-            Sale.ReadOnly = true;
-            // 
-            // _color
-            // 
-            _color.HeaderText = "اللون";
-            _color.MinimumWidth = 6;
-            _color.Name = "_color";
-            _color.ReadOnly = true;
-            // 
-            // _size
-            // 
-            _size.HeaderText = "المقاس";
-            _size.MinimumWidth = 6;
-            _size.Name = "_size";
-            _size.ReadOnly = true;
-            // 
-            // notes
-            // 
-            notes.HeaderText = "ملاحظات";
-            notes.MinimumWidth = 6;
-            notes.Name = "notes";
-            notes.ReadOnly = true;
-            // 
             // AddProductPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -693,7 +693,6 @@
         private Button AddProductBtn;
         private Label notesLbl;
         private TextBox noteBox;
-        private DataGridView Items;
         private Label existProductsLbl;
         private PictureBox pictureBox1;
         private Label label1;
@@ -719,5 +718,6 @@
         private DataGridViewTextBoxColumn _color;
         private DataGridViewTextBoxColumn _size;
         private DataGridViewTextBoxColumn notes;
+        public DataGridView Items;
     }
 }

@@ -412,13 +412,8 @@ namespace Store_System.UI.ControlPanelUi
                 }
 
                 MessageBox.Show($"{orderId} : تم حفظ الفاتورة بنجاح رقم الفاتورة هو", "System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _user = await _userService.GetUserByID(int.Parse(UserIDBox.Text));
-                _user.MoneyStockAmount += double.Parse(PaidUp.Text);
-                await _userService.UpdateUser(_user);
-
                 _mainStockPage.RefreshGridView();
                 PrintBill(sender, e);  // to print bill after save the order
-
                 Items.Rows.Clear();
                 Clear();
             }

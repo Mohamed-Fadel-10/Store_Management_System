@@ -34,6 +34,12 @@ namespace Store_System.Services
                 return new List<User>(); 
             }
         }
+        public int GetLastBranchID()
+        {
+            Branch branch = _context.Branch.OrderByDescending(o => o.ID).FirstOrDefault();
+            return branch.ID;
+
+        }
 
         public async Task<User> GetUserByUserName(string username)
         {

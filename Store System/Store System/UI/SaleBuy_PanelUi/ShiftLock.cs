@@ -34,6 +34,7 @@ namespace Store_System.UI.ControlPanelUi
 
             ShiftLockService.ShiftMoneyChanged += GetShiftMoney;
 
+
         }
 
 
@@ -72,7 +73,7 @@ namespace Store_System.UI.ControlPanelUi
         private async void Addbtn_Click(object sender, EventArgs e)
         {
             int effectedRow = await shiftLockService.UpdateMoney(int.Parse(userIDBox.Text), int.Parse(branchIdBox.Text), double.Parse(finalShiftMoneyBox.Text));
-            if (effectedRow == 1)
+            if (effectedRow == 2)
             {
                 MessageBox.Show(".تم تقفيل الشيفت بنجاح", "!System", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Clear();
@@ -81,7 +82,6 @@ namespace Store_System.UI.ControlPanelUi
             else
             {
                 MessageBox.Show("حدثت مشكلة يرجى اعادة المحاولة", "!System", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
 
         }

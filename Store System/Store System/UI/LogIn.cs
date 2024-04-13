@@ -20,6 +20,7 @@ namespace Store_System.UI
         Dashboard home;
         SaleBill _saleBill;
         BuyBill _buyBill;
+        BranchService _branchService;
 
 
 
@@ -31,6 +32,7 @@ namespace Store_System.UI
             home = new Dashboard();
             _saleBill = new SaleBill();
             _buyBill = new BuyBill();
+            _branchService = new BranchService();
 
             PasswordBox.UseSystemPasswordChar = true;
         }
@@ -65,10 +67,12 @@ namespace Store_System.UI
                         {
                             if (user.Role == Role.Admin && user.Password == PasswordBox.Text)
                             {
+                                var branchID = await _branchService.GetLastBranchID();
                                 home.UserName = UserNameBox.Text;
                                 home.CashierName = user.Name;
                                 home.StockMoneyName = user.MoneyStockName;
                                 home.UserID = user.ID;
+                                home.BranchID = branchID.ID;
                                 this.Hide();
                                 home.Show();
                             }
